@@ -57,7 +57,7 @@ constraint bounded_path(k, E, from, to, w, 3, 1, ns2, es2, peso_totale2);
 %array[int] of var bool: es;
 %predicate path(num_nodes, num_nodes*num_nodes, travel_time, travel_time, 1, 5, ns, es);
 %array[1..num_nodes*num_nodes] of var int: path;
-%predicate find_path()
+%%%predicate find_path()
 
 solve minimize peso_totale + peso_totale2;
 
