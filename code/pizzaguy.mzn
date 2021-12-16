@@ -8,7 +8,7 @@ int: delivery_window = 30; % number of minutes beyond the decided delivery time
 
 % int: k = 9;  % number of nodes
 % int: E = 18; % number of edges
-int: N = 3;  % number of orders
+% int: N = 3;  % number of orders
 
 % description of the graph
 array[1..E] of int: from; % array of the beginning of the edges
@@ -22,35 +22,56 @@ array[1..N] of int: dest;      % the node where to deliver
 
 %array[1..num_nodes,1..num_nodes] of int: travel_time;
 
-array[1..k] of var bool: ns;
+%array[1..k] of var bool: ns;
+array[1..k] of var bool: ns1;
 array[1..k] of var bool: ns2;
-
-array[1..E] of var bool: es;
+array[1..k] of var bool: ns3;
+array[1..k] of var bool: ns4;
+%array[1..E,1..N] of var bool: es;
+array[1..E] of var bool: es1;
 array[1..E] of var bool: es2;
+array[1..E] of var bool: es3;
+array[1..E] of var bool: es4;
+
+var set of 1..N: orders_of_the_deliverer; % set of all the orders assigned to a deliverer
+array[1..N] of var int:  arrival_time;    % array of all the arrival times of the assigned orders
+array[1..N] of var int: departure_time;   % array of all the departure times of the assigned orders
+array[1..1000] of var int: path;          % array that specifies all the nodes in the path of all the work day
+
 
 
 %% toy example
 %%% graph #1
-% from = [1,1,1,6, 5,3,2,2, 7, 4,10, 3, 9,3,8,2, 8,12];
-% to   = [4,7,6,5,12,4,3,7,13,11,11,10,10,9,9,8,13,13];
-% w    = [3,2,1,6,4,9,2,5,7,6,4,1,2,3,2,6,3,3];
-int: k = 4;
-int: E = 5;
-from = [1,2,3,4,1];
-to   = [2,3,4,1,3];
-w    = [1,1,1,1,5];
+int: k = 13;
+int: E = 18;
+from = [1, 1, 1, 6,  5, 3, 2, 2,  7,  4, 10,  3,  9, 3, 8, 2,  8, 12];
+to   = [4, 7, 6, 5, 12, 4, 3, 7, 13, 11, 11, 10, 10, 9, 9, 8, 13, 13];
+w    = [3, 2, 1, 6,  4, 9, 2, 5,  7,  6,  4,  1,  2, 3, 2, 6,  3,  3];
+
+% int: k = 4;
+% int: E = 5;
+% from = [1,2,3,4,1];
+% to   = [2,3,4,1,3];
+% w    = [1,1,1,1,5];
 
 %%% orders #1
-orario = [19,19,19];
-num_pizze = [7,5,9];
-dest = [9,11,5];
+int: N = 3;
+orario =    [19, 19, 19];
+num_pizze = [7,   5,  9];
+dest =      [9,  11,  5];
 
-var int: peso_totale;
-var int: peso_totale2;
+array[1..N+1] of var int: peso_totale;
+
+constraint bounded_path(k, E, from, to, w,       1, dest[1], ns1, es1, peso_totale[1]);
+constraint bounded_path(k, E, from, to, w, dest[1], dest[2], ns2, es2, peso_totale[2]);
+constraint bounded_path(k, E, from, to, w, dest[2], dest[3], ns3, es3, peso_totale[3]);
+constraint bounded_path(k, E, from, to, w, dest[3],       1, ns4, es4, peso_totale[4]);
 
 %constraint path(k, E, from, to, 3,1, ns, es);
-constraint bounded_path(k, E, from, to, w, 1, 3, ns, es, peso_totale);
-constraint bounded_path(k, E, from, to, w, 3, 1, ns2, es2, peso_totale2);
+% constraint forall(i in 1..N)(
+%   bounded_path(k,E, from, to, w, dest[i],dest[i+1],ns[i], es[i], peso_totale[i])
+%   );
+% %constraint bounded_path(k, E, from, to, w, 1, 3, ns, es, peso_totale[1]);
 %%%%
 
 %array[int] of var bool: ns;
@@ -59,11 +80,10 @@ constraint bounded_path(k, E, from, to, w, 3, 1, ns2, es2, peso_totale2);
 %array[1..num_nodes*num_nodes] of var int: path;
 %%%%%predicate find_path()
 
-solve minimize peso_totale + peso_totale2;
+solve minimize sum(peso_totale);
 
-output [ show(ns) ++ "\n" ++ show(es) ++ "\n" 
-          ++ show(ns2) ++ "\n" ++ show(es2)++ 
-          "\n peso totale: " ++ show(peso_totale) ++
-          "\n peso totale2: " ++ show(peso_totale2)];
+output [ show(ns2) ++ "\n" ++ show(es2) ++ "\n" 
+          %++ show(ns2) ++ "\n" ++ show(es2)++ 
+          ++"\n peso totale: " ++ show(peso_totale)];
 
 %output [show(ns2) ++ "\n" ++ show(es2) ++ "\n" ++ show(peso_totale)];
