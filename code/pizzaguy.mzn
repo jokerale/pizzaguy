@@ -79,11 +79,29 @@ constraint bounded_path(k, E, from, to, w, dest[3],       1, ns4, es4, peso_tota
 %predicate path(num_nodes, num_nodes*num_nodes, travel_time, travel_time, 1, 5, ns, es);
 %array[1..num_nodes*num_nodes] of var int: path;
 %%%%%predicate find_path()
+var int: somma_peso_totale = sum(peso_totale);
 
-solve minimize sum(peso_totale);
+solve minimize somma_peso_totale;
 
-output [ show(ns2) ++ "\n" ++ show(es2) ++ "\n" 
-          %++ show(ns2) ++ "\n" ++ show(es2)++ 
-          ++"\n peso totale: " ++ show(peso_totale)];
+% output [ show(ns1) ++ "\n" ++ show(es1) ++ "\n" ++
+%          show(ns2) ++ "\n" ++ show(es2) ++ "\n" ++
+%          show(ns3) ++ "\n" ++ show(es3) ++ "\n" ++
+%          show(ns4) ++ "\n" ++ show(es4) ++ "\n" ++
+%          "\n peso totale: " ++ show(somma_peso_totale)];
 
-%output [show(ns2) ++ "\n" ++ show(es2) ++ "\n" ++ show(peso_totale)];
+%%% STAMPA ARCHI DA NODO A NODO
+% output [ if fix(es1[i] == true) then show(from[i]) ++ "->" ++ show(to[i]) ++ " " else "" endif | i in 1..E ] ++ ["\n" ] ++
+%        [ if fix(es2[i] == true) then show(from[i]) ++ "->" ++ show(to[i]) ++ " " else "" endif | i in 1..E ] ++ ["\n" ] ++
+%        [ if fix(es3[i] == true) then show(from[i]) ++ "->" ++ show(to[i]) ++ " " else "" endif | i in 1..E ] ++ ["\n" ] ++ 
+%        [ if fix(es4[i] == true) then show(from[i]) ++ "->" ++ show(to[i]) ++ " " else "" endif | i in 1..E ] ++ ["\n" ] ++
+%        ["\n peso totale: " ++ show(somma_peso_totale)];
+
+%%% STAMPA DEI NODI VISITATI NEI PERCORSI
+output [ if fix(ns1[i] == true) then show(i) ++" " else "" endif | i in 1..k ] ++ ["\n" ] ++
+       [ if fix(ns2[i] == true) then show(i) ++" " else "" endif | i in 1..k ] ++ ["\n" ] ++
+       [ if fix(ns3[i] == true) then show(i) ++" " else "" endif | i in 1..k ] ++ ["\n" ] ++
+       [ if fix(ns4[i] == true) then show(i) ++" " else "" endif | i in 1..k ] ++ ["\n" ] ++
+       ["\n peso totale: " ++ show(somma_peso_totale)];
+
+%%% STAMPA DELLA SOMMA DEI PESI DEGLI ARCHI NEI PERCORSI
+%output ["\n peso totale" ++ show(somma_peso_totale)];
