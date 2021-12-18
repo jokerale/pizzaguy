@@ -9,4 +9,4 @@ The report can be found in the report folder.
 
 ### Report 
 Download the last report (pdf) [here](https://github.com/jokerale/pizzaguy/releases/latest/download/report.pdf).\
-Previous versions of reports can be found in the releases.
+
