@@ -42,7 +42,7 @@ var set of 1..N: d3;
 %% -- Contraints
 
 % All the order must be assigned -- maybe not needed ? 
-constraint (d1 union d2 union d3) = 1..N;
+%constraint (d1 union d2 union d3) = 1..N;
 % .. to only one deliver
 constraint all_disjoint([d1,d2,d3]);
 
@@ -67,28 +67,31 @@ array[1..N+1] of var int: peso_totale;
 
 
 constraint bounded_path(k, E, from, to, w, 1, 1, ns1, es1, peso_totale[1]);
-constraint forall(i in d1)( ns1[dest[i]] = true );
- constraint bounded_path(k, E, from, to, w, 1, 1, ns2, es2, peso_totale[2]);
- constraint forall(i in d2)( ns2[dest[i]] = true );
- constraint bounded_path(k, E, from, to, w, 1, 1, ns3, es3, peso_totale[3]);
- constraint forall(i in d3)( ns3[dest[i]] = true );
+constraint forall(i in d1)( ns1[i] = true );
+
+constraint bounded_path(k, E, from, to, w, 1, 1, ns2, es2, peso_totale[2]);
+constraint forall(i in d2)( ns2[i] = true );
+ 
+constraint bounded_path(k, E, from, to, w, 1, 1, ns3, es3, peso_totale[3]);
+constraint forall(i in d3)( ns3[i] = true );
 
 var int: somma_peso_totale = sum(peso_totale);
 
-solve satisfy;
-%solve minimize somma_peso_totale;
+%solve satisfy;
+solve minimize somma_peso_totale;
+
+output [show(d1) ++ "\n" ++ show(d2) ++ "\n" ++ show(d3) ++ "\n"];
 
 
+% output 
+%       ["d1: "] ++ [ show(dest[i]) ++ "  " | i in fix(d1) ] ++ ["\n"] ++
+%       ["d2: "] ++ [ show(dest[i]) ++ "  " | i in fix(d2) ] ++ ["\n"] ++
+%       ["d3: "] ++ [ show(dest[i]) ++ "  " | i in fix(d3) ]
 
-output 
-      ["d1: "] ++ [ show(dest[i]) ++ "  " | i in fix(d1) ] ++ ["\n"] ++
-      ["d2: "] ++ [ show(dest[i]) ++ "  " | i in fix(d2) ] ++ ["\n"] ++
-      ["d3: "] ++ [ show(dest[i]) ++ "  " | i in fix(d3) ]
-
-        %[i | i in d1] ++ ["\n"] ++
-        %[show(d2)] ++ ["\n"] ++
-        %[show(d3)]
+%         %[i | i in d1] ++ ["\n"] ++
+%         %[show(d2)] ++ ["\n"] ++
+%         %[show(d3)]
         
-        ;
+%         ;
 
 
