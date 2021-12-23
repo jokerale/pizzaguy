@@ -20,34 +20,39 @@ array[1..N] of int: dest;      % the node where to deliver
 
 %array[1..k] of var bool: ns;
 array[1..k] of var bool: ns1;
-array[1..k] of var bool: ns2;
-array[1..k] of var bool: ns3;
-array[1..k] of var bool: ns4;
+%array[1..k] of var bool: ns2;
+%array[1..k] of var bool: ns3;
+%array[1..k] of var bool: ns4;
 %array[1..E,1..N] of var bool: es;
 array[1..E] of var bool: es1;
-array[1..E] of var bool: es2;
-array[1..E] of var bool: es3;
-array[1..E] of var bool: es4;
+%array[1..E] of var bool: es2;
+%array[1..E] of var bool: es3;
+%array[1..E] of var bool: es4;
 
-array[1..g] of var set of 1..N: orders_of_the_deliverer; % set of all the orders assigned to a deliverer
-array[1..N] of var int:  arrival_time;                   % array of all the arrival times of the assigned orders
-array[1..N] of var int: departure_time;                  % array of all the departure times of the assigned orders
-array[1..1000] of var int: path;                         % array that specifies all the nodes in the path of all the work day
+%array[1..g] of var set of 1..N: orders_of_the_deliverer; % set of all the orders assigned to a deliverer
+array[1..N] of var 1..N: orders_of_the_deliverer;
+%array[1..N] of var int:  arrival_time;                   % array of all the arrival times of the assigned orders
+%array[1..N] of var int: departure_time;                  % array of all the departure times of the assigned orders
+%array[1..1000] of var int: path;                         % array that specifies all the nodes in the path of all the work day
 
 array[1..N+1] of var int: peso_totale;
 
 % vincolo ordini univoci tra deliverer
-constraint all_disjoint(orders_of_the_deliverer);
-constraint partition_set(orders_of_the_deliverer, 1..N);
+%constraint all_disjoint(orders_of_the_deliverer);
+%constraint partition_set(orders_of_the_deliverer, 1..N);
 %%% forzare un deliverer ad eseguire una consegna
 %constraint orders_of_the_deliverer[1] = {1};
-
 % vincoli sui percorsi
-constraint bounded_path(k, E, from, to, w,       1, dest[1], ns1, es1, peso_totale[1]);
-constraint bounded_path(k, E, from, to, w, dest[1], dest[2], ns2, es2, peso_totale[2]);
-constraint bounded_path(k, E, from, to, w, dest[2], dest[3], ns3, es3, peso_totale[3]);
-constraint bounded_path(k, E, from, to, w, dest[3],       1, ns4, es4, peso_totale[4]);
+% constraint bounded_path(k, E, from, to, w,       1, dest[1], ns1, es1, peso_totale[1]);
+% constraint bounded_path(k, E, from, to, w, dest[1], dest[2], ns2, es2, peso_totale[2]);
+% constraint bounded_path(k, E, from, to, w, dest[2], dest[3], ns3, es3, peso_totale[3]);
+% constraint bounded_path(k, E, from, to, w, dest[3],       1, ns4, es4, peso_totale[4]);
 
+constraint bounded_path(k, E, from, to, w, 1,2, ns1, es1, peso_totale[1]);
+%constraint forall(i in dest)(ns1[i] = true);
+constraint ns1[5] = true;
+constraint forall(i in 2..N+1)(peso_totale[i] = 0);
+constraint peso_totale[1] > 0;
 
 %constraint path(k, E, from, to, 3,1, ns, es);
 % constraint forall(i in 1..N)(
@@ -72,22 +77,23 @@ solve minimize somma_peso_totale;
 %          "\n peso totale: " ++ show(somma_peso_totale)];
 
 %%% STAMPA ARCHI DA NODO A NODO
-% output [ if fix(es1[i] == true) then show(from[i]) ++ "->" ++ show(to[i]) ++ " " else "" endif | i in 1..E ] ++ ["\n" ] ++
+output 
+       [ if fix(es1[i] == true) then show(from[i]) ++ "->" ++ show(to[i]) ++ " " else "" endif | i in 1..E ] ++ ["\n" ] ++
 %        [ if fix(es2[i] == true) then show(from[i]) ++ "->" ++ show(to[i]) ++ " " else "" endif | i in 1..E ] ++ ["\n" ] ++
 %        [ if fix(es3[i] == true) then show(from[i]) ++ "->" ++ show(to[i]) ++ " " else "" endif | i in 1..E ] ++ ["\n" ] ++ 
 %        [ if fix(es4[i] == true) then show(from[i]) ++ "->" ++ show(to[i]) ++ " " else "" endif | i in 1..E ] ++ ["\n" ] ++
-%        ["\n peso totale: " ++ show(somma_peso_totale)];
+        ["\n peso totale: " ++ show(somma_peso_totale)];
 
 %%% STAMPA DEI NODI VISITATI NEI PERCORSI
-output [ if fix(ns1[i] == true) then show(i) ++" " else "" endif | i in 1..k ] ++ ["\n" ] ++
-       [ if fix(ns2[i] == true) then show(i) ++" " else "" endif | i in 1..k ] ++ ["\n" ] ++
-       [ if fix(ns3[i] == true) then show(i) ++" " else "" endif | i in 1..k ] ++ ["\n" ] ++
-       [ if fix(ns4[i] == true) then show(i) ++" " else "" endif | i in 1..k ] ++ ["\n" ] ++
-       ["\n peso totale: " ++ show(somma_peso_totale)];
+% output [ if fix(ns1[i] == true) then show(i) ++" " else "" endif | i in 1..k ] ++ ["\n" ] ++
+%        [ if fix(ns2[i] == true) then show(i) ++" " else "" endif | i in 1..k ] ++ ["\n" ] ++
+%        [ if fix(ns3[i] == true) then show(i) ++" " else "" endif | i in 1..k ] ++ ["\n" ] ++
+%        [ if fix(ns4[i] == true) then show(i) ++" " else "" endif | i in 1..k ] ++ ["\n" ] ++
+%        ["\n peso totale: " ++ show(somma_peso_totale)];
 
 %%% STAMPA DELLA SOMMA DEI PESI DEGLI ARCHI NEI PERCORSI
 %output ["\n peso totale" ++ show(somma_peso_totale)];
-output ["\n"++show(orders_of_the_deliverer[i])| i in 1..g];
+output ["\n OOTD: "++show(orders_of_the_deliverer[i])| i in 1..g];
 
 %% toy example
 %%% graph #1
