@@ -1,3 +1,2 @@
-/report/*.aux
-/report/*.log
-/report/*.pdf
+*.out *aux *blx.bib *bcf *.run.xml *bbl *blg *log *toc *.ptb *.tod *.fls *.fdb_latexmk *.lof
+report/report.pdf
