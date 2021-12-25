@@ -30,6 +30,25 @@
 
 	\subsection{Intro sub}
 
+	\section{Model v0.1}
+
+	file: \texttt{an-idea-2.mzn}\\~\
+
+	The time is divided in 6 slots of half-an-hours (19.00 - 22.00). Let's call $h$ one of these slots of time. 
+
+	There are $d$ deliverers available for doing deliveries.
+
+	Each deliverer $d$ has a set of orders to handle for each slot $h$. These informations are stored in a boolean 3-d matrix \texttt{scheduling}, in which:
+	\begin{center}
+		\texttt{scheduling[$d$, orderID, $h$] = true}
+	\end{center} 
+	means that the deliver $d$ has to deliver order with id \texttt{orderID} in the time slot $h$. In every slot $h$, the deliver must reach all nodes specified as \textit{destinations} of the order assigned to him/her, starting from node $1$ (pizzeria) and return back to it (a sort of "circuit" starting and ending with same node, that reach (at least) a specific set of nodes). 
+
+	This first semplification doesn't allow a deliverer to do more than one "circuit" in a single time slot $h$. 
+
+	Only total travelled distance is minimized (for now). Maybe a balancing function is needed or maybe not.
+
+
 \end{document}
 
 

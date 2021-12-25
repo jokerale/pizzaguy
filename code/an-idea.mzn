@@ -34,6 +34,10 @@ to    = [2, 3, 4, 3,    2, 3, 4,    5];
 w     = [1, 2, 3, 4,    1, 2, 3,    0];
 
 
+%       2---3
+%       |  /   
+%       | /    
+%      1(5)----4
 
 %% -- Orders
 
@@ -43,7 +47,7 @@ array[1..N] of int: orario;    % the decided time of the orders
 array[1..N] of int: dest;      % the node where to deliver
 orario     =  [19, 19, 19, 20];
 num_pizze  =  [15, 15, 6,  6];
-dest       =  [2,  4,  4,  2];
+dest       =  [2,  4,  4,  3];
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -78,7 +82,7 @@ constraint alldifferent_except_0(orders_of_the_delivers);
 % and also reachs every node assigned to the deliver.
 constraint forall(i in 1..d, j in 1..N) (
               % exists a path from pizzeria and back 
-              bounded_path(k, E, from, to, w, 1, 5, row(ns, i), row(es, i), peso_totale[i]) /\
+              bounded_path(k, E, from, to, w, 1, 5, row(ns, i), row(es, i), peso_totale[i]) /\  % are we able to specify something like: one or more than one of these paths, concatenated?
               % reaching all nodes assigned to them
               ((orders_of_the_delivers[i, j] > 0) -> (ns[i,dest[orders_of_the_delivers[i, j]]] = true))
             );

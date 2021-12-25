@@ -1,2 +1,16 @@
-*.out *aux *blx.bib *bcf *.run.xml *bbl *blg *log *toc *.ptb *.tod *.fls *.fdb_latexmk *.lof
+report/*.out
+report/*aux
+report/*blx.bib 
+report/*bcf 
+report/*.run.xml 
+report/*bbl 
+report/*blg 
+report/*.log 
+report/*toc 
+report/*.ptb 
+report/*.tod 
+report/*.fls 
+report/*.fdb_latexmk 
+report/*.lof
+report/*synctex.gz
 report/report.pdf
