@@ -51,7 +51,7 @@ array[1..N] of int: num_pizze; % array describing the number of pizzas for every
 array[1..N] of int: orario;    % the decided time of the orders
 array[1..N] of int: dest;      % the node where to deliver
 orario     =  [19, 19, 19, 20];
-num_pizze  =  [15, 15, 6,  6];
+num_pizze  =  [2, 8, 8,  6];
 dest       =  [2,  4,  4,  3];
 
 
@@ -83,8 +83,13 @@ constraint forall(j in 1..N)(
 % LIMIT: only 1 "circuit" for each deliver for each half-an-hour.
 constraint forall(id in 1..d, ih in 1..h) ( % for each deliver, for each half-an-hour
     bounded_path(k, E, from, to, w, 1, 5, [ns[id,j,ih] | j in 1..k], [es[id,j,ih] | j in 1..E], path_w[id,ih]) /\
-    forall(iN in 1..N) (scheduling[id,iN,ih] = true -> ns[id,dest[iN],ih] = true)
+    forall(iN in 1..N) (scheduling[id,iN,ih] = true -> ns[id,dest[iN],ih] = true) /\
+    
+    % max number of pizzas
+    sum([scheduling[id,iN,ih]*num_pizze[iN] | iN in 1..N]) <= 16
+    
   );
+
 
 
 
@@ -112,11 +117,11 @@ output
           if(j=N /\ i=d) then "\n" else "" endif
             | ih in 1..h, i in 1..d, j in 1..N] ++
         
-        ["deliver\tpath_w\tpath"] ++ ["\n"] ++
-        ["-------\t------\t----"] ++ ["\n"] ++
+        ["deliver\t#pizzas\tpath_w\tpath"] ++ ["\n"] ++
+        ["-------\t-------\t------\t----"] ++ ["\n"] ++
 
         [ if i=1 /\ j=1 then "(h"++show(ih)++")\n" else "" endif ++
-          if (j=1) then show(i) ++ "\t" ++ show(path_w[i,ih])++"\t" else "" endif ++
+          if (j=1) then show(i) ++ "\t" ++ show(sum([scheduling[i,iN,ih] * num_pizze[iN] | iN in 1..N])) ++"\t" ++ show(path_w[i,ih])++"\t" else "" endif ++
 
           if fix(es[i,j,ih]) = true then show(from[j]) ++ "<->" ++ show(to[j]) ++ " "  else "" endif ++
                     if(j=E) then "\n" else "" endif ++
