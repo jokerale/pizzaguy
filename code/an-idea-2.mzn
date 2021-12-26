@@ -66,7 +66,8 @@ array[1..d, 1..E, 1..h] of var bool: es;
 
 array[1..d, 1..h] of var int: path_w;
 
-
+% Each element constains the number of pizzas carried in the corresponding half-an-hour
+array[1..d, 1..h] of var int: pizzas_carried;
 
 %%%%%% CONSTRAINTS %%%%%%
 
@@ -87,6 +88,13 @@ constraint forall(id in 1..d, ih in 1..h) ( % for each deliver, for each half-an
   );
 
 
+% This constraints the number of pizzas that each deliverer can carry in the HALF-AN-HOUR
+constraint sum(pizzas_carried) = sum(num_pizze);
+constraint forall(id in 1..d, ih in 1..h)(
+  pizzas_carried[id, ih] = sum([ num_pizze[j] | j in 1..N where scheduling[id, j, ih] = 1])
+  );
+constraint forall(id in 1..d, ih in 1..h)( pizzas_carried[id, ih] <= 16 );
+constraint forall(id in 1..d, ih in 1..h)( pizzas_carried[id, ih] >= 0   );
 
 
 %solve satisfy;
@@ -124,5 +132,10 @@ output
           if(j=E /\ i=d) then "\n" else "" endif   
 
         | ih in 1..h, i in 1..d, j in 1..E] ++
+        
+        ["Pizzas carried:"] ++ 
+        [if j == 1 then "\n d" ++ show(i) ++": "  ++ show(pizzas_carried[i,j]) else " " ++ show(pizzas_carried[i,j]) endif 
+        | i in 1..d, j in 1.. h]  ++
+        ["\n"] ++
         
         ["tot path weight: " ++ show(sum(path_w))];
