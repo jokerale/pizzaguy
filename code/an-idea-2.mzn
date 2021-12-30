@@ -22,6 +22,10 @@ include "globals.mzn";
 % Number of delivers
 int: d = 2;
 
+% Time of service
+int: start = 19;
+int: end = 22;
+
 % Half-an-hours of service 
 int: h = 6; %(19.00 -> 22.00)
 
@@ -48,12 +52,14 @@ w     = [1, 2, 3, 4,    1, 2, 3,    0];
 
 int: N = 4;
 array[1..N] of int: num_pizze; % array describing the number of pizzas for every order 
-array[1..N] of int: orario;    % the decided time of the orders
+array[1..N] of float: orario;    % the decided time of the orders
 array[1..N] of int: dest;      % the node where to deliver
-orario     =  [19, 19, 19, 20];
-num_pizze  =  [2, 8, 8,  6];
-dest       =  [2,  4,  4,  3];
+orario     =  [19.15, 19.30, 19.30, 20.30];
+num_pizze  =  [2,     8,     8,     6];
+dest       =  [2,     4,     4,     3];
 
+
+array[1..N] of int: ra = [ round(floor(orario[iN]-start)*60 + (orario[iN] - floor(orario[iN]))*100) | iN in 1..N]; % requested arrival time (in minutes from start time)
 
 %%%%%% DECISION VARIABLES %%%%%%
 
@@ -66,6 +72,8 @@ array[1..d, 1..E, 1..h] of var bool: es;
 
 array[1..d, 1..h] of var int: path_w;
 
+
+array[1..N] of var int: ea; % estimated arrival time for each order 
 
 
 %%%%%% CONSTRAINTS %%%%%%
@@ -85,12 +93,18 @@ constraint forall(id in 1..d, ih in 1..h) ( % for each deliver, for each half-an
     bounded_path(k, E, from, to, w, 1, 5, [ns[id,j,ih] | j in 1..k], [es[id,j,ih] | j in 1..E], path_w[id,ih]) /\
     forall(iN in 1..N) (scheduling[id,iN,ih] = true -> ns[id,dest[iN],ih] = true) /\
     
+    %my_circuit([scheduling[id,iN,ih]*dest[iN] | iN in 1..N], ... , W)
+    
     % max number of pizzas
     sum([scheduling[id,iN,ih]*num_pizze[iN] | iN in 1..N]) <= 16
-    
   );
 
 
+
+% must arrive in the delivery time window
+%constraint forall(iN in 1..N)(
+%  ea[iN] <= ra[iN]+30 
+%);
 
 
 
