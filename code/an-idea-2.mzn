@@ -22,6 +22,10 @@ include "globals.mzn";
 % Number of delivers
 int: d = 2;
 
+% Time of service
+int: start = 19;
+int: end = 22;
+
 % Half-an-hours of service 
 int: h = 6; %(19.00 -> 22.00)
 
@@ -48,12 +52,14 @@ w     = [1, 2, 3, 4,    1, 2, 3,    0];
 
 int: N = 4;
 array[1..N] of int: num_pizze; % array describing the number of pizzas for every order 
-array[1..N] of int: orario;    % the decided time of the orders
+array[1..N] of float: orario;    % the decided time of the orders
 array[1..N] of int: dest;      % the node where to deliver
-orario     =  [19, 19, 19, 20];
-num_pizze  =  [15, 15, 6,  6];
-dest       =  [2,  4,  4,  3];
+orario     =  [19.15, 19.30, 19.30, 20.30];
+num_pizze  =  [2,     8,     8,     6];
+dest       =  [2,     4,     4,     3];
 
+
+array[1..N] of int: ra = [ round(floor(orario[iN]-start)*60 + (orario[iN] - floor(orario[iN]))*100) | iN in 1..N]; % requested arrival time (in minutes from start time)
 
 %%%%%% DECISION VARIABLES %%%%%%
 
@@ -68,6 +74,9 @@ array[1..d, 1..h] of var int: path_w;
 
 % Each element constains the number of pizzas carried in the corresponding half-an-hour
 array[1..d, 1..h] of var int: pizzas_carried;
+
+array[1..N] of var int: ea; % estimated arrival time for each order 
+
 
 %%%%%% CONSTRAINTS %%%%%%
 
@@ -84,7 +93,18 @@ constraint forall(j in 1..N)(
 % LIMIT: only 1 "circuit" for each deliver for each half-an-hour.
 constraint forall(id in 1..d, ih in 1..h) ( % for each deliver, for each half-an-hour
     bounded_path(k, E, from, to, w, 1, 5, [ns[id,j,ih] | j in 1..k], [es[id,j,ih] | j in 1..E], path_w[id,ih]) /\
-    forall(iN in 1..N) (scheduling[id,iN,ih] = true -> ns[id,dest[iN],ih] = true)
+    forall(iN in 1..N) (scheduling[id,iN,ih] = true -> ns[id,dest[iN],ih] = true) 
+    
+    % in the future something like
+    % my_circuit([scheduling[id,iN,ih]*dest[iN] | iN in 1..N], ... , W)
+    
+    % max number of pizzas (branch: giacomo)
+    % sum([scheduling[id,iN,ih]*num_pizze[iN] | iN in 1..N]) <= 16
+
+    % must arrive in the delivery time window
+    %constraint forall(iN in 1..N)(
+    %  ea[iN] <= ra[iN]+30 
+    %);
   );
 
 
@@ -95,6 +115,9 @@ constraint forall(id in 1..d, ih in 1..h)(
   );
 constraint forall(id in 1..d, ih in 1..h)( pizzas_carried[id, ih] <= 16 );
 constraint forall(id in 1..d, ih in 1..h)( pizzas_carried[id, ih] >= 0   );
+
+
+
 
 
 %solve satisfy;
@@ -120,11 +143,11 @@ output
           if(j=N /\ i=d) then "\n" else "" endif
             | ih in 1..h, i in 1..d, j in 1..N] ++
         
-        ["deliver\tpath_w\tpath"] ++ ["\n"] ++
-        ["-------\t------\t----"] ++ ["\n"] ++
+        ["deliver\t#pizzas\tpath_w\tpath"] ++ ["\n"] ++
+        ["-------\t-------\t------\t----"] ++ ["\n"] ++
 
         [ if i=1 /\ j=1 then "(h"++show(ih)++")\n" else "" endif ++
-          if (j=1) then show(i) ++ "\t" ++ show(path_w[i,ih])++"\t" else "" endif ++
+          if (j=1) then show(i) ++ "\t" ++ show(sum([scheduling[i,iN,ih] * num_pizze[iN] | iN in 1..N])) ++"\t" ++ show(path_w[i,ih])++"\t" else "" endif ++
 
           if fix(es[i,j,ih]) = true then show(from[j]) ++ "<->" ++ show(to[j]) ++ " "  else "" endif ++
                     if(j=E) then "\n" else "" endif ++
