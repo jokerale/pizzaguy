@@ -7,7 +7,9 @@
 % TO-DO:
 % - Add constraints on time of delivery and number of pizzas for each deliver.
 %      --> if each deliver can don only one "circuit" for each half-an-hour, we can use 2d array [1..d, 1..h] with pizza handled in the corresponding circuit.
-% - Think about a "balancing" function to minimize or maximize in addition to minimization of total travelled distance
+%   DONE: but time constraint is too much simple. 
+
+%  - Think about a "balancing" function to minimize or maximize in addition to minimization of total travelled distance
 %      --> but maybe with time-of-delivery constraints the problem of "sparse" deliveries goes away. 
 
 % Don't know why:
@@ -91,9 +93,13 @@ constraint forall(j in 1..N)(
 % The idea is: for each delivers, must have a path that starts from pizzeria (node 1) and get back to it (node 5 - dummy node for pizzeria)
 % and also reachs every node assigned to the deliver.
 % LIMIT: only 1 "circuit" for each deliver for each half-an-hour.
+% LIMIT: the time to reach a certain destination is set to return time for corresponding circuit.
 constraint forall(id in 1..d, ih in 1..h) ( % for each deliver, for each half-an-hour
     bounded_path(k, E, from, to, w, 1, 5, [ns[id,j,ih] | j in 1..k], [es[id,j,ih] | j in 1..E], path_w[id,ih]) /\
-    forall(iN in 1..N) (scheduling[id,iN,ih] = true -> ns[id,dest[iN],ih] = true) 
+    forall(iN in 1..N) (scheduling[id,iN,ih] = true -> (ns[id,dest[iN],ih] = true /\ ea[iN] = (ih-1)*30 + path_w[id,ih]))
+    
+    
+    
     
     % in the future something like
     % my_circuit([scheduling[id,iN,ih]*dest[iN] | iN in 1..N], ... , W)
@@ -118,6 +124,10 @@ constraint forall(id in 1..d, ih in 1..h)( pizzas_carried[id, ih] >= 0   );
 
 
 
+% must arrive in the delivery time window
+constraint forall(iN in 1..N)(
+  ea[iN] > ra[iN] /\ ea[iN] <= ra[iN]+30 
+);
 
 
 %solve satisfy;
@@ -161,4 +171,6 @@ output
         | i in 1..d, j in 1.. h]  ++
         ["\n"] ++
         
-        ["tot path weight: " ++ show(sum(path_w))];
+        ["tot path weight: " ++ show(sum(path_w))]
+        
+        ++ ["\nexpected arrival: "] ++ [show(ea)];
