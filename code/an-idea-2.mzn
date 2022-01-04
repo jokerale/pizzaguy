@@ -19,6 +19,66 @@
 
 include "globals.mzn";
 
+
+%% My predicate: a modified bounded_path.
+% input: graph related information (like bounded path)
+%        and an array x in which x[i] = j means that destination j has to be reached to do the order with ID = i. 
+% output: array of int W, in which K[i] = j means that to reach the destination for the order with ID = i the path has weight j. 
+
+% NOT WORKING ANYMORE:
+% - B construction: ok.
+% - path construction: not ok.
+% - how to return the time in which the deliver return to node 1?
+
+% Test code of this predicate in test-predicate.mzn
+
+predicate my_path( % graph
+                   int: k, int: E, array [int] of int: from, array [int] of int: to, array [int] of int: w,
+                   % path
+                   array [int] of var bool: ns, array [int] of var bool: es, array [int] of var int: K, 
+                   % input
+                   array[int] of var int: x) =
+
+let{
+  int: n = card(index_set(x));
+  % B contains set of indexes i of x to handle (i s.t. x[i]>0)
+  % All the 0s in B are at the end of it.
+  array[1..n] of var index_set(x) union {0}: B; 
+
+  array[1..n, 1..k] of var bool: ns;
+  array[1..n, 1..E] of var bool: es;
+
+} in
+
+% B construction
+  forall(i in 1..n) (
+    if x[i]>0 then count_eq(B,i,1) else count_eq(B,i,0) endif
+    /\ B[i]=0 -> forall(j in i..n) (B[j] = 0)
+    )
+     
+   /\
+% path   
+   bounded_path(k,E,from,to,w,1,x[B[1]],[ns[1,j] | j in 1..k],[es[1,j] | j in 1..E], K[B[1]])
+   /\
+   % I want to say something like:
+   % forall(i in 1..n-1) 
+   %    find the path from 1 to i (if B[i] != 0) that reach every previous nodes, then W of this path --> K[i] 
+   
+   % how about path(n-->1) weight, or total weight?  
+
+%   bounded_path(k,E,from,to,w,x[B[1]],x[B[2]],[ns[2,j] | j in 1..k],[es[2,j] | j in 1..E], K[B[2]])
+%    forall(i in 1..n-2) (
+%      if B[i+1] != 0 then 
+%          bounded_path(N,E,from,to,w, x[B[i]], x[B[i+1]], [ns[i+1,j] | j in 1..N], [es[i+1,j] | j in 1..E], K[B[i+1]])
+%        else 
+%          true 
+%        endif)
+   
+;
+
+
+
+
 %%%%%% INPUT %%%%%%
 
 % Number of delivers
