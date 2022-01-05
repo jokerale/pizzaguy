@@ -44,35 +44,39 @@ let{
   % B contains set of indexes i of x to handle (i s.t. x[i]>0)
   % All the 0s in B are at the end of it.
   array[1..n] of var index_set(x) union {0}: B; 
+  % t[i] contains the weight for the path from x[ B[i-1] ] to x[ B[i] ]
+  array[1..n] of var int: t;
 
   array[1..n, 1..k] of var bool: ns;
   array[1..n, 1..E] of var bool: es;
 
 } in
 
-% B construction
-  forall(i in 1..n) (
-    if x[i]>0 then count_eq(B,i,1) else count_eq(B,i,0) endif
-    /\ B[i]=0 -> forall(j in i..n) (B[j] = 0)
-    )
+% B and t construction
+  forall(i in 1..n) (if x[i]>0 then count_eq(B,i,1) else count_eq(B,i,0) endif)
+  /\ forall(i in 1..n) (B[i]=0 -> forall(j in i..n) (B[j] = 0))
+  /\ forall(i in 1..n) (t[i] >= 0)
+
      
    /\
 % path   
    bounded_path(k,E,from,to,w,1,x[B[1]],[ns[1,j] | j in 1..k],[es[1,j] | j in 1..E], K[B[1]])
-   /\
+   
+   
    % I want to say something like:
    % forall(i in 1..n-1) 
    %    find the path from 1 to i (if B[i] != 0) that reach every previous nodes, then W of this path --> K[i] 
+   %    or, find the path from x at B[i] to x at B[i+1]. Then final path will be the sum of sub-paths. 
    
    % how about path(n-->1) weight, or total weight?  
 
-%   bounded_path(k,E,from,to,w,x[B[1]],x[B[2]],[ns[2,j] | j in 1..k],[es[2,j] | j in 1..E], K[B[2]])
-%    forall(i in 1..n-2) (
-%      if B[i+1] != 0 then 
-%          bounded_path(N,E,from,to,w, x[B[i]], x[B[i+1]], [ns[i+1,j] | j in 1..N], [es[i+1,j] | j in 1..E], K[B[i+1]])
-%        else 
-%          true 
-%        endif)
+   % this might work but it doesn't. It seems that it is not possible to add path constraints on a decision variable (B)
+%   /\
+%   forall(i,j in 1..n-1 where j=i+1)(
+%      B[j] > 0 -> bounded_path(k,E,from,to,w,x[B[i]],x[B[j]],[ns[j,w] | w in 1..k],[es[j,w] | w in 1..E], t[j]) 
+%   );
+
+%   forall(i in 1..n) (if B[i] > 0 then W[B[i]] = sum([t[j] | j in 1..i]) else true endif)
    
 ;
 
@@ -233,4 +237,4 @@ output
         
         ["tot path weight: " ++ show(sum(path_w))]
         
-        ++ ["\nexpected arrival: "] ++ [show(ea)];
+        ++ ["\nexpected arrival: ["] ++ [ show(start+(ea[i] div 60)) ++ "." ++ show(ea[i] mod 60) ++ if i=N then "]" else ", " endif | i in 1..N ];

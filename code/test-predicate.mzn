@@ -24,8 +24,8 @@ w     = [1, 2, 3, 4];
 
 % bounded_path(k, E, from, to, w, 1, 5, [ns[id,j,ih] | j in 1..k], [es[id,j,ih] | j in 1..E], path_w[id,ih])
 
-array[1..k] of var bool: ns;
-array[1..E] of var bool: es;
+  array[1..n, 1..k] of var bool: ns;
+  array[1..n, 1..E] of var bool: es;
 array[1..N] of var int: W;
 
 
@@ -46,6 +46,8 @@ let{
 %   array[1..n] of var lb_array(x)..ub_array(x): A; % x ordered
 %   var int: number_of_zeros = sum([x[i]=0 | i in 1..N]);   
   
+  array[1..n] of var int: t; % temporary paths' weights
+  
   array[1..n, 1..k] of var bool: ns;
   array[1..n, 1..E] of var bool: es;
 %   array[int] of var int: X = [x[i]>0 | i in 1..card(index_set(x))];
@@ -58,16 +60,25 @@ let{
 
 } in
 
-% B construction
-  forall(i in 1..n) (
-    if x[i]>0 then count_eq(B,i,1) else count_eq(B,i,0) endif
-    /\ B[i]=0 -> forall(j in i..n) (B[j] = 0)
-    )
+% B (and t) construction -- it really works?
+  forall(i in 1..n) (if x[i]>0 then count_eq(B,i,1) else count_eq(B,i,0) endif)
+  /\
+  forall(i in 1..n) (B[i]=0 -> forall(j in i..n) (B[j] = 0))
+%  /\
+%  forall(i in 1..n) (B[i]=0 -> t[i]=0)
+    
      
    /\
 % path   
-   bounded_path(k,E,from,to,w,1,x[B[1]],[ns[1,j] | j in 1..k],[es[1,j] | j in 1..E], K[B[1]])
+   bounded_path(k,E,from,to,w,1,x[B[1]],[ns[1,j] | j in 1..k],[es[1,j] | j in 1..E], t[1])
    /\
+   forall(i in 1..n-1 where B[i+1]>0)(
+     %if B[i+1] != 0 then
+       bounded_path(k,E,from,to,w,x[B[i]],x[B[i+1]],[ns[i+1,j] | j in 1..k],[es[i+1,j] | j in 1..E], t[i+1])
+     %else
+     %  t[i+1] = 0
+     %endif
+     )
    % I want to say something like:
    % forall(i in 1..n-1) 
    %    find the path from 1 to i (if B[i] != 0) that reach every previous nodes, then W of this path --> K[i] 
@@ -79,28 +90,63 @@ let{
 %        else 
 %          true 
 %        endif)
+
    
+  /\ 
+  forall(i in 1..n) (W[i] = t[i]) %if B[i] > 0 then W[B[i]] = sum([t[j] | j in 1..i]) else true endif)      
+            
 ;
 %%
 
 %constraint aaa([dest[i]*scheduling[i] | i in 1..N]);
-constraint aaa(k,E,from,to,w,ns,es,W,[dest[i]*scheduling[i]| i in 1..N]);
 
-% array[int] of var int: x = [dest[i]*scheduling[i]| i in 1..N];
+
+%constraint aaa(k,E,from,to,w,[ns[1,i] | i in 1..k],[ns[1,i] | i in 1..E],W,[dest[i]*scheduling[i]| i in 1..N]);
+
+ array[int] of var int: x = [dest[i]*scheduling[i]| i in 1..N];
+
 
 % %var set of index_set(x): A;
 
             
 %                                     %/\ alldifferent_except_0(B);
 
-% int: n = card(index_set(x));
+ int: n = card(index_set(x));
 
-% array[1..n] of var index_set(x) union {0}: B;
+ array[1..n] of var index_set(x) union {0}: B;
 
-% constraint forall(i in 1..n) (if x[i]>0 then count_eq(B,i,1) else count_eq(B,i,0) endif);
-% constraint forall(i in 1..n) (B[i]=0 -> forall(j in i..n) (B[j] = 0));
+ constraint forall(i in 1..n) (if x[i]>0 then count_eq(B,i,1) else count_eq(B,i,0) endif);
+ constraint forall(i in 1..n) (B[i]=0 -> forall(j in i..n) (B[j] = 0));
+ constraint alldifferent_except_0(B);
+
+array[1..n] of var int: t;
+constraint forall(i in 1..n)(t[i]>=0);
+array[1..n] of var int: ttt;
+
+constraint 
+  bounded_path(k,E,from,to,w,1,x[B[1]],[ns[1,j] | j in 1..k],[es[1,j] | j in 1..E], t[1]);
+%constraint
+%  bounded_path(k,E,from,to,w,x[B[1]],x[B[2]],[ns[2,j] | j in 1..k],[es[2,j] | j in 1..E], t[2]) ;
+  %/\
+  %bounded_path(k,E,from,to,w,x[B[2]],x[B[3]],[ns[3,j] | j in 1..k],[es[3,j] | j in 1..E], t[3]);
+constraint forall(i,j in 1..n-1 where j=i+1)(
+  %if B[j] != 0 then bounded_path(k,E,from,to,w,x[B[i]],x[B[j]],[ns[j,w] | w in 1..k],[es[j,w] | w in 1..E], t[j])
+  %else true endif
+  B[j] > 0 -> bounded_path(k,E,from,to,w,x[B[i]],x[B[j]],[ns[j,w] | w in 1..k],[es[j,w] | w in 1..E], t[j]) 
+ %true
+   );
 
 
+
+%    forall(i in 1..n-1 where B[i+1]>0)(
+%      %if B[i+1] != 0 then
+%        bounded_path(k,E,from,to,w,x[B[i]],x[B[i+1]],[ns[i+1,j] | j in 1..k],[es[i+1,j] | j in 1..E], t[i+1])
+%      %else
+%      %  t[i+1] = 0
+%      %endif
+%      );
+
+          
           
                               % /\ value_precede
 % constraint forall(i in 1..n) (if x[i]>0 then i in A else not(i in A) endif);
@@ -117,6 +163,8 @@ constraint aaa(k,E,from,to,w,ns,es,W,[dest[i]*scheduling[i]| i in 1..N]);
 solve satisfy;
 
 output %[show(A)]++["\n"]
-     % ["x: "] ++ [show(x)] ++ ["\n"]
-    %  ++ ["B: "] ++ [show(B)] ++ ["\n"]
+     ["x: "] ++ [show(x)] ++ ["\n"] ++
+     ["B: "] ++ [show(B)] ++ ["\n"] ++
+     ["t: "] ++ [show(t)] ++ ["\n"] ++
+     ["ttt: "] ++ [show(ttt)] ++ ["\n"] ++
       ["W: "] ++ [show(W)] ++ ["\n"];
