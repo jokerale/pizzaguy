@@ -58,27 +58,39 @@ let{
 %   int: N = card(index_set(x));
 %   var set of 1..max: S;
 
+
+  array[1..4] of var int: C = [1,4,0,0];
+
 } in
 
 % B (and t) construction -- it really works?
-  forall(i in 1..n) (if x[i]>0 then count_eq(B,i,1) else count_eq(B,i,0) endif)
-  /\
-  forall(i in 1..n) (B[i]=0 -> forall(j in i..n) (B[j] = 0))
+
+  
+ % forall(i in 1..n) (if x[i]>0 then count_eq(B,i,1) else count_eq(B,i,0) endif)
+ % /\
+ % forall(i in 1..n) (B[i]=0 -> forall(j in i..n) (B[j] = 0))
+
+
 %  /\
 %  forall(i in 1..n) (B[i]=0 -> t[i]=0)
     
      
-   /\
+   %/\
 % path   
-   bounded_path(k,E,from,to,w,1,x[B[1]],[ns[1,j] | j in 1..k],[es[1,j] | j in 1..E], t[1])
+   bounded_path(k,E,from,to,w,1,x[C[1]],[ns[1,j] | j in 1..k],[es[1,j] | j in 1..E], t[1])
    /\
-   forall(i in 1..n-1 where B[i+1]>0)(
+   bounded_path(k,E,from,to,w,x[C[1]],x[C[2]],[ns[2,j] | j in 1..k],[es[2,j] | j in 1..E], t[2])
+   /\
+   bounded_path(k,E,from,to,w,x[C[2]],1,[ns[3,j] | j in 1..k],[es[3,j] | j in 1..E], t[3])
+  
+   
+   %forall(i in 1..n-1 where C[i+1]>0)(
      %if B[i+1] != 0 then
-       bounded_path(k,E,from,to,w,x[B[i]],x[B[i+1]],[ns[i+1,j] | j in 1..k],[es[i+1,j] | j in 1..E], t[i+1])
+   %    bounded_path(k,E,from,to,w,x[C[i]],x[C[i+1]],[ns[i+1,j] | j in 1..k],[es[i+1,j] | j in 1..E], t[i+1])
      %else
      %  t[i+1] = 0
      %endif
-     )
+   %  )
    % I want to say something like:
    % forall(i in 1..n-1) 
    %    find the path from 1 to i (if B[i] != 0) that reach every previous nodes, then W of this path --> K[i] 
