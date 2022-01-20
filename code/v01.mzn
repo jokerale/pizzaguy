@@ -35,7 +35,11 @@ orario     =  [19.15, 19.30, 19.30, 20.30, 19.45, 19.30, 20.30, 21.30];
 num_pizze  =  [2,     8,     8,     6,     5,     8,     8,     6];
 dest       =  [2,     4,     4,     3,     2,     5,     3,     5];
 
-
+% constraint scheduling[1,1,2] = 1;
+% constraint scheduling[1,8,6] = 1;
+% constraint scheduling[1,2,2] = 1;
+% constraint scheduling[1,5,2] = 1;
+% constraint scheduling[2,3,2] = 1;
 array[1..N] of int: ra = [ round(floor(orario[iN]-start)*60 + (orario[iN] - floor(orario[iN]))*100) | iN in 1..N]; % requested arrival time (in minutes from start time)
 
 %%%%%% DECISION VARIABLES %%%%%%
@@ -68,6 +72,7 @@ constraint forall(id in 1..d, ih in 1..h, iN in 1..N)(
 % X consistency
 constraint forall(id in 1..d, ih in 1..h, iN in 1..N)(
   if P[id, iN, ih] > 0 then 
+%   if P[id, iN, ih] != 0 then
     count([ X[id, iNN, ih] | iNN in 1..N] ,iN,1) 
     else 
     count([ X[id, iNN, ih] | iNN in 1..N] ,iN,0) 
@@ -80,6 +85,12 @@ constraint forall(id in 1..d, ih in 1..h, iN in 1..N)(
 % distances consistency
 constraint forall(id in 1..d, ih in 1..h, iN in 1..N)(
    distances[id, iN, ih] >= 0
+%     /\
+%     distances[id, iN, ih] <= 30
+);
+
+constraint forall(id in 1..d, ih in 1..h, iN in 1..N)(
+  count([X[id,iNN,ih]| iNN in 1..N], iN, 0) -> distances[id,iN,ih] = 0
 );
 
 constraint forall(id in 1..d, iN in 1..N, ih in 1..h)(
@@ -120,6 +131,7 @@ constraint forall(id in 1..d, iN in 1..N, ih in 1..h)(
 
 constraint forall(j in 1..N)(
     ea[j] = sum([scheduling[id,j,ih] * (distances[id,j,ih]+((ih-1)*30)) | id in 1..d, ih in 1..h])  
+    %ea[j] = sum([(distances[id,j,ih]+((ih-1)*30)) | id in 1..d, ih in 1..h])  
   );
   
 
@@ -139,11 +151,10 @@ constraint forall(iN in 1..N)(
   ea[iN] > ra[iN] /\ ea[iN] <= ra[iN]+30 
 );
 
-
-solve satisfy;
+solve :: int_search( distances,
+        dom_w_deg, indomain_random) satisfy;
+%solve satisfy;
 %solve minimize sum(ea);
-
-
 
 
 output   
@@ -198,7 +209,7 @@ output
         [
           if(i=1 /\ j=1) then "(h"++show(ih)++")\n" else "" endif ++
           if (j=1) then show(i) ++ "\t" else "" endif ++
-          show(distances[i,j,ih]*scheduling[i,j,ih]) ++ "\t" ++
+          show((distances[i,j,ih]+((ih-1)*30))*scheduling[i,j,ih]) ++ "\t" ++
           %"(" ++ show(i) ++ " " ++ show(j) ++ " " ++ show(k) ++ ") " ++
           if(j=N) then "\n" else "" endif ++
           if(j=N /\ i=d) then "\n" else "" endif
@@ -206,7 +217,7 @@ output
             
         ["\nexpected arrival: ["] ++ [ show(start+(ea[i] div 60)) ++ "." ++ show(ea[i] mod 60) ++ if i=N then "]" else ", " endif | i in 1..N ] 
         
-        ++["\n"] ++ [show(ra)];
+        ++["\nra: "] ++ [show(ra)];
         
           
 
