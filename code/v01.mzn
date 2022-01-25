@@ -50,11 +50,16 @@ array[1..d, 1..N, 1..h] of var bool: scheduling;
 % Each element constains the number of pizzas carried in the corresponding half-an-hour
 array[1..d, 1..h] of var int: pizzas_carried;
 
-array[1..N] of var int: ea; % estimated arrival time for each order 
+% array[1..N] of var int: ea; % estimated arrival time for each order 
+ array[1..N] of var 0..h*30: ea; % estimated arrival time for each order 
 
-array[1..d, 1..N, 1..h] of var int: P; % destinations to reach
+%array[1..d, 1..N, 1..h] of var int: P; % destinations to reach
+array[1..d, 1..N, 1..h] of var 0..N: P; % destinations to reach
+
 array[1..d, 1..N, 1..h] of var 0..N: X; % positions of the destinations to reach collapsed
-array[1..d, 1..N, 1..h] of var int: distances; % partial distances to reach the node
+
+%array[1..d, 1..N, 1..h] of var int: distances; % partial distances to reach the node
+array[1..d, 1..N, 1..h] of var 0..30: distances; % partial distances to reach the node
 
 %%%%%% CONSTRAINTS %%%%%%
 
@@ -63,7 +68,7 @@ constraint sum(scheduling) = N;
 % .. to only one deliver.
 constraint forall(j in 1..N)(
     sum([scheduling[id,j,ih]| id in 1..d, ih in 1..h]) = 1
-  );
+  );  
   
 % P consistency
 constraint forall(id in 1..d, ih in 1..h, iN in 1..N)(
@@ -144,17 +149,20 @@ constraint forall(id in 1..d, ih in 1..h)(
 constraint forall(id in 1..d, ih in 1..h)( pizzas_carried[id, ih] <= 16 );
 constraint forall(id in 1..d, ih in 1..h)( pizzas_carried[id, ih] >= 0   );
 
-
+% SIMMETRY BREAKING STRATEGY, this force an ordering in the number of pizzas carried by each deliverer in one half-an-hour. The first is greater than the second, which is greater then the third an so on...
+constraint forall(ih in 1..h, id in 1..d-1)(
+  pizzas_carried[id,ih] >= pizzas_carried[id+1,ih]
+);
 
 % must arrive in the delivery time window
 constraint forall(iN in 1..N)(
-  ea[iN] > ra[iN] /\ ea[iN] <= ra[iN]+30 
+  ea[iN] >= ra[iN] /\ ea[iN] <= ra[iN]+30 
 );
 
-solve :: int_search( distances,
-        dom_w_deg, indomain_random) satisfy;
+%solve :: int_search( scheduling,
+%        first_fail, indomain_random) minimize sum(ea);
 %solve satisfy;
-%solve minimize sum(ea);
+solve minimize sum(ea);
 
 
 output   
