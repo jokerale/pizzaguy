@@ -15,7 +15,7 @@ int: h = 6; %(19.00 -> 22.00)
 
 % Graph 
 int: k = 5;
-array[1..k, 1..k] of var int: mdist; % matrix of distances
+array[1..k, 1..k] of int: mdist; % matrix of distances
 mdist = [| 0, 1, 2, 2, 3
          | 1, 0, 2, 3, 3
          | 2, 2, 0, 4, 1
@@ -69,7 +69,15 @@ constraint sum(scheduling) = N;
 constraint forall(j in 1..N)(
     sum([scheduling[id,j,ih]| id in 1..d, ih in 1..h]) = 1
   );  
-  
+
+
+constraint forall(id in 1..d, iN in 1..N, ih in 1..h)(
+ if (ih*30) < ra[iN] then 
+     scheduling[id,iN,ih] = 0
+ endif
+);
+
+
 % P consistency
 constraint forall(id in 1..d, ih in 1..h, iN in 1..N)(
   P[id, iN, ih] = scheduling[id, iN, ih] * dest[iN]
