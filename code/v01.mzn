@@ -1,29 +1,29 @@
 include "globals.mzn";
 
 %%%%%% INPUT %%%%%%
-orario = [19.15, 20];
-dest = [2, 7];
-num_pizze = [1, 4];
-k = 13;
-N = 2;
-mdist = [| 0,  7,  9,  3,   7,  1,  2,  12, 12, 10, 9,  11, 9
-         | 7,  0,  2, 10,   14, 8,  5,  6,  5,  3,  7,  12, 9
-         | 9,  2,  0,  9,   15, 10, 7,  5,  3,  1,  5,  11, 8
-         | 3,  10, 9,  0,   10, 4,  5,  14, 12, 10, 6,  14, 12
-         | 7,  14, 15, 10,  0,  6,  9,  10, 12, 14, 16, 4,  7
-         | 1,  8,  10, 4,   6,  0,  3,  13, 13, 11, 10, 10, 10
-         | 2,  5,  7,  5,   9,  3,  0,  10, 10, 8,  11, 10, 7
-         | 12, 6,  5,  14,  10, 13, 10, 0,  2,  4,  8,  6,  3
-         | 12, 5,  3,  12,  12, 13, 10, 2,  0,  2,  6,  8,  5
-         | 10, 3,  1,  10,  14, 11, 8,  4,  2,  0,  4,  10, 7
-         | 9,  7,  5,  6,   16, 10, 11, 8,  6,  4,  0,  14, 11
-         | 11, 12, 11, 14,  4,  10, 10, 6,  8,  10, 14, 0,  3
-         | 9,  9,  8,  12,  7,  10, 7,  3,  5,  7,  11, 3,  0
-         |];
+% orario = [21.00, 19.45, 20.30];
+% dest = [2, 3, 6];
+% num_pizze = [1, 4, 3];
+% k = 13;
+% N = 3;
+% mdist = [| 0,  7,  9,  3,   7,  1,  2,  12, 12, 10, 9,  11, 9
+%          | 7,  0,  2, 10,   14, 8,  5,  6,  5,  3,  7,  12, 9
+%          | 9,  2,  0,  9,   15, 10, 7,  5,  3,  1,  5,  11, 8
+%          | 3,  10, 9,  0,   10, 4,  5,  14, 12, 10, 6,  14, 12
+%          | 7,  14, 15, 10,  0,  6,  9,  10, 12, 14, 16, 4,  7
+%          | 1,  8,  10, 4,   6,  0,  3,  13, 13, 11, 10, 10, 10
+%          | 2,  5,  7,  5,   9,  3,  0,  10, 10, 8,  11, 10, 7
+%          | 12, 6,  5,  14,  10, 13, 10, 0,  2,  4,  8,  6,  3
+%          | 12, 5,  3,  12,  12, 13, 10, 2,  0,  2,  6,  8,  5
+%          | 10, 3,  1,  10,  14, 11, 8,  4,  2,  0,  4,  10, 7
+%          | 9,  7,  5,  6,   16, 10, 11, 8,  6,  4,  0,  14, 11
+%          | 11, 12, 11, 14,  4,  10, 10, 6,  8,  10, 14, 0,  3
+%          | 9,  9,  8,  12,  7,  10, 7,  3,  5,  7,  11, 3,  0
+%          |];
 
 
 % Number of delivers
-int: d = 3;
+int: d;
 
 % Time of service
 int: start = 19;
@@ -75,7 +75,7 @@ array[1..d, 1..h] of var 0..16: pizzas_carried;
  array[1..N] of var 0..h*30: ea; % estimated arrival time for each order 
 
 %array[1..d, 1..N, 1..h] of var int: P; % destinations to reach
-array[1..d, 1..N, 1..h] of var 0..N: P; % destinations to reach
+array[1..d, 1..N, 1..h] of var 0..k: P; % destinations to reach
 
 array[1..d, 1..N, 1..h] of var 0..N: X; % positions of the destinations to reach collapsed
 
@@ -190,8 +190,8 @@ constraint forall(iN in 1..N)(
 
 %solve :: int_search( X,
 %        first_fail, indomain_random) minimize sum(ea);
-%solve satisfy;
-solve minimize sum(ea);
+solve satisfy;
+%solve minimize sum(ea);
 
 
 output   
@@ -247,13 +247,14 @@ output
           if(i=1 /\ j=1) then "(h"++show(ih)++")\n" else "" endif ++
           if (j=1) then show(i) ++ "\t" else "" endif ++
           show((distances[i,j,ih])*scheduling[i,j,ih]) ++ "\t" ++
+%          show((distances[i,j,ih])*scheduling[i,j,ih]) ++ "\t" ++
           %"(" ++ show(i) ++ " " ++ show(j) ++ " " ++ show(k) ++ ") " ++
           if(j=N) then "\n" else "" endif ++
           if(j=N /\ i=d) then "\n" else "" endif
             | ih in 1..h, i in 1..d, j in 1..N] ++
             
         ["\nexpected arrival: ["] ++ [ show(start+(ea[i] div 60)) ++ "." ++ show(ea[i] mod 60) ++ if i=N then "]" else ", " endif | i in 1..N ] 
-        
+        %["\nea: "] ++ [show(ea)]
         ++["\nra: "] ++ [show(ra)];
         
           
