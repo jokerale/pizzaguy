@@ -5,6 +5,8 @@ import numpy as np
 import os
 from itertools import combinations
 import random
+import sys
+import argparse
 import osmnx as ox
 
 #### FUNZIONI DI SUPPORTO ####
@@ -50,12 +52,20 @@ def ordersGeneretor(orari_possibili, n_pizze_max, n_nodi, n_ordini):
     dest = np.random.randint(2, n_nodi+1, size=n_ordini)
     
     return orari, num_pizze, dest
+############ USER INTERFACE ############
+parser = argparse.ArgumentParser(description="Generatore di input per il solver Minizinc.")
 
+parser.add_argument("-d", "--deliverers", nargs=1, type=int, required=True, help="numero di deliverers")
+parser.add_argument("-N", "--ordini", nargs=1, type=int, required=True, help="numero di ordini totali")
+parser.add_argument("-p", "--place", nargs=1, required=True, help="città da cui prendere la mappa \n(formato: città, provincia, nazione)")
+
+input_var = parser.parse_args()
+#print(input_var)
 ############ GENERATORE ############
-place_name = "Casaloldo, Mantova, Italy"
+#place_name = "Casaloldo, Mantova, Italy"
 
 # dowload del grafico
-graph = ox.graph_from_place(place_name, network_type="drive")
+graph = ox.graph_from_place(input_var.place, network_type="drive")
 # conversione delle etichette con numeri consecutivi partendo da 1
 gg = nx.convert_node_labels_to_integers(graph)
 # conversione ad un grafo indiretto
@@ -76,7 +86,7 @@ orari_possibili = ["19.00", "19.15", "19.30", "19.45", "20.00", "20.15", "20.30"
 #num_pizze
 #dest
 
-deliverers = 3
+#deliverers = 3
 N = 4
 orari, pizze, nodi = ordersGeneretor(orari_possibili, 16, mDistSorted2.shape[0], N)
 dfOrari = pd.DataFrame(orari)
@@ -94,7 +104,7 @@ file.write(stringa + os.linesep
            + stringaOrari + os.linesep 
            + stringaPizze + os.linesep 
            + stringaNodi+ os.linesep
-           + "N = " + str(N) + ";" + os.linesep
+           + "N = " + str(input_var.ordini) + ";" + os.linesep
            + "k = " + str(mDistSorted2.shape[0]) + ";" + os.linesep
-           + "d = " + str(deliverers) + ";" + os.linesep)
+           + "d = " + str(input_var.deliverers) + ";" + os.linesep)
 file.close()
