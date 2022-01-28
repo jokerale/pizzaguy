@@ -77,14 +77,14 @@ orari_possibili = ["19.00", "19.15", "19.30", "19.45", "20.00", "20.15", "20.30"
 #dest
 
 deliverers = 3
-N = 8
+N = 4
 orari, pizze, nodi = ordersGeneretor(orari_possibili, 16, mDistSorted2.shape[0], N)
 dfOrari = pd.DataFrame(orari)
 dfPizze = pd.DataFrame(pizze)
 dfNodi = pd.DataFrame(nodi)
 
 
-stringa = dataStringGenerator(pd.DataFrame(mDistSorted2,dtype=int), "mdist")
+stringa = dataStringGenerator(pd.DataFrame(mDistSorted2/18,dtype=int), "mdist")
 stringaOrari = dataStringGenerator(dfOrari, "orario")
 stringaPizze = dataStringGenerator(dfPizze, "num_pizze")
 stringaNodi = dataStringGenerator(dfNodi, "dest")

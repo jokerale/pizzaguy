@@ -91,10 +91,16 @@ constraint forall(j in 1..N)(
     sum([scheduling[id,j,ih]| id in 1..d, ih in 1..h]) = 1
   );  
 
-%NB: this constraint enforce that all the half-an-hour before the requested arrival time must be 0
+%% NB: this constraint enforce that all the half-an-hour before the requested arrival time must be 0
 constraint forall(id in 1..d, iN in 1..N, ih in 1..h)(
- if (ih*30) <= ra[iN] then 
+ if (ih*30) < ra[iN] then 
      scheduling[id,iN,ih] = 0
+ endif
+);
+%% NB: this constraint is similatr to the previous one but enforce that all the half-an-hour after the requested time must be zero
+constraint forall(id in 1..d, iN in 1..N, ih in 1..h)(
+ if (ih*30) > (ra[iN]+60) then 
+   scheduling[id,iN,ih] = 0
  endif
 );
 
@@ -185,7 +191,7 @@ constraint forall(ih in 1..h, id in 1..d-1)(
 
 % must arrive in the delivery time window
 constraint forall(iN in 1..N)(
-  ea[iN] > ra[iN] /\ ea[iN] <= ra[iN]+30 
+  ea[iN] >= ra[iN] /\ ea[iN] < ra[iN]+30 
 );
 
 %solve :: int_search( X,
@@ -253,8 +259,8 @@ output
           if(j=N /\ i=d) then "\n" else "" endif
             | ih in 1..h, i in 1..d, j in 1..N] ++
             
-        ["\nexpected arrival: ["] ++ [ show(start+(ea[i] div 60)) ++ "." ++ show(ea[i] mod 60) ++ if i=N then "]" else ", " endif | i in 1..N ] 
-        %["\nea: "] ++ [show(ea)]
+        %["\nexpected arrival: ["] ++ [ show(start+(ea[i] div 60)) ++ "." ++ show(ea[i] mod 60) ++ if i=N then "]" else ", " endif | i in 1..N ] 
+        ["\nea: "] ++ [show(ea)]
         ++["\nra: "] ++ [show(ra)];
         
           
