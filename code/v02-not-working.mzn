@@ -31,7 +31,7 @@ array[1..N] of int: ra =         % requested arrival time (in minutes from start
 
 
 %%%%% Input
-d=5;
+d=3;
 
 k=5;
 mdist = [| 0, 1, 2, 2, 3
@@ -86,7 +86,14 @@ constraint forall(iN in 1..N)(
   
   
   
-  
+% It takes as input a "row" of scheduling
+% and constraint this row (a single half-an-hour) to be a "circuit" 
+% in which the deliverer starts from node 1 and go back to it, passing 
+% through all the nodes assigned to him in this specific half-an-hour.
+% X, P, and d have the same meaning of v01, but here they're considered
+% as single row.  
+% The result for this constraint is to directly constraint the meaningfull
+% "cell" of ea.     
 predicate my_circuit(array [1..N] of var bool: sched,
                      array [1..N] of var 0..h*30: ea,
                      int: ih ) = 
@@ -122,8 +129,8 @@ predicate my_circuit(array [1..N] of var bool: sched,
     ( 
     X[iN] = 0 -> forall(j in iN..N) (X[j] = 0)
     )
-    /\
-    % d: construction
+   /\
+   % d: construction
     (
     count([X[iNN]| iNN in 1..N], iN, 0) -> d[iN] = 0
     )
@@ -158,7 +165,7 @@ predicate my_circuit(array [1..N] of var bool: sched,
     sched[iN] > 0 -> (ea[iN] = d[iN]+(ih-1)*30)
     )
     
-  )
+  ) % end forall iN in 1..N
 
   /\
   
@@ -170,19 +177,23 @@ predicate my_circuit(array [1..N] of var bool: sched,
   
 ;
 
-
-
+% constraint sum(pizzas_carried) = sum(num_pizze);
+% constraint forall(id in 1..d, ih in 1..h)(
+%   pizzas_carried[id, ih] = sum([ num_pizze[j] | j in 1..N where scheduling[id, j, ih] = 1])
+%   );
+% % SIMMETRY BREAKING STRATEGY, this force an ordering in the number of pizzas carried by each deliverer in one half-an-hour. The first is greater than the second, which is greater then the third an so on...
+% constraint forall(ih in 1..h, id in 1..d-1)(
+%   pizzas_carried[id,ih] >= pizzas_carried[id+1,ih]
+% );
 
 constraint forall(id in 1..d, iN in 1..N, ih in 1..h)(
- if (ih*30) < ra[iN] then 
-     scheduling[id,iN,ih] = 0
+  ((ih*30) < ra[iN]) -> scheduling[id,iN,ih] = 0
+);
+constraint forall(id in 1..d, iN in 1..N, ih in 1..h)(
+ if (ih*30) > (ra[iN]+60) then 
+   scheduling[id,iN,ih] = 0
  endif
 );
-% constraint forall(id in 1..d, iN in 1..N, ih in 1..h)(
-%  if (ih*30) > (ra[iN]+60) then 
-%    scheduling[id,iN,ih] = 0
-%  endif
-% );
 
 % for each deliverer and for each half-an-hour, the row of scheduling must 
 % represent a circuit of nodes to reach
@@ -201,6 +212,8 @@ constraint forall(iN in 1..N)(
 
 
 solve satisfy;
+% solve :: int_search( ea,
+%        first_fail, indomain_random) minimize sum(ea);
 
 
 
