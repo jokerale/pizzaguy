@@ -1,4 +1,5 @@
 include "globals.mzn";
+%include "data/data_Asola_4.dzn";
 
 %%%%%% INPUT %%%%%%
 % orario = [21.00, 19.45, 20.30];
@@ -74,13 +75,13 @@ array[1..d, 1..h] of var 0..16: pizzas_carried;
 % array[1..N] of var int: ea; % estimated arrival time for each order 
  array[1..N] of var 0..h*30: ea; % estimated arrival time for each order 
 
-%array[1..d, 1..N, 1..h] of var int: P; % destinations to reach
 array[1..d, 1..N, 1..h] of var 0..k: P; % destinations to reach
+%array[1..d, 1..N, 1..h] of var array2set(dest) union {0}: P; % destinations to reach
 
 array[1..d, 1..N, 1..h] of var 0..N: X; % positions of the destinations to reach collapsed
 
 %array[1..d, 1..N, 1..h] of var int: distances; % partial distances to reach the node
-array[1..d, 1..N, 1..h] of var 0..30: distances; % partial distances to reach the node
+array[1..d, 1..N, 1..h] of var 0..29: distances; % partial distances to reach the node
 
 %%%%%% CONSTRAINTS %%%%%%
 
@@ -93,16 +94,20 @@ constraint forall(j in 1..N)(
 
 %% NB: this constraint enforce that all the half-an-hour before the requested arrival time must be 0
 constraint forall(id in 1..d, iN in 1..N, ih in 1..h)(
- if (ih*30) < ra[iN] then 
-     scheduling[id,iN,ih] = 0
- endif
+  (
+    (ih*30) <= ra[iN] -> scheduling[id,iN,ih] = 0
+  )
+  /\
+  (
+    ((ih-1)*30) > (ra[iN]+15) -> scheduling[id,iN,ih] = 0
+  )
+
 );
 %% NB: this constraint is similatr to the previous one but enforce that all the half-an-hour after the requested time must be zero
-constraint forall(id in 1..d, iN in 1..N, ih in 1..h)(
- if (ih*30) > (ra[iN]+60) then 
-   scheduling[id,iN,ih] = 0
- endif
-);
+%constraint forall(id in 1..d, iN in 1..N, ih in 1..h)(
+%  (
+%
+%);
 
 
 % P consistency
@@ -155,12 +160,12 @@ constraint forall(id in 1..d, iN in 1..N, ih in 1..h)(
   % add constraint on total distances
   if X[id,iN,ih] !=0 then
     if iN+1 == N+1 then
-      distances[id, X[id,iN,ih], ih] + mdist[P[id, X[id,iN,ih], ih],1] <= 30
+      distances[id, X[id,iN,ih], ih] + mdist[P[id, X[id,iN,ih], ih],1] < 30
       %/\
       %distances[id, X[id,iN,ih], ih] + mdist[P[id, X[id,iN,ih], ih],1] >= (ih-1)*30
     else
       if X[id,iN+1,ih] == 0 then
-        distances[id, X[id,iN,ih], ih] + mdist[P[id, X[id,iN,ih], ih],1] <= 30
+        distances[id, X[id,iN,ih], ih] + mdist[P[id, X[id,iN,ih], ih],1] < 30
         %/\
         %distances[id, X[id,iN,ih], ih] + mdist[P[id, X[id,iN,ih], ih],1] >= (ih-1)*30
       endif
@@ -194,77 +199,91 @@ constraint forall(iN in 1..N)(
   ea[iN] >= ra[iN] /\ ea[iN] < ra[iN]+30 
 );
 
-%solve :: int_search( X,
-%        first_fail, indomain_random) minimize sum(ea);
-solve satisfy;
+
+
+constraint forall(ik in 1..k)(
+(
+  count(dest,k,0) -> count(P,k,0)
+)
+    /\
+ ( count(dest,k,1) -> count(P,k,1)
+  )
+);
+
+
+
+
+solve :: int_search( X,
+        first_fail, indomain_random) minimize sum(ea);
+%solve satisfy;
 %solve minimize sum(ea);
 
 
-output   
+%output   
 
-        ["order ID\tdest"] ++ ["\n"] ++
-        ["--------\t----"] ++ ["\n"] ++
-        [show(i) ++ "\t" ++ show(dest[i]) ++ "\n" | i in 1..N] ++ ["\n"] ++
-        
-        ["\nSCHEDULING\n"] ++
-        ["deliver\t"] ++ ["ord-" ++ show(i) ++"\t" | i in 1..N] ++ ["\n"] ++
-        ["-------\t"] ++ ["------\t" | i in 1..N] ++ ["\n"] ++
-        
-        [
-          if(i=1 /\ j=1) then "(h"++show(ih)++")\n" else "" endif ++
-          if (j=1) then show(i) ++ "\t" else "" endif ++
-          if fix(scheduling[i,j,ih])=true then "1" else "0" endif ++ "\t" ++
-          %"(" ++ show(i) ++ " " ++ show(j) ++ " " ++ show(k) ++ ") " ++
-          if(j=N) then "\n" else "" endif ++
-          if(j=N /\ i=d) then "\n" else "" endif
-            | ih in 1..h, i in 1..d, j in 1..N] ++
-            
-        ["\nP\n"] ++    
-        ["deliver\t"] ++ ["ord-" ++ show(i) ++"\t" | i in 1..N] ++ ["\n"] ++
-        ["-------\t"] ++ ["------\t" | i in 1..N] ++ ["\n"] ++
-        
-        [
-          if(i=1 /\ j=1) then "(h"++show(ih)++")\n" else "" endif ++
-          if (j=1) then show(i) ++ "\t" else "" endif ++
-          show(P[i,j,ih]) ++ "\t" ++
-          %"(" ++ show(i) ++ " " ++ show(j) ++ " " ++ show(k) ++ ") " ++
-          if(j=N) then "\n" else "" endif ++
-          if(j=N /\ i=d) then "\n" else "" endif
-            | ih in 1..h, i in 1..d, j in 1..N] ++
-        
-        ["\nX\n"] ++
-        ["deliver\t"] ++ ["ord-" ++ show(i) ++"\t" | i in 1..N] ++ ["\n"] ++
-        ["-------\t"] ++ ["------\t" | i in 1..N] ++ ["\n"] ++
-        
-        [
-          if(i=1 /\ j=1) then "(h"++show(ih)++")\n" else "" endif ++
-          if (j=1) then show(i) ++ "\t" else "" endif ++
-          show(X[i,j,ih]) ++ "\t" ++
-          %"(" ++ show(i) ++ " " ++ show(j) ++ " " ++ show(k) ++ ") " ++
-          if(j=N) then "\n" else "" endif ++
-          if(j=N /\ i=d) then "\n" else "" endif
-            | ih in 1..h, i in 1..d, j in 1..N] ++
-        
-        ["\ndistances*scheduling\n"] ++
-        ["deliver\t"] ++ ["ord-" ++ show(i) ++"\t" | i in 1..N] ++ ["\n"] ++
-        ["-------\t"] ++ ["------\t" | i in 1..N] ++ ["\n"] ++
-        
-        [
-          if(i=1 /\ j=1) then "(h"++show(ih)++")\n" else "" endif ++
-          if (j=1) then show(i) ++ "\t" else "" endif ++
-          show((distances[i,j,ih])*scheduling[i,j,ih]) ++ "\t" ++
+%        ["order ID\tdest"] ++ ["\n"] ++
+%        ["--------\t----"] ++ ["\n"] ++
+%        [show(i) ++ "\t" ++ show(dest[i]) ++ "\n" | i in 1..N] ++ ["\n"] ++
+%        
+%        ["\nSCHEDULING\n"] ++
+%        ["deliver\t"] ++ ["ord-" ++ show(i) ++"\t" | i in 1..N] ++ ["\n"] ++
+%        ["-------\t"] ++ ["------\t" | i in 1..N] ++ ["\n"] ++
+%        
+%        [
+%          if(i=1 /\ j=1) then "(h"++show(ih)++")\n" else "" endif ++
+%          if (j=1) then show(i) ++ "\t" else "" endif ++
+%          if fix(scheduling[i,j,ih])=true then "1" else "0" endif ++ "\t" ++
+%          %"(" ++ show(i) ++ " " ++ show(j) ++ " " ++ show(k) ++ ") " ++
+%          if(j=N) then "\n" else "" endif ++
+%          if(j=N /\ i=d) then "\n" else "" endif
+%            | ih in 1..h, i in 1..d, j in 1..N] ++
+%            
+%        ["\nP\n"] ++    
+%        ["deliver\t"] ++ ["ord-" ++ show(i) ++"\t" | i in 1..N] ++ ["\n"] ++
+%        ["-------\t"] ++ ["------\t" | i in 1..N] ++ ["\n"] ++
+%        
+%        [
+%          if(i=1 /\ j=1) then "(h"++show(ih)++")\n" else "" endif ++
+%          if (j=1) then show(i) ++ "\t" else "" endif ++
+%          show(P[i,j,ih]) ++ "\t" ++
+%          %"(" ++ show(i) ++ " " ++ show(j) ++ " " ++ show(k) ++ ") " ++
+%          if(j=N) then "\n" else "" endif ++
+%          if(j=N /\ i=d) then "\n" else "" endif
+%            | ih in 1..h, i in 1..d, j in 1..N] ++
+%        
+%        ["\nX\n"] ++
+%        ["deliver\t"] ++ ["ord-" ++ show(i) ++"\t" | i in 1..N] ++ ["\n"] ++
+%        ["-------\t"] ++ ["------\t" | i in 1..N] ++ ["\n"] ++
+%        
+%        [
+%          if(i=1 /\ j=1) then "(h"++show(ih)++")\n" else "" endif ++
+%          if (j=1) then show(i) ++ "\t" else "" endif ++
+%          show(X[i,j,ih]) ++ "\t" ++
+%          %"(" ++ show(i) ++ " " ++ show(j) ++ " " ++ show(k) ++ ") " ++
+%          if(j=N) then "\n" else "" endif ++
+%          if(j=N /\ i=d) then "\n" else "" endif
+%            | ih in 1..h, i in 1..d, j in 1..N] ++
+%        
+%        ["\ndistances*scheduling\n"] ++
+%        ["deliver\t"] ++ ["ord-" ++ show(i) ++"\t" | i in 1..N] ++ ["\n"] ++
+%        ["-------\t"] ++ ["------\t" | i in 1..N] ++ ["\n"] ++
+%        
+%        [
+%          if(i=1 /\ j=1) then "(h"++show(ih)++")\n" else "" endif ++
+%          if (j=1) then show(i) ++ "\t" else "" endif ++
 %          show((distances[i,j,ih])*scheduling[i,j,ih]) ++ "\t" ++
-          %"(" ++ show(i) ++ " " ++ show(j) ++ " " ++ show(k) ++ ") " ++
-          if(j=N) then "\n" else "" endif ++
-          if(j=N /\ i=d) then "\n" else "" endif
-            | ih in 1..h, i in 1..d, j in 1..N] ++
-            
-        %["\nexpected arrival: ["] ++ [ show(start+(ea[i] div 60)) ++ "." ++ show(ea[i] mod 60) ++ if i=N then "]" else ", " endif | i in 1..N ] 
-        ["\nea: "] ++ [show(ea)]
-        ++["\nra: "] ++ [show(ra)];
-        
-          
-
+%          %show((distances[i,j,ih])*scheduling[i,j,ih]) ++ "\t" ++
+%          %"(" ++ show(i) ++ " " ++ show(j) ++ " " ++ show(k) ++ ") " ++
+%          if(j=N) then "\n" else "" endif ++
+%          if(j=N /\ i=d) then "\n" else "" endif
+%            | ih in 1..h, i in 1..d, j in 1..N] ++
+%            
+%        %["\nexpected arrival: ["] ++ [ show(start+(ea[i] div 60)) ++ "." ++ show(ea[i] mod 60) ++ if i=N then "]" else ", " endif | i in 1..N ] 
+%        ["\nea: "] ++ [show(ea)]
+%        ++["\nra: "] ++ [show(ra)];
+%        
+%          
+%
 %         ["order ID\tdest"] ++ ["\n"] ++
 %         ["--------\t----"] ++ ["\n"] ++
 %         [show(i) ++ "\t" ++ show(dest[i]) ++ "\n" | i in 1..N] ++ ["\n"] ++
