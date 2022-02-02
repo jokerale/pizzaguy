@@ -199,16 +199,18 @@ constraint forall(iN in 1..N)(
   ea[iN] >= ra[iN] /\ ea[iN] < ra[iN]+30 
 );
 
-
-
 constraint forall(ik in 1..k)(
-(
-  count(dest,k,0) -> count(P,k,0)
-)
-    /\
- ( count(dest,k,1) -> count(P,k,1)
-  )
+ ( count(dest,k,0) -> count(P,k,0) )
+ /\
+ ( count(dest,k,1) -> count(P,k,1) )
 );
+% constraint forall(ik in 1..k)(
+%   let{
+%        var int: c;
+%     } in  count(dest,k,c) -> count(P,k,c)
+% %   /\
+% %   ( count(dest,k,1) -> count(P,k,1) )
+% );
 
 
 
@@ -219,70 +221,70 @@ solve :: int_search( X,
 %solve minimize sum(ea);
 
 
-%output   
+output   
 
-%        ["order ID\tdest"] ++ ["\n"] ++
-%        ["--------\t----"] ++ ["\n"] ++
-%        [show(i) ++ "\t" ++ show(dest[i]) ++ "\n" | i in 1..N] ++ ["\n"] ++
-%        
-%        ["\nSCHEDULING\n"] ++
-%        ["deliver\t"] ++ ["ord-" ++ show(i) ++"\t" | i in 1..N] ++ ["\n"] ++
-%        ["-------\t"] ++ ["------\t" | i in 1..N] ++ ["\n"] ++
-%        
-%        [
-%          if(i=1 /\ j=1) then "(h"++show(ih)++")\n" else "" endif ++
-%          if (j=1) then show(i) ++ "\t" else "" endif ++
-%          if fix(scheduling[i,j,ih])=true then "1" else "0" endif ++ "\t" ++
-%          %"(" ++ show(i) ++ " " ++ show(j) ++ " " ++ show(k) ++ ") " ++
-%          if(j=N) then "\n" else "" endif ++
-%          if(j=N /\ i=d) then "\n" else "" endif
-%            | ih in 1..h, i in 1..d, j in 1..N] ++
-%            
-%        ["\nP\n"] ++    
-%        ["deliver\t"] ++ ["ord-" ++ show(i) ++"\t" | i in 1..N] ++ ["\n"] ++
-%        ["-------\t"] ++ ["------\t" | i in 1..N] ++ ["\n"] ++
-%        
-%        [
-%          if(i=1 /\ j=1) then "(h"++show(ih)++")\n" else "" endif ++
-%          if (j=1) then show(i) ++ "\t" else "" endif ++
-%          show(P[i,j,ih]) ++ "\t" ++
-%          %"(" ++ show(i) ++ " " ++ show(j) ++ " " ++ show(k) ++ ") " ++
-%          if(j=N) then "\n" else "" endif ++
-%          if(j=N /\ i=d) then "\n" else "" endif
-%            | ih in 1..h, i in 1..d, j in 1..N] ++
-%        
-%        ["\nX\n"] ++
-%        ["deliver\t"] ++ ["ord-" ++ show(i) ++"\t" | i in 1..N] ++ ["\n"] ++
-%        ["-------\t"] ++ ["------\t" | i in 1..N] ++ ["\n"] ++
-%        
-%        [
-%          if(i=1 /\ j=1) then "(h"++show(ih)++")\n" else "" endif ++
-%          if (j=1) then show(i) ++ "\t" else "" endif ++
-%          show(X[i,j,ih]) ++ "\t" ++
-%          %"(" ++ show(i) ++ " " ++ show(j) ++ " " ++ show(k) ++ ") " ++
-%          if(j=N) then "\n" else "" endif ++
-%          if(j=N /\ i=d) then "\n" else "" endif
-%            | ih in 1..h, i in 1..d, j in 1..N] ++
-%        
-%        ["\ndistances*scheduling\n"] ++
-%        ["deliver\t"] ++ ["ord-" ++ show(i) ++"\t" | i in 1..N] ++ ["\n"] ++
-%        ["-------\t"] ++ ["------\t" | i in 1..N] ++ ["\n"] ++
-%        
-%        [
-%          if(i=1 /\ j=1) then "(h"++show(ih)++")\n" else "" endif ++
-%          if (j=1) then show(i) ++ "\t" else "" endif ++
-%          show((distances[i,j,ih])*scheduling[i,j,ih]) ++ "\t" ++
-%          %show((distances[i,j,ih])*scheduling[i,j,ih]) ++ "\t" ++
-%          %"(" ++ show(i) ++ " " ++ show(j) ++ " " ++ show(k) ++ ") " ++
-%          if(j=N) then "\n" else "" endif ++
-%          if(j=N /\ i=d) then "\n" else "" endif
-%            | ih in 1..h, i in 1..d, j in 1..N] ++
-%            
-%        %["\nexpected arrival: ["] ++ [ show(start+(ea[i] div 60)) ++ "." ++ show(ea[i] mod 60) ++ if i=N then "]" else ", " endif | i in 1..N ] 
-%        ["\nea: "] ++ [show(ea)]
-%        ++["\nra: "] ++ [show(ra)];
-%        
-%          
+       ["order ID\tdest"] ++ ["\n"] ++
+       ["--------\t----"] ++ ["\n"] ++
+       [show(i) ++ "\t" ++ show(dest[i]) ++ "\n" | i in 1..N] ++ ["\n"] ++
+       
+       ["\nSCHEDULING\n"] ++
+       ["deliver\t"] ++ ["ord-" ++ show(i) ++"\t" | i in 1..N] ++ ["\n"] ++
+       ["-------\t"] ++ ["------\t" | i in 1..N] ++ ["\n"] ++
+       
+       [
+         if(i=1 /\ j=1) then "(h"++show(ih)++")\n" else "" endif ++
+         if (j=1) then show(i) ++ "\t" else "" endif ++
+         if fix(scheduling[i,j,ih])=true then "1" else "0" endif ++ "\t" ++
+         %"(" ++ show(i) ++ " " ++ show(j) ++ " " ++ show(k) ++ ") " ++
+         if(j=N) then "\n" else "" endif ++
+         if(j=N /\ i=d) then "\n" else "" endif
+           | ih in 1..h, i in 1..d, j in 1..N] ++
+           
+       ["\nP\n"] ++    
+       ["deliver\t"] ++ ["ord-" ++ show(i) ++"\t" | i in 1..N] ++ ["\n"] ++
+       ["-------\t"] ++ ["------\t" | i in 1..N] ++ ["\n"] ++
+       
+       [
+         if(i=1 /\ j=1) then "(h"++show(ih)++")\n" else "" endif ++
+         if (j=1) then show(i) ++ "\t" else "" endif ++
+         show(P[i,j,ih]) ++ "\t" ++
+         %"(" ++ show(i) ++ " " ++ show(j) ++ " " ++ show(k) ++ ") " ++
+         if(j=N) then "\n" else "" endif ++
+         if(j=N /\ i=d) then "\n" else "" endif
+           | ih in 1..h, i in 1..d, j in 1..N] ++
+       
+       ["\nX\n"] ++
+       ["deliver\t"] ++ ["ord-" ++ show(i) ++"\t" | i in 1..N] ++ ["\n"] ++
+       ["-------\t"] ++ ["------\t" | i in 1..N] ++ ["\n"] ++
+       
+       [
+         if(i=1 /\ j=1) then "(h"++show(ih)++")\n" else "" endif ++
+         if (j=1) then show(i) ++ "\t" else "" endif ++
+         show(X[i,j,ih]) ++ "\t" ++
+         %"(" ++ show(i) ++ " " ++ show(j) ++ " " ++ show(k) ++ ") " ++
+         if(j=N) then "\n" else "" endif ++
+         if(j=N /\ i=d) then "\n" else "" endif
+           | ih in 1..h, i in 1..d, j in 1..N] ++
+       
+       ["\ndistances*scheduling\n"] ++
+       ["deliver\t"] ++ ["ord-" ++ show(i) ++"\t" | i in 1..N] ++ ["\n"] ++
+       ["-------\t"] ++ ["------\t" | i in 1..N] ++ ["\n"] ++
+       
+       [
+         if(i=1 /\ j=1) then "(h"++show(ih)++")\n" else "" endif ++
+         if (j=1) then show(i) ++ "\t" else "" endif ++
+         show((distances[i,j,ih])*scheduling[i,j,ih]) ++ "\t" ++
+         %show((distances[i,j,ih])*scheduling[i,j,ih]) ++ "\t" ++
+         %"(" ++ show(i) ++ " " ++ show(j) ++ " " ++ show(k) ++ ") " ++
+         if(j=N) then "\n" else "" endif ++
+         if(j=N /\ i=d) then "\n" else "" endif
+           | ih in 1..h, i in 1..d, j in 1..N] ++
+           
+       %["\nexpected arrival: ["] ++ [ show(start+(ea[i] div 60)) ++ "." ++ show(ea[i] mod 60) ++ if i=N then "]" else ", " endif | i in 1..N ] 
+       ["\nea: "] ++ [show(ea)]
+       ++["\nra: "] ++ [show(ra)];
+       
+         
 %
 %         ["order ID\tdest"] ++ ["\n"] ++
 %         ["--------\t----"] ++ ["\n"] ++
