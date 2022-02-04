@@ -138,3 +138,6 @@ out = os.popen(cmd).read()
 
 print('OUT:')
 print(out)
+f1 = open('out.txt','w')
+f1.write(out)
+f1.close()
