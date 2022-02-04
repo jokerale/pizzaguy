@@ -78,9 +78,11 @@ parser.add_argument("-c", "--city", nargs=1, required=True, help="city to use")
 parser.add_argument("-t", "--timeout", nargs=1, type=int, required=True, help="max time for Minizinc execution (in seconds)")
 parser.add_argument("-N", "--Norders", nargs=1, type=int, required=True, help="number of orders")
 parser.add_argument("-d", "--deliverers", nargs=1, type=int, required=True, help="number of deliverers")
+parser.add_argument('--plot-map', dest='plot', action='store_true', help='generate and save figure of map with paths')
 #parser.add_argument("-p", "--place", nargs=1, required=True, help="città da cui prendere la mappa \n(formato: città, provincia, nazione)")
 
 input_var = parser.parse_args()
+
 
 
 ##### MAIN PROGRAM #####
@@ -90,6 +92,7 @@ filename_dij = 'data/' + str(input_var.city[0]) + '_dijkstra.dzn'
 timelimit = input_var.timeout[0]*1000
 N = input_var.Norders[0]
 d = input_var.deliverers[0]
+plot = input_var.plot
 
 # Needed for images generation (in the future)
 g = ox.load_graphml(filepath=filename)

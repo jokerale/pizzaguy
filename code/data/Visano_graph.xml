@@ -2501,7 +2501,7 @@
       <data key="d7">[73603792, 73603823]</data>
       <data key="d14">Via Angelo Canossi</data>
       <data key="d11">unclassified</data>
-      <data key="d16">['4', '5']</data>
+      <data key="d16">['5', '4']</data>
       <data key="d8">False</data>
       <data key="d12">288.67400000000004</data>
       <data key="d13">LINESTRING (10.352507 45.3421313, 10.352386 45.342173, 10.3512066 45.342531, 10.3510622 45.3425698, 10.3509815 45.3426065, 10.3509032 45.3426682, 10.3505687 45.3430668, 10.3502959 45.3433903, 10.3502081 45.343487, 10.3501393 45.3435553, 10.3500705 45.3436254, 10.3499946 45.3436837, 10.3498498 45.3437771)</data>
@@ -2510,7 +2510,7 @@
       <data key="d7">[73603796, 73603783]</data>
       <data key="d14">Via per Calvisano</data>
       <data key="d11">unclassified</data>
-      <data key="d16">['4', '5']</data>
+      <data key="d16">['5', '4']</data>
       <data key="d8">False</data>
       <data key="d12">651.201</data>
       <data key="d13">LINESTRING (10.3621926 45.3273451, 10.3630353 45.3272544, 10.3637084 45.3271764, 10.3655216 45.3269662, 10.366396 45.3268733, 10.366816 45.3268287, 10.3673626 45.3267691, 10.3679702 45.3267028, 10.3686668 45.3266268, 10.3691278 45.3265765, 10.370419 45.3264257)</data>
@@ -2682,7 +2682,7 @@
       <data key="d7">[73530937, 74670509]</data>
       <data key="d9">2</data>
       <data key="d10">SP11</data>
-      <data key="d14">['Via Per Isorella', 'Via Visano']</data>
+      <data key="d14">['Via Visano', 'Via Per Isorella']</data>
       <data key="d11">tertiary</data>
       <data key="d16">6</data>
       <data key="d8">False</data>
@@ -2707,7 +2707,7 @@
       <data key="d7">[207246032, 45420262, 45420263]</data>
       <data key="d10">['SP6', 'SP11']</data>
       <data key="d14">Via Acquafredda</data>
-      <data key="d11">['secondary', 'tertiary']</data>
+      <data key="d11">['tertiary', 'secondary']</data>
       <data key="d8">False</data>
       <data key="d12">88.04400000000001</data>
       <data key="d18">yes</data>
@@ -4010,7 +4010,7 @@
     </edge>
     <edge source="208" target="210" id="0">
       <data key="d7">[150736196, 319228150]</data>
-      <data key="d14">['Via Aldo Moro', 'Via Papa Giovanni Ventitreesimo']</data>
+      <data key="d14">['Via Papa Giovanni Ventitreesimo', 'Via Aldo Moro']</data>
       <data key="d11">unclassified</data>
       <data key="d8">False</data>
       <data key="d12">358.54</data>
@@ -4425,7 +4425,7 @@
       <data key="d8">False</data>
       <data key="d12">76.796</data>
     </edge>
-    <data key="d0">2022-02-03 16:06:54</data>
+    <data key="d0">2022-02-04 21:37:31</data>
     <data key="d1">OSMnx 1.1.2</data>
     <data key="d2">epsg:4326</data>
     <data key="d3">True</data>

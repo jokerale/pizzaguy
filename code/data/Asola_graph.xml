@@ -2494,7 +2494,7 @@
       <data key="d9">SS343</data>
       <data key="d10">Strada statale 343 Asolana</data>
       <data key="d11">primary</data>
-      <data key="d17">['40', '90']</data>
+      <data key="d17">['90', '40']</data>
       <data key="d12">False</data>
       <data key="d13">237.10000000000002</data>
       <data key="d15">LINESTRING (10.4167346 45.2330641, 10.4168818 45.231435, 10.4169217 45.2311664, 10.4169922 45.230942)</data>
@@ -4227,7 +4227,7 @@
     <edge source="98" target="175" id="0">
       <data key="d7">[134056274, 134056271]</data>
       <data key="d12">True</data>
-      <data key="d10">['Via Fulvio Ziacchi', 'Via Tomaselli']</data>
+      <data key="d10">['Via Tomaselli', 'Via Fulvio Ziacchi']</data>
       <data key="d11">unclassified</data>
       <data key="d13">217.036</data>
       <data key="d15">LINESTRING (10.4121803 45.2229675, 10.4108742 45.2229851, 10.4108769 45.2227085, 10.4109678 45.2219561)</data>
@@ -4342,7 +4342,7 @@
     </edge>
     <edge source="103" target="291" id="0">
       <data key="d7">[134112573, 134112567]</data>
-      <data key="d10">['Via Sardegna', 'Via Piemonte']</data>
+      <data key="d10">['Via Piemonte', 'Via Sardegna']</data>
       <data key="d11">unclassified</data>
       <data key="d12">False</data>
       <data key="d13">283.51599999999996</data>
@@ -4756,7 +4756,7 @@
     </edge>
     <edge source="135" target="139" id="1">
       <data key="d7">[134111448, 104326330, 134111443]</data>
-      <data key="d10">['Via Isonzo', 'Via Pasubio', 'Via Tagliamento']</data>
+      <data key="d10">['Via Tagliamento', 'Via Pasubio', 'Via Isonzo']</data>
       <data key="d11">residential</data>
       <data key="d12">False</data>
       <data key="d13">216.05599999999998</data>
@@ -5442,7 +5442,7 @@
     </edge>
     <edge source="196" target="202" id="0">
       <data key="d7">[134067152, 134067161]</data>
-      <data key="d10">['Strada Quinta', 'Strada Sesta']</data>
+      <data key="d10">['Strada Sesta', 'Strada Quinta']</data>
       <data key="d11">unclassified</data>
       <data key="d12">False</data>
       <data key="d13">136.926</data>
@@ -6065,7 +6065,7 @@
     </edge>
     <edge source="263" target="269" id="0">
       <data key="d7">[134110371, 134110374]</data>
-      <data key="d10">['Via Enrico Fermi', 'Via Alessandro Volta']</data>
+      <data key="d10">['Via Alessandro Volta', 'Via Enrico Fermi']</data>
       <data key="d11">residential</data>
       <data key="d12">False</data>
       <data key="d13">163.13799999999998</data>
@@ -6163,7 +6163,7 @@
     </edge>
     <edge source="272" target="284" id="0">
       <data key="d7">[134111437, 134111439]</data>
-      <data key="d10">['Via Giacomo Leopardi', 'Via Dante Alighieri']</data>
+      <data key="d10">['Via Dante Alighieri', 'Via Giacomo Leopardi']</data>
       <data key="d11">residential</data>
       <data key="d12">False</data>
       <data key="d13">134.289</data>
@@ -6577,7 +6577,7 @@
     </edge>
     <edge source="306" target="311" id="0">
       <data key="d7">[134112565, 134112575]</data>
-      <data key="d10">['Via Genova', 'Via Torino']</data>
+      <data key="d10">['Via Torino', 'Via Genova']</data>
       <data key="d11">residential</data>
       <data key="d12">False</data>
       <data key="d13">290.073</data>
@@ -7309,7 +7309,7 @@
       <data key="d8">2</data>
       <data key="d9">SS343</data>
       <data key="d10">Strada statale 343 Asolana</data>
-      <data key="d11">['primary', 'unclassified']</data>
+      <data key="d11">['unclassified', 'primary']</data>
       <data key="d17">90</data>
       <data key="d12">False</data>
       <data key="d13">877.111</data>
@@ -7690,7 +7690,7 @@
       <data key="d13">21.61</data>
       <data key="d15">LINESTRING (10.4259433 45.2262816, 10.4259484 45.2262205, 10.4259293 45.2261531, 10.4258964 45.226093)</data>
     </edge>
-    <data key="d0">2022-02-03 16:06:55</data>
+    <data key="d0">2022-02-04 21:37:32</data>
     <data key="d1">OSMnx 1.1.2</data>
     <data key="d2">epsg:4326</data>
     <data key="d3">True</data>
