@@ -282,7 +282,23 @@ output
            
        %["\nexpected arrival: ["] ++ [ show(start+(ea[i] div 60)) ++ "." ++ show(ea[i] mod 60) ++ if i=N then "]" else ", " endif | i in 1..N ] 
        ["\nea: "] ++ [show(ea)]
-       ++["\nra: "] ++ [show(ra)];
+       ++["\nra: "] ++ [show(ra)]
+       
+       
+       % FORMATTED OUTPUT FOR PYTHON
+       
+       ++ ["\n\nThe above output is formatted in this way:"]
+       ++ ["\n\tFirst line: number of deliverer;number of half-an-hour; number of orders"]
+       ++ ["\n\tAll the other lines: d_index;h_index; dest1 dest2 .. destN\n"]
+       ++ ["\nELABORATION_DATA\n"] 
+       ++ [show(d) ++ ";" ++ show(h) ++ ";" ++ show(N) ++ "\n"] 
+       ++ [if (iN==1) then show(id)++";"++show(ih)++";" else "" endif
+           ++ if (fix(X[id,iN,ih])>0) then show(dest[X[id,iN,ih]]) else "" endif   
+           ++ if (iN==N) then "\n" else " " endif 
+             | ih in 1..h, id in 1..d, iN in 1..N]
+       ++ ["\n"]
+       
+       ;
        
          
 %

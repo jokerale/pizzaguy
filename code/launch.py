@@ -134,7 +134,14 @@ print('orari: ' + str(stringaOrari))
 print('pizze: ' + str(stringaPizze))
 print('destin: ' + str(stringaNodi))
 print('Executing: ' + cmd)
+
+
+start = time.perf_counter()
 out = os.popen(cmd).read()
+end = time.perf_counter()
+
+t = end-start 
+print("TIME: " + str(t))
 
 print('OUT:')
 print(out)

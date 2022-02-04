@@ -16,4 +16,5 @@ report/*synctex.gz
 report/report.pdf
 code/.ipynb_checkpoints/
 code/cache/
-
+code/data/temp-order.dzn
+code/out.txt
