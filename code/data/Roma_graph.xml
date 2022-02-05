@@ -23866,7 +23866,7 @@
     </edge>
     <edge source="2" target="1330" id="0">
       <data key="d8">[217556088, 107292728, 180216918]</data>
-      <data key="d10">['4', '2']</data>
+      <data key="d10">['2', '4']</data>
       <data key="d11">Corso Vittorio Emanuele Secondo</data>
       <data key="d12">tertiary</data>
       <data key="d13">50</data>
@@ -23896,7 +23896,7 @@
       <data key="d8">[203960985, 22955683, 184686429, 229645757]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via del Corso', 'Largo San Carlo al Corso', 'Via del Leoncino', 'Vicolo del Grottino']</data>
+      <data key="d11">['Via del Leoncino', 'Largo San Carlo al Corso', 'Vicolo del Grottino', 'Via del Corso']</data>
       <data key="d12">living_street</data>
       <data key="d14">116.04499999999999</data>
       <data key="d15">LINESTRING (12.4781961 41.9047136, 12.4782622 41.9049852, 12.4784254 41.9050205, 12.4786993 41.9050798, 12.4788363 41.9047491, 12.4788676 41.9046697)</data>
@@ -24051,7 +24051,7 @@
     <edge source="8" target="12" id="0">
       <data key="d8">[209185952, 4245329, 130351734]</data>
       <data key="d9">True</data>
-      <data key="d11">['Via degli Orsini', 'Via di Panico', 'Via di Monte Giordano']</data>
+      <data key="d11">['Via degli Orsini', 'Via di Monte Giordano', 'Via di Panico']</data>
       <data key="d12">residential</data>
       <data key="d14">187.775</data>
       <data key="d10">1</data>
@@ -24076,7 +24076,7 @@
       <data key="d8">[190525392, 121897309, 220274294]</data>
       <data key="d9">True</data>
       <data key="d10">3</data>
-      <data key="d11">['Piazza di Ponte Umberto Primo', 'Lungotevere Tor di Nona']</data>
+      <data key="d11">['Lungotevere Tor di Nona', 'Piazza di Ponte Umberto Primo']</data>
       <data key="d12">primary</data>
       <data key="d13">50</data>
       <data key="d14">416.779</data>
@@ -24150,7 +24150,7 @@
     <edge source="12" target="3988" id="0">
       <data key="d8">[4245323, 128541420]</data>
       <data key="d9">True</data>
-      <data key="d11">['Largo Ottavio Tassoni', 'Via dei Banchi Nuovi']</data>
+      <data key="d11">['Via dei Banchi Nuovi', 'Largo Ottavio Tassoni']</data>
       <data key="d12">residential</data>
       <data key="d14">205.93499999999995</data>
       <data key="d15">LINESTRING (12.4684567 41.8991995, 12.4684135 41.899206, 12.468371 41.8992131, 12.4683285 41.8992215, 12.4683033 41.8992277, 12.4682902 41.8992309, 12.4682532 41.8992404, 12.4682183 41.8992499, 12.4681811 41.8992608, 12.4681459 41.8992718, 12.4680755 41.8992947, 12.4680058 41.8993193, 12.4679374 41.8993449, 12.4678655 41.8993734, 12.467795 41.899403, 12.4674684 41.8995477, 12.467445 41.8995582, 12.4668314 41.899868, 12.4668122 41.8998751, 12.4667911 41.8998791, 12.4667666 41.899879, 12.4667387 41.8998755, 12.4667123 41.8998663, 12.4666902 41.8998536, 12.4666722 41.8998405, 12.466654 41.8998245, 12.4666314 41.8998092, 12.4666097 41.8998003, 12.4665854 41.8997925, 12.4665623 41.8997872, 12.4665367 41.899783, 12.4663201 41.8997587, 12.4662584 41.8997518)</data>
@@ -24182,7 +24182,7 @@
     <edge source="14" target="3131" id="0">
       <data key="d8">[4245321, 292494318, 187776469, 60615612, 130434078]</data>
       <data key="d9">True</data>
-      <data key="d11">['Via di Tor Sanguigna', 'Largo Febo', 'Piazza di Pasquino', "Via di Santa Maria dell'Anima"]</data>
+      <data key="d11">['Largo Febo', 'Via di Tor Sanguigna', "Via di Santa Maria dell'Anima", 'Piazza di Pasquino']</data>
       <data key="d12">residential</data>
       <data key="d14">296.687</data>
       <data key="d15">LINESTRING (12.4722018 41.8977238, 12.4723438 41.8978919, 12.4723426 41.8979343, 12.4723279 41.8984544, 12.4723237 41.8986029, 12.4723185 41.8987853, 12.4722828 41.899188, 12.4722612 41.8995476, 12.4722458 41.8998027, 12.472245 41.899829, 12.4722498 41.8999531, 12.4723775 41.9001253, 12.472426 41.9001736, 12.4725106 41.9002682, 12.4725407 41.9002964)</data>
@@ -24296,7 +24296,7 @@
     <edge source="18" target="23" id="0">
       <data key="d8">[292494312, 60575540]</data>
       <data key="d9">True</data>
-      <data key="d11">['Via Cerri', 'Corso Vittorio Emanuele II']</data>
+      <data key="d11">['Corso Vittorio Emanuele II', 'Via Cerri']</data>
       <data key="d12">residential</data>
       <data key="d14">46.809000000000005</data>
       <data key="d15">LINESTRING (12.4691615 41.8972576, 12.4693473 41.8976001, 12.469375 41.8976474)</data>
@@ -24530,7 +24530,7 @@
     <edge source="29" target="1282" id="0">
       <data key="d8">[23752216, 117744327]</data>
       <data key="d9">True</data>
-      <data key="d11">['Via del Paradiso', 'Largo dei Chiavari']</data>
+      <data key="d11">['Largo dei Chiavari', 'Via del Paradiso']</data>
       <data key="d12">residential</data>
       <data key="d14">99.60300000000001</data>
       <data key="d15">LINESTRING (12.4735377 41.8959656, 12.4737019 41.895979, 12.4738931 41.895994, 12.4740393 41.8960056, 12.4740355 41.8963995, 12.4740314 41.8965258)</data>
@@ -24596,8 +24596,8 @@
     <edge source="31" target="616" id="0">
       <data key="d8">[147125840, 147125842, 202304086]</data>
       <data key="d9">True</data>
-      <data key="d10">['1', '2']</data>
-      <data key="d11">['Piazza della Repubblica', 'Via Nazionale']</data>
+      <data key="d10">['2', '1']</data>
+      <data key="d11">['Via Nazionale', 'Piazza della Repubblica']</data>
       <data key="d12">['tertiary', 'unclassified']</data>
       <data key="d13">50</data>
       <data key="d14">100.72600000000001</data>
@@ -24625,7 +24625,7 @@
       <data key="d8">[108570596, 147125845]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Piazza della Repubblica', 'Via Nazionale']</data>
+      <data key="d11">['Via Nazionale', 'Piazza della Repubblica']</data>
       <data key="d12">tertiary</data>
       <data key="d13">50</data>
       <data key="d14">53.86600000000001</data>
@@ -24635,7 +24635,7 @@
       <data key="d8">[147125841, 202304085]</data>
       <data key="d9">True</data>
       <data key="d10">2</data>
-      <data key="d11">['Piazza della Repubblica', 'Via Nazionale']</data>
+      <data key="d11">['Via Nazionale', 'Piazza della Repubblica']</data>
       <data key="d12">tertiary</data>
       <data key="d13">50</data>
       <data key="d14">53.25900000000001</data>
@@ -24777,7 +24777,7 @@
       <data key="d8">[52447705, 51940146, 4247948, 4247949]</data>
       <data key="d9">True</data>
       <data key="d10">['2', '3']</data>
-      <data key="d11">['Via del Traforo', 'Traforo Umberto I', 'Traforo Umberto Primo', 'Via Milano']</data>
+      <data key="d11">['Via del Traforo', 'Via Milano', 'Traforo Umberto I', 'Traforo Umberto Primo']</data>
       <data key="d12">tertiary</data>
       <data key="d13">50</data>
       <data key="d14">506.86499999999995</data>
@@ -25513,7 +25513,7 @@
       <data key="d8">[24164248, 24164249, 24164250]</data>
       <data key="d9">True</data>
       <data key="d10">2</data>
-      <data key="d11">['Piazza di Porta Maggiore', 'Viale dello Scalo San Lorenzo']</data>
+      <data key="d11">['Viale dello Scalo San Lorenzo', 'Piazza di Porta Maggiore']</data>
       <data key="d12">secondary</data>
       <data key="d13">50</data>
       <data key="d14">174.56400000000002</data>
@@ -25586,7 +25586,7 @@
       <data key="d8">[139233473, 995598666, 184355730]</data>
       <data key="d9">True</data>
       <data key="d10">2</data>
-      <data key="d11">['Via Prenestina', 'Piazzale Labicano']</data>
+      <data key="d11">['Piazzale Labicano', 'Via Prenestina']</data>
       <data key="d12">secondary</data>
       <data key="d13">50</data>
       <data key="d14">840.9839999999999</data>
@@ -25720,7 +25720,7 @@
     </edge>
     <edge source="68" target="4343" id="0">
       <data key="d8">[203752585, 40636076]</data>
-      <data key="d11">['Piazza del Teatro di Pompeo', 'Piazza Pollarola']</data>
+      <data key="d11">['Piazza Pollarola', 'Piazza del Teatro di Pompeo']</data>
       <data key="d12">residential</data>
       <data key="d9">False</data>
       <data key="d14">72.689</data>
@@ -26154,8 +26154,8 @@
     <edge source="85" target="3206" id="0">
       <data key="d8">[28867489, 165913043, 232765095]</data>
       <data key="d9">True</data>
-      <data key="d10">['1', '2']</data>
-      <data key="d11">['Via Florida', 'Via delle Botteghe Oscure']</data>
+      <data key="d10">['2', '1']</data>
+      <data key="d11">['Via delle Botteghe Oscure', 'Via Florida']</data>
       <data key="d12">tertiary</data>
       <data key="d13">30</data>
       <data key="d14">293.49600000000004</data>
@@ -26164,7 +26164,7 @@
     <edge source="85" target="3251" id="0">
       <data key="d8">[90941529, 22979125]</data>
       <data key="d9">True</data>
-      <data key="d10">['1', '2']</data>
+      <data key="d10">['2', '1']</data>
       <data key="d11">['Piazza del Gesù', "Via d'Aracoeli"]</data>
       <data key="d12">tertiary</data>
       <data key="d13">50</data>
@@ -26263,7 +26263,7 @@
       <data key="d8">[182034212, 22886134]</data>
       <data key="d9">True</data>
       <data key="d10">2</data>
-      <data key="d11">['Piazza della Repubblica', 'Via Giuseppe Romita']</data>
+      <data key="d11">['Via Giuseppe Romita', 'Piazza della Repubblica']</data>
       <data key="d12">secondary</data>
       <data key="d13">50</data>
       <data key="d14">90.71200000000002</data>
@@ -26729,7 +26729,7 @@
       <data key="d8">[204897976, 204149302, 204149303]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via della Lungara', 'Via di Porta Settimiana']</data>
+      <data key="d11">['Via di Porta Settimiana', 'Via della Lungara']</data>
       <data key="d12">residential</data>
       <data key="d13">30</data>
       <data key="d14">90.43799999999999</data>
@@ -26806,7 +26806,7 @@
     <edge source="108" target="2781" id="0">
       <data key="d8">[4951285, 27805645]</data>
       <data key="d9">True</data>
-      <data key="d11">['Via della Paglia', 'Vicolo del Piede']</data>
+      <data key="d11">['Vicolo del Piede', 'Via della Paglia']</data>
       <data key="d12">residential</data>
       <data key="d13">30</data>
       <data key="d14">127.25800000000001</data>
@@ -26844,7 +26844,7 @@
       <data key="d8">[27806144, 27806169, 33684471]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Vicolo della Luce', 'Via della Lungaretta', 'Via della Gensola']</data>
+      <data key="d11">['Via della Gensola', 'Vicolo della Luce', 'Via della Lungaretta']</data>
       <data key="d12">residential</data>
       <data key="d13">30</data>
       <data key="d14">161.534</data>
@@ -26897,7 +26897,7 @@
       <data key="d8">[33652505, 22951527, 28264041]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Piazza di San Calisto', 'Via di San Cosimato', 'Via di San Francesco a Ripa']</data>
+      <data key="d11">['Via di San Cosimato', 'Piazza di San Calisto', 'Via di San Francesco a Ripa']</data>
       <data key="d12">residential</data>
       <data key="d13">30</data>
       <data key="d14">213.84300000000002</data>
@@ -26964,8 +26964,8 @@
     </edge>
     <edge source="115" target="4546" id="0">
       <data key="d8">[97165937, 126146476, 95513393, 381223151]</data>
-      <data key="d11">['Via di Ponte Quattro Capi', "Piazza di San Bartolomeo all'Isola", 'Ponte Cestio']</data>
-      <data key="d12">['residential', 'living_street']</data>
+      <data key="d11">["Piazza di San Bartolomeo all'Isola", 'Via di Ponte Quattro Capi', 'Ponte Cestio']</data>
+      <data key="d12">['living_street', 'residential']</data>
       <data key="d9">False</data>
       <data key="d14">154.322</data>
       <data key="d10">2</data>
@@ -26996,7 +26996,7 @@
     <edge source="116" target="137" id="0">
       <data key="d8">[125374931, 184021901, 570505255]</data>
       <data key="d9">True</data>
-      <data key="d11">['Via del Tempio', 'Piazza Gerusalemme', "Via del Portico d'Ottavia"]</data>
+      <data key="d11">["Via del Portico d'Ottavia", 'Via del Tempio', 'Piazza Gerusalemme']</data>
       <data key="d12">residential</data>
       <data key="d14">279.054</data>
       <data key="d15">LINESTRING (12.4774514 41.8923658, 12.4774461 41.8924622, 12.4774266 41.8928173, 12.477436 41.8928485, 12.4774493 41.8928658, 12.4774743 41.8928914, 12.4775776 41.8928524, 12.4781943 41.8926099, 12.4783239 41.892536, 12.47835 41.8924984, 12.4783778 41.8923774, 12.4784342 41.8922049, 12.478477 41.8920769, 12.4784878 41.8920476, 12.4785004 41.892013, 12.4786668 41.8915234, 12.4786521 41.8914928, 12.4786126 41.891436, 12.4785806 41.89139, 12.4785456 41.8913436)</data>
@@ -27083,7 +27083,7 @@
       <data key="d8">[202304080, 22951417]</data>
       <data key="d9">True</data>
       <data key="d10">2</data>
-      <data key="d11">['Lungotevere degli Anguillara', 'Lungotevere degli Alberteschi']</data>
+      <data key="d11">['Lungotevere degli Alberteschi', 'Lungotevere degli Anguillara']</data>
       <data key="d12">primary</data>
       <data key="d13">50</data>
       <data key="d14">51.705</data>
@@ -27164,7 +27164,7 @@
     </edge>
     <edge source="123" target="3392" id="0">
       <data key="d8">[22880328, 32504840]</data>
-      <data key="d11">['Piazza della Consolazione', 'Vico Jugario']</data>
+      <data key="d11">['Vico Jugario', 'Piazza della Consolazione']</data>
       <data key="d12">residential</data>
       <data key="d9">False</data>
       <data key="d14">121.625</data>
@@ -27194,7 +27194,7 @@
       <data key="d8">[123971346, 82201173]</data>
       <data key="d9">True</data>
       <data key="d10">2</data>
-      <data key="d11">['Piazza della Bocca della Verità', 'Via dei Cerchi']</data>
+      <data key="d11">['Via dei Cerchi', 'Piazza della Bocca della Verità']</data>
       <data key="d12">tertiary</data>
       <data key="d13">50</data>
       <data key="d14">128.01899999999998</data>
@@ -27213,7 +27213,7 @@
     <edge source="124" target="3934" id="0">
       <data key="d8">[22880326, 138303047, 138303048, 366796445, 22880319]</data>
       <data key="d9">True</data>
-      <data key="d11">['Via di San Teodoro', 'Foro Romano']</data>
+      <data key="d11">['Foro Romano', 'Via di San Teodoro']</data>
       <data key="d12">residential</data>
       <data key="d14">425.37100000000004</data>
       <data key="d10">1</data>
@@ -27317,7 +27317,7 @@
       <data key="d8">[108564723, 108564726]</data>
       <data key="d9">True</data>
       <data key="d10">2</data>
-      <data key="d11">['Piazza Barberini', 'Via Sistina']</data>
+      <data key="d11">['Via Sistina', 'Piazza Barberini']</data>
       <data key="d12">tertiary</data>
       <data key="d13">50</data>
       <data key="d14">89.809</data>
@@ -27364,7 +27364,7 @@
     </edge>
     <edge source="129" target="319" id="0">
       <data key="d8">[22955658, 251348156, 190028501, 201292279]</data>
-      <data key="d11">['Largo di San Rocco', 'Piazza Augusto Imperatore', 'Via di Ripetta']</data>
+      <data key="d11">['Via di Ripetta', 'Piazza Augusto Imperatore', 'Largo di San Rocco']</data>
       <data key="d12">residential</data>
       <data key="d9">False</data>
       <data key="d14">160.103</data>
@@ -27375,7 +27375,7 @@
     <edge source="129" target="130" id="0">
       <data key="d8">[122726329, 124908286, 49185041]</data>
       <data key="d9">False</data>
-      <data key="d10">['1', '2']</data>
+      <data key="d10">['2', '1']</data>
       <data key="d11">Piazza Augusto Imperatore</data>
       <data key="d12">residential</data>
       <data key="d14">151.054</data>
@@ -27587,7 +27587,7 @@
     <edge source="141" target="142" id="0">
       <data key="d8">[125374923, 22894036]</data>
       <data key="d9">True</data>
-      <data key="d11">['Piazza dei Cenci', 'Via Beatrice Cenci']</data>
+      <data key="d11">['Via Beatrice Cenci', 'Piazza dei Cenci']</data>
       <data key="d12">residential</data>
       <data key="d14">98.32499999999999</data>
       <data key="d13">50</data>
@@ -27835,8 +27835,8 @@
     <edge source="151" target="2419" id="0">
       <data key="d8">[24179183, 33281526, 24187879]</data>
       <data key="d9">True</data>
-      <data key="d10">['4', '3']</data>
-      <data key="d11">['Lungotevere Prati', 'Lungotevere dei Mellini']</data>
+      <data key="d10">['3', '4']</data>
+      <data key="d11">['Lungotevere dei Mellini', 'Lungotevere Prati']</data>
       <data key="d12">primary</data>
       <data key="d13">50</data>
       <data key="d14">436.369</data>
@@ -28304,7 +28304,7 @@
       <data key="d8">[176559784, 222401995]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Piazza di Porta San Giovanni', 'Viale Carlo Felice']</data>
+      <data key="d11">['Viale Carlo Felice', 'Piazza di Porta San Giovanni']</data>
       <data key="d12">secondary</data>
       <data key="d13">50</data>
       <data key="d14">83.635</data>
@@ -28639,7 +28639,7 @@
       <data key="d8">[93470432, 48646858]</data>
       <data key="d9">True</data>
       <data key="d10">3</data>
-      <data key="d11">['Piazza delle Finanze', 'Via Cernaia']</data>
+      <data key="d11">['Via Cernaia', 'Piazza delle Finanze']</data>
       <data key="d12">secondary</data>
       <data key="d13">50</data>
       <data key="d14">102.49</data>
@@ -29065,7 +29065,7 @@
       <data key="d8">[102290914, 23591372]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via dei Querceti', "Via Capo d'Africa"]</data>
+      <data key="d11">["Via Capo d'Africa", 'Via dei Querceti']</data>
       <data key="d12">residential</data>
       <data key="d14">164.173</data>
       <data key="d15">LINESTRING (12.497963 41.8887223, 12.4977854 41.8882628, 12.4964896 41.8885198)</data>
@@ -29204,7 +29204,7 @@
     <edge source="201" target="212" id="0">
       <data key="d8">[24566952, 24566951]</data>
       <data key="d9">True</data>
-      <data key="d10">['1', '2']</data>
+      <data key="d10">['2', '1']</data>
       <data key="d11">Via di Valle delle Camene</data>
       <data key="d12">residential</data>
       <data key="d14">636.2040000000002</data>
@@ -29224,7 +29224,7 @@
       <data key="d8">[180216928, 215801331, 227497908, 103775333]</data>
       <data key="d9">True</data>
       <data key="d10">3</data>
-      <data key="d11">['Piazza di Porta Capena', 'Via di San Gregorio', 'Via Celio Vibenna']</data>
+      <data key="d11">['Via Celio Vibenna', 'Via di San Gregorio', 'Piazza di Porta Capena']</data>
       <data key="d12">secondary</data>
       <data key="d13">50</data>
       <data key="d14">639.32</data>
@@ -29511,7 +29511,7 @@
       <data key="d8">[122185756, 106366989]</data>
       <data key="d9">False</data>
       <data key="d10">2</data>
-      <data key="d11">['Via di San Giovanni in Laterano', 'Piazza di San Giovanni in Laterano']</data>
+      <data key="d11">['Piazza di San Giovanni in Laterano', 'Via di San Giovanni in Laterano']</data>
       <data key="d12">residential</data>
       <data key="d14">58.614999999999995</data>
       <data key="d15">LINESTRING (12.5040029 41.887193, 12.5039301 41.8871971, 12.5034205 41.8872509, 12.5033048 41.8872756)</data>
@@ -29759,7 +29759,7 @@
     <edge source="229" target="878" id="0">
       <data key="d8">[190062982, 108349470, 181029527]</data>
       <data key="d9">True</data>
-      <data key="d11">['Via dei Penitenzieri', 'Via di Porta Santo Spirito']</data>
+      <data key="d11">['Via di Porta Santo Spirito', 'Via dei Penitenzieri']</data>
       <data key="d12">residential</data>
       <data key="d14">214.83999999999997</data>
       <data key="d17">building_passage</data>
@@ -29900,7 +29900,7 @@
       <data key="d8">[22951657, 193388004]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via del Gianicolo', 'Piazza della Rovere']</data>
+      <data key="d11">['Piazza della Rovere', 'Via del Gianicolo']</data>
       <data key="d12">tertiary</data>
       <data key="d13">50</data>
       <data key="d14">149.831</data>
@@ -30816,7 +30816,7 @@
     <edge source="269" target="318" id="0">
       <data key="d8">[218720705, 144912413]</data>
       <data key="d10">4</data>
-      <data key="d11">['Piazza Cola di Rienzo', 'Via Cola di Rienzo']</data>
+      <data key="d11">['Via Cola di Rienzo', 'Piazza Cola di Rienzo']</data>
       <data key="d12">secondary</data>
       <data key="d13">50</data>
       <data key="d9">False</data>
@@ -31076,7 +31076,7 @@
     <edge source="280" target="293" id="0">
       <data key="d8">[218720706, 27414100]</data>
       <data key="d10">4</data>
-      <data key="d11">['Piazza Cola di Rienzo', 'Via Cola di Rienzo']</data>
+      <data key="d11">['Via Cola di Rienzo', 'Piazza Cola di Rienzo']</data>
       <data key="d12">secondary</data>
       <data key="d13">50</data>
       <data key="d9">False</data>
@@ -31087,7 +31087,7 @@
       <data key="d8">[218720708, 144910644]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Piazza Cola di Rienzo', 'Via Lucrezio Caro']</data>
+      <data key="d11">['Via Lucrezio Caro', 'Piazza Cola di Rienzo']</data>
       <data key="d12">residential</data>
       <data key="d14">83.841</data>
       <data key="d15">LINESTRING (12.468917 41.9088866, 12.4690276 41.9087002, 12.46904 41.9086767, 12.4693245 41.9081963)</data>
@@ -31096,7 +31096,7 @@
       <data key="d8">[118709899, 218720703]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Piazza Cola di Rienzo', 'Via Alessandro Farnese']</data>
+      <data key="d11">['Via Alessandro Farnese', 'Piazza Cola di Rienzo']</data>
       <data key="d12">residential</data>
       <data key="d14">75.207</data>
       <data key="d15">LINESTRING (12.4685488 41.9095049, 12.4687851 41.9090979, 12.4688001 41.9090739, 12.468917 41.9088866)</data>
@@ -31240,7 +31240,7 @@
       <data key="d8">[25752436, 182038037, 25752439, 381471162, 52577534]</data>
       <data key="d9">True</data>
       <data key="d10">2</data>
-      <data key="d11">['Ponte Umberto Primo', 'Piazza di Ponte Umberto Primo', 'Piazza dei Tribunali']</data>
+      <data key="d11">['Ponte Umberto Primo', 'Piazza dei Tribunali', 'Piazza di Ponte Umberto Primo']</data>
       <data key="d12">tertiary</data>
       <data key="d13">50</data>
       <data key="d14">220.59300000000002</data>
@@ -31852,7 +31852,7 @@
       <data key="d8">[24593796, 81754940, 998191615]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Piazza di Porta Maggiore', 'Piazzale Labicano']</data>
+      <data key="d11">['Piazzale Labicano', 'Piazza di Porta Maggiore']</data>
       <data key="d12">secondary</data>
       <data key="d13">50</data>
       <data key="d14">52.79599999999999</data>
@@ -31863,7 +31863,7 @@
       <data key="d8">[998191616, 28667833, 95640019]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Piazza di Porta Maggiore', 'Piazzale Labicano']</data>
+      <data key="d11">['Piazzale Labicano', 'Piazza di Porta Maggiore']</data>
       <data key="d12">secondary</data>
       <data key="d13">50</data>
       <data key="d14">52.294</data>
@@ -33266,7 +33266,7 @@
       <data key="d8">[24186878, 144097895]</data>
       <data key="d9">True</data>
       <data key="d10">2</data>
-      <data key="d11">['Piazza delle 5 Giornate', 'Piazza delle Cinque Giornate']</data>
+      <data key="d11">['Piazza delle Cinque Giornate', 'Piazza delle 5 Giornate']</data>
       <data key="d12">secondary</data>
       <data key="d13">50</data>
       <data key="d14">95.64400000000002</data>
@@ -33599,7 +33599,7 @@
     <edge source="395" target="3050" id="0">
       <data key="d8">[190043641, 190043683]</data>
       <data key="d10">2</data>
-      <data key="d11">['Viale Carso', 'Largo Generale Gonzaga del Vodice']</data>
+      <data key="d11">['Largo Generale Gonzaga del Vodice', 'Viale Carso']</data>
       <data key="d12">residential</data>
       <data key="d13">50</data>
       <data key="d9">False</data>
@@ -34254,7 +34254,7 @@
       <data key="d8">[22886161, 205709427]</data>
       <data key="d9">True</data>
       <data key="d10">3</data>
-      <data key="d11">['Piazza della Repubblica', 'Viale Luigi Einaudi']</data>
+      <data key="d11">['Viale Luigi Einaudi', 'Piazza della Repubblica']</data>
       <data key="d12">secondary</data>
       <data key="d13">50</data>
       <data key="d14">117.05799999999999</data>
@@ -34316,7 +34316,7 @@
     <edge source="439" target="720" id="0">
       <data key="d8">[188107497, 188107498, 23173332, 190349530]</data>
       <data key="d9">True</data>
-      <data key="d11">['Via dei Tre Pupazzi', 'Vicolo del Campanile']</data>
+      <data key="d11">['Vicolo del Campanile', 'Via dei Tre Pupazzi']</data>
       <data key="d12">residential</data>
       <data key="d14">102.501</data>
       <data key="d17">building_passage</data>
@@ -34418,7 +34418,7 @@
       <data key="d8">[23173616, 187775824, 22951774]</data>
       <data key="d9">True</data>
       <data key="d10">3</data>
-      <data key="d11">['Lungotevere Vaticano', 'Sottovia Lungotevere in Sassia']</data>
+      <data key="d11">['Sottovia Lungotevere in Sassia', 'Lungotevere Vaticano']</data>
       <data key="d12">primary</data>
       <data key="d13">50</data>
       <data key="d14">250.59399999999997</data>
@@ -35154,7 +35154,7 @@
       <data key="d16">viaduct</data>
       <data key="d9">True</data>
       <data key="d10">2</data>
-      <data key="d11">['Circonvallazione Tiburtina', 'Viale Castrense']</data>
+      <data key="d11">['Viale Castrense', 'Circonvallazione Tiburtina']</data>
       <data key="d12">trunk</data>
       <data key="d13">40</data>
       <data key="d14">295.626</data>
@@ -35325,7 +35325,7 @@
       <data key="d8">[132274268, 22885333]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Piazza Lugo', 'Via Biella']</data>
+      <data key="d11">['Via Biella', 'Piazza Lugo']</data>
       <data key="d12">residential</data>
       <data key="d13">50</data>
       <data key="d14">170.357</data>
@@ -35343,7 +35343,7 @@
     <edge source="482" target="4191" id="0">
       <data key="d8">[188072481, 203673005]</data>
       <data key="d10">2</data>
-      <data key="d11">['Largo Paola Frassinetti', 'Via Vercelli']</data>
+      <data key="d11">['Via Vercelli', 'Largo Paola Frassinetti']</data>
       <data key="d12">residential</data>
       <data key="d13">50</data>
       <data key="d9">False</data>
@@ -35354,7 +35354,7 @@
       <data key="d8">[65799558, 22883478]</data>
       <data key="d9">True</data>
       <data key="d10">2</data>
-      <data key="d11">['Largo Paola Frassinetti', 'Via Tuscolana']</data>
+      <data key="d11">['Via Tuscolana', 'Largo Paola Frassinetti']</data>
       <data key="d12">residential</data>
       <data key="d13">50</data>
       <data key="d14">198.35899999999995</data>
@@ -36106,7 +36106,7 @@
     <edge source="514" target="2428" id="0">
       <data key="d8">[309831346, 110595478]</data>
       <data key="d10">2</data>
-      <data key="d11">['Via Gela', 'Piazza di Ponte Lungo']</data>
+      <data key="d11">['Piazza di Ponte Lungo', 'Via Gela']</data>
       <data key="d12">tertiary</data>
       <data key="d13">50</data>
       <data key="d9">False</data>
@@ -36118,7 +36118,7 @@
       <data key="d9">True</data>
       <data key="d10">2</data>
       <data key="d18">SS7</data>
-      <data key="d11">['Via Appia Nuova', 'Piazza di Ponte Lungo']</data>
+      <data key="d11">['Piazza di Ponte Lungo', 'Via Appia Nuova']</data>
       <data key="d12">primary</data>
       <data key="d13">50</data>
       <data key="d14">126.722</data>
@@ -36141,7 +36141,7 @@
       <data key="d9">True</data>
       <data key="d10">2</data>
       <data key="d18">SS7</data>
-      <data key="d11">['Via Appia Nuova', 'Piazza di Ponte Lungo']</data>
+      <data key="d11">['Piazza di Ponte Lungo', 'Via Appia Nuova']</data>
       <data key="d12">primary</data>
       <data key="d13">50</data>
       <data key="d14">78.118</data>
@@ -36152,7 +36152,7 @@
       <data key="d9">True</data>
       <data key="d10">1</data>
       <data key="d18">SS7</data>
-      <data key="d11">['Via Appia Nuova', 'Piazza di Ponte Lungo']</data>
+      <data key="d11">['Piazza di Ponte Lungo', 'Via Appia Nuova']</data>
       <data key="d12">tertiary</data>
       <data key="d13">50</data>
       <data key="d14">74.025</data>
@@ -36336,7 +36336,7 @@
     <edge source="522" target="3771" id="0">
       <data key="d8">[33600912, 27628159]</data>
       <data key="d9">True</data>
-      <data key="d11">['Via La Spezia', 'Largo Brindisi']</data>
+      <data key="d11">['Largo Brindisi', 'Via La Spezia']</data>
       <data key="d12">primary</data>
       <data key="d13">50</data>
       <data key="d14">113.517</data>
@@ -36832,7 +36832,7 @@
       <data key="d8">[24648440, 128648689, 222401992]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Piazza di Porta San Giovanni', 'Piazzale Appio']</data>
+      <data key="d11">['Piazzale Appio', 'Piazza di Porta San Giovanni']</data>
       <data key="d12">primary_link</data>
       <data key="d13">50</data>
       <data key="d14">47.332</data>
@@ -36842,7 +36842,7 @@
       <data key="d8">[222401993, 59207862]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Piazza di Porta San Giovanni', 'Piazzale Appio']</data>
+      <data key="d11">['Piazzale Appio', 'Piazza di Porta San Giovanni']</data>
       <data key="d12">primary</data>
       <data key="d13">50</data>
       <data key="d14">45.481</data>
@@ -37143,8 +37143,8 @@
     <edge source="557" target="3068" id="0">
       <data key="d8">[22885283, 49189903]</data>
       <data key="d9">True</data>
-      <data key="d10">['1', '2']</data>
-      <data key="d11">['Via Voghera', 'Via Orvieto']</data>
+      <data key="d10">['2', '1']</data>
+      <data key="d11">['Via Orvieto', 'Via Voghera']</data>
       <data key="d12">residential</data>
       <data key="d14">119.467</data>
       <data key="d15">LINESTRING (12.5174464 41.8861618, 12.5172333 41.8861783, 12.5171681 41.8852647)</data>
@@ -37790,7 +37790,7 @@
       <data key="d8">[833516929, 32758333]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via Labicana', 'Piazza del Colosseo']</data>
+      <data key="d11">['Piazza del Colosseo', 'Via Labicana']</data>
       <data key="d12">secondary</data>
       <data key="d13">['30', '50']</data>
       <data key="d14">40.904999999999994</data>
@@ -37798,7 +37798,7 @@
     </edge>
     <edge source="598" target="1089" id="0">
       <data key="d8">[50602468, 190525597]</data>
-      <data key="d11">['Via del Fagutale', 'Piazza di San Francesco di Paola']</data>
+      <data key="d11">['Piazza di San Francesco di Paola', 'Via del Fagutale']</data>
       <data key="d12">residential</data>
       <data key="d9">False</data>
       <data key="d14">297.782</data>
@@ -38185,7 +38185,7 @@
       <data key="d8">[61979722, 24167916]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Largo Leopardi', 'Via Leopardi']</data>
+      <data key="d11">['Via Leopardi', 'Largo Leopardi']</data>
       <data key="d12">residential</data>
       <data key="d14">104.374</data>
       <data key="d15">LINESTRING (12.5016449 41.8940676, 12.5016313 41.8940925, 12.501631 41.8941129, 12.5022262 41.8947281, 12.5023479 41.8948258)</data>
@@ -38252,7 +38252,7 @@
       <data key="d8">[23327651, 107254166]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via Carlo Alberto', 'Piazza di Santa Maria Maggiore']</data>
+      <data key="d11">['Piazza di Santa Maria Maggiore', 'Via Carlo Alberto']</data>
       <data key="d12">residential</data>
       <data key="d13">50</data>
       <data key="d14">35.263</data>
@@ -38333,7 +38333,7 @@
       <data key="d8">[23914145, 205709429]</data>
       <data key="d9">True</data>
       <data key="d10">2</data>
-      <data key="d11">['Piazza della Repubblica', 'Via Vittorio Emanuele Orlando']</data>
+      <data key="d11">['Via Vittorio Emanuele Orlando', 'Piazza della Repubblica']</data>
       <data key="d12">tertiary</data>
       <data key="d13">50</data>
       <data key="d14">67.99600000000001</data>
@@ -38364,7 +38364,7 @@
       <data key="d8">[205709426, 122077319]</data>
       <data key="d9">True</data>
       <data key="d10">2</data>
-      <data key="d11">['Piazza della Repubblica', 'Via Vittorio Emanuele Orlando']</data>
+      <data key="d11">['Via Vittorio Emanuele Orlando', 'Piazza della Repubblica']</data>
       <data key="d12">secondary</data>
       <data key="d13">50</data>
       <data key="d14">85.785</data>
@@ -38382,7 +38382,7 @@
     <edge source="621" target="3706" id="0">
       <data key="d8">[106769417, 106769419, 99498973]</data>
       <data key="d9">True</data>
-      <data key="d10">['1', '2']</data>
+      <data key="d10">['2', '1']</data>
       <data key="d11">Via Pastrengo</data>
       <data key="d12">tertiary</data>
       <data key="d13">50</data>
@@ -38810,8 +38810,8 @@
     <edge source="640" target="3697" id="0">
       <data key="d8">[201512865, 24152609, 24152610, 201512872, 22883453, 24152767]</data>
       <data key="d9">True</data>
-      <data key="d10">['1', '2']</data>
-      <data key="d11">['Vicolo del Mandrione', 'Via Casilina Vecchia', 'Via del Mandrione']</data>
+      <data key="d10">['2', '1']</data>
+      <data key="d11">['Via del Mandrione', 'Vicolo del Mandrione', 'Via Casilina Vecchia']</data>
       <data key="d12">tertiary</data>
       <data key="d13">['30', '10']</data>
       <data key="d14">366.214</data>
@@ -39030,7 +39030,7 @@
       <data key="d8">[35022260, 95599053]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Piazza di Porta Metronia', 'Piazzale Metronio']</data>
+      <data key="d11">['Piazzale Metronio', 'Piazza di Porta Metronia']</data>
       <data key="d12">secondary</data>
       <data key="d13">50</data>
       <data key="d14">51.016999999999996</data>
@@ -39050,7 +39050,7 @@
       <data key="d8">[107258331, 106129551]</data>
       <data key="d9">True</data>
       <data key="d10">2</data>
-      <data key="d11">['Piazza di Porta Metronia', "Largo dell'Amba Aradam"]</data>
+      <data key="d11">["Largo dell'Amba Aradam", 'Piazza di Porta Metronia']</data>
       <data key="d12">primary</data>
       <data key="d13">50</data>
       <data key="d14">81.66999999999999</data>
@@ -39070,7 +39070,7 @@
       <data key="d8">[106129540, 83016310]</data>
       <data key="d9">True</data>
       <data key="d10">2</data>
-      <data key="d11">['Piazza di Porta Metronia', "Largo dell'Amba Aradam"]</data>
+      <data key="d11">["Largo dell'Amba Aradam", 'Piazza di Porta Metronia']</data>
       <data key="d12">primary</data>
       <data key="d13">50</data>
       <data key="d14">71.834</data>
@@ -39079,7 +39079,7 @@
     <edge source="653" target="654" id="0">
       <data key="d8">[224190931, 224190933]</data>
       <data key="d10">2</data>
-      <data key="d11">['Via Farsalo', 'Via dei Laterani']</data>
+      <data key="d11">['Via dei Laterani', 'Via Farsalo']</data>
       <data key="d12">residential</data>
       <data key="d9">False</data>
       <data key="d14">190.228</data>
@@ -39318,7 +39318,7 @@
       <data key="d8">[22890785, 22890835]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via di Villa Fonseca', "Via di Sant'Erasmo"]</data>
+      <data key="d11">["Via di Sant'Erasmo", 'Via di Villa Fonseca']</data>
       <data key="d12">residential</data>
       <data key="d14">175.674</data>
       <data key="d15">LINESTRING (12.4992159 41.8839857, 12.5004111 41.8845791, 12.5007167 41.8842052, 12.5007742 41.8841465)</data>
@@ -39648,7 +39648,7 @@
     <edge source="681" target="3465" id="0">
       <data key="d8">[43570228, 25372621]</data>
       <data key="d9">True</data>
-      <data key="d10">['1', '2']</data>
+      <data key="d10">['2', '1']</data>
       <data key="d11">Viale delle Terme di Caracalla</data>
       <data key="d12">tertiary</data>
       <data key="d13">50</data>
@@ -39713,7 +39713,7 @@
     </edge>
     <edge source="683" target="4702" id="0">
       <data key="d8">[891689737, 74326042]</data>
-      <data key="d10">['4', '6']</data>
+      <data key="d10">['6', '4']</data>
       <data key="d11">['Via Druso', 'Piazzale Numa Pompilio']</data>
       <data key="d12">primary</data>
       <data key="d13">50</data>
@@ -40308,7 +40308,7 @@
       <data key="d8">[736912578, 190349503]</data>
       <data key="d9">True</data>
       <data key="d10">2</data>
-      <data key="d11">['Piazza Amerigo Capponi', 'Via Giovanni Vitelleschi']</data>
+      <data key="d11">['Via Giovanni Vitelleschi', 'Piazza Amerigo Capponi']</data>
       <data key="d12">tertiary</data>
       <data key="d13">50</data>
       <data key="d14">33.719</data>
@@ -40460,7 +40460,7 @@
       <data key="d8">[736282056, 188107496, 23173331, 188107494]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via degli Ombrellari', "Vicolo d'Orfeo"]</data>
+      <data key="d11">["Vicolo d'Orfeo", 'Via degli Ombrellari']</data>
       <data key="d12">residential</data>
       <data key="d13">30</data>
       <data key="d14">119.137</data>
@@ -40623,7 +40623,7 @@
       <data key="d8">[168441377, 27806583]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Lungotevere Ripa', 'Lungotevere Porto di Ripa Grande']</data>
+      <data key="d11">['Lungotevere Porto di Ripa Grande', 'Lungotevere Ripa']</data>
       <data key="d12">primary</data>
       <data key="d13">50</data>
       <data key="d14">245.827</data>
@@ -40956,7 +40956,7 @@
       <data key="d8">[33652769, 26172503]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via Colomba Antonietti', 'Via della Renella']</data>
+      <data key="d11">['Via della Renella', 'Via Colomba Antonietti']</data>
       <data key="d12">residential</data>
       <data key="d14">160.954</data>
       <data key="d13">30</data>
@@ -41080,8 +41080,8 @@
     <edge source="749" target="2800" id="0">
       <data key="d8">[33686520, 33686380]</data>
       <data key="d9">True</data>
-      <data key="d10">['1', '2']</data>
-      <data key="d11">["Piazza San Francesco d'Assisi", 'Via Anicia']</data>
+      <data key="d10">['2', '1']</data>
+      <data key="d11">['Via Anicia', "Piazza San Francesco d'Assisi"]</data>
       <data key="d12">residential</data>
       <data key="d13">30</data>
       <data key="d14">233.14600000000002</data>
@@ -42300,7 +42300,7 @@
       <data key="d8">[122552552, 48660141]</data>
       <data key="d9">True</data>
       <data key="d10">2</data>
-      <data key="d12">['secondary', 'secondary_link']</data>
+      <data key="d12">['secondary_link', 'secondary']</data>
       <data key="d13">50</data>
       <data key="d14">38.963</data>
       <data key="d15">LINESTRING (12.4810698 41.8772054, 12.4810173 41.8771868, 12.4809978 41.8771774, 12.4809769 41.8771651, 12.4809598 41.877153, 12.4809405 41.8771354, 12.4809297 41.8771208, 12.4809283 41.8771188, 12.4809203 41.8771085, 12.4809125 41.8770959, 12.4809107 41.8770921, 12.4809047 41.877079, 12.4808827 41.8770234, 12.4808764 41.8770008, 12.4808714 41.8769793, 12.4808678 41.8769467, 12.4808655 41.8769152)</data>
@@ -42567,7 +42567,7 @@
     <edge source="822" target="3260" id="0">
       <data key="d8">[161611131, 36977724]</data>
       <data key="d9">True</data>
-      <data key="d10">['1', '2']</data>
+      <data key="d10">['2', '1']</data>
       <data key="d11">Circonvallazione Nomentana</data>
       <data key="d12">['tertiary', 'tertiary_link']</data>
       <data key="d13">50</data>
@@ -42586,7 +42586,7 @@
       <data key="d8">[220168199, 220168198, 23921303]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via Ridolfino Venuti', 'Largo Ettore De Ruggiero']</data>
+      <data key="d11">['Largo Ettore De Ruggiero', 'Via Ridolfino Venuti']</data>
       <data key="d12">residential</data>
       <data key="d14">157.928</data>
       <data key="d15">LINESTRING (12.5193915 41.9210083, 12.5195939 41.9211899, 12.5206162 41.9220057, 12.5206844 41.9220524)</data>
@@ -43108,8 +43108,8 @@
     <edge source="843" target="4714" id="0">
       <data key="d8">[970000993, 23898395]</data>
       <data key="d9">True</data>
-      <data key="d10">['1', '2']</data>
-      <data key="d11">['Piazzale del Verano', 'Viale Regina Elena']</data>
+      <data key="d10">['2', '1']</data>
+      <data key="d11">['Viale Regina Elena', 'Piazzale del Verano']</data>
       <data key="d12">secondary</data>
       <data key="d13">50</data>
       <data key="d14">435.10499999999996</data>
@@ -43122,7 +43122,7 @@
       <data key="d10">1</data>
       <data key="d11">Via Masaniello</data>
       <data key="d12">tertiary_link</data>
-      <data key="d13">['50', '40']</data>
+      <data key="d13">['40', '50']</data>
       <data key="d20">no</data>
       <data key="d14">156.13</data>
       <data key="d15">LINESTRING (12.532354 41.9082639, 12.5321341 41.9083252, 12.5320633 41.9083505, 12.532019 41.908368, 12.5319815 41.9083855, 12.5319479 41.9084043, 12.531921 41.9084232, 12.5318942 41.9084433, 12.5318701 41.9084644, 12.5317881 41.9085508, 12.5316656 41.9086805, 12.5316044 41.9087545, 12.531419 41.9090168, 12.531261 41.9092014, 12.5311679 41.9092986)</data>
@@ -43151,9 +43151,9 @@
     <edge source="845" target="4133" id="0">
       <data key="d8">[28160321, 329382026, 217599291]</data>
       <data key="d9">True</data>
-      <data key="d10">['1', '2']</data>
-      <data key="d12">['primary_link', 'primary']</data>
-      <data key="d13">['50', '40']</data>
+      <data key="d10">['2', '1']</data>
+      <data key="d12">['primary', 'primary_link']</data>
+      <data key="d13">['40', '50']</data>
       <data key="d14">475.008</data>
       <data key="d11">Circonvallazione Tiburtina</data>
       <data key="d15">LINESTRING (12.5305445 41.9084711, 12.5303556 41.9085464, 12.5303331 41.9085589, 12.5303134 41.9085704, 12.5302766 41.9085956, 12.5302519 41.9086161, 12.5302241 41.9086458, 12.5302044 41.9086735, 12.5301941 41.9086926, 12.5301852 41.9087117, 12.5301769 41.9087338, 12.5301713 41.9087549, 12.530168 41.9087838, 12.5301701 41.9088117, 12.5301747 41.9088433, 12.5301819 41.908874, 12.5301894 41.9088983, 12.5302036 41.9089225, 12.5302228 41.908946, 12.5302487 41.9089705, 12.5302728 41.9089904, 12.5303008 41.9090093, 12.5303322 41.9090274, 12.5303684 41.9090425, 12.5303949 41.9090514, 12.5304241 41.9090593, 12.5304476 41.9090645, 12.5304718 41.9090682, 12.5304955 41.9090706, 12.5305219 41.9090721, 12.5305699 41.9090705, 12.530609 41.9090671, 12.5306435 41.9090632, 12.5306698 41.9090586, 12.5307029 41.9090499, 12.5307422 41.9090347, 12.5307956 41.9090076, 12.5308517 41.9089781, 12.5309104 41.908944, 12.5309798 41.9088977, 12.5311087 41.9087746, 12.5313642 41.9084478, 12.5319202 41.9076483, 12.5320727 41.9073947, 12.5321877 41.907163, 12.532312 41.9068626, 12.5323798 41.9067063, 12.5324196 41.906604, 12.5324515 41.9064886, 12.5324647 41.9064277, 12.5324644 41.9063707, 12.5324484 41.9061549)</data>
@@ -43373,7 +43373,7 @@
       <data key="d8">[190525474, 190525647]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via degli Ausoni', 'Piazza dei Sanniti']</data>
+      <data key="d11">['Piazza dei Sanniti', 'Via degli Ausoni']</data>
       <data key="d12">residential</data>
       <data key="d14">80.441</data>
       <data key="d15">LINESTRING (12.5166499 41.8987147, 12.5164764 41.8989047, 12.5160948 41.8993085)</data>
@@ -43619,7 +43619,7 @@
       <data key="d8">[26172545, 33652770, 26172561]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via del Politeama', 'Via Colomba Antonietti', 'Via della Renella']</data>
+      <data key="d11">['Via della Renella', 'Via del Politeama', 'Via Colomba Antonietti']</data>
       <data key="d12">residential</data>
       <data key="d13">30</data>
       <data key="d14">198.795</data>
@@ -43864,7 +43864,7 @@
       <data key="d8">[121455918, 121897310]</data>
       <data key="d9">True</data>
       <data key="d10">2</data>
-      <data key="d11">['Lungotevere in Sassia', 'Piazza della Rovere']</data>
+      <data key="d11">['Piazza della Rovere', 'Lungotevere in Sassia']</data>
       <data key="d12">primary</data>
       <data key="d13">50</data>
       <data key="d14">41.804</data>
@@ -44458,7 +44458,7 @@
       <data key="d8">[23266115, 232393133]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via Alessandro Volta', 'Via Lorenzo Ghiberti']</data>
+      <data key="d11">['Via Lorenzo Ghiberti', 'Via Alessandro Volta']</data>
       <data key="d12">residential</data>
       <data key="d14">162.88299999999998</data>
       <data key="d15">LINESTRING (12.475593 41.8779486, 12.4755211 41.877921, 12.4746144 41.8775744, 12.474552 41.8775484, 12.4745163 41.8776006, 12.4742238 41.8780153, 12.4741829 41.8780733)</data>
@@ -45064,7 +45064,7 @@
       <data key="d8">[190344601, 86249399]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Piazza di Porta Portese', 'Piazzale Portuense']</data>
+      <data key="d11">['Piazzale Portuense', 'Piazza di Porta Portese']</data>
       <data key="d12">secondary</data>
       <data key="d13">50</data>
       <data key="d14">46.033</data>
@@ -45074,7 +45074,7 @@
       <data key="d8">[190344630, 949395743]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Piazza di Porta Portese', 'Piazzale Portuense']</data>
+      <data key="d11">['Piazzale Portuense', 'Piazza di Porta Portese']</data>
       <data key="d12">secondary</data>
       <data key="d13">50</data>
       <data key="d14">38.588</data>
@@ -45124,7 +45124,7 @@
       <data key="d8">[23338770, 23276037]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via Principe Umberto', 'Via Lamarmora']</data>
+      <data key="d11">['Via Lamarmora', 'Via Principe Umberto']</data>
       <data key="d12">residential</data>
       <data key="d14">178.337</data>
       <data key="d15">LINESTRING (12.5068842 41.8948912, 12.5069377 41.8949433, 12.5074262 41.8954203, 12.507474 41.8954642, 12.5075366 41.8954286, 12.5083634 41.8949583, 12.5084148 41.8949281)</data>
@@ -45201,8 +45201,8 @@
     <edge source="953" target="2060" id="0">
       <data key="d8">[24876984, 23275867]</data>
       <data key="d9">True</data>
-      <data key="d10">['1', '2']</data>
-      <data key="d11">['Piazza Vittorio Emanuele Secondo', 'Via Napoleone Terzo']</data>
+      <data key="d10">['2', '1']</data>
+      <data key="d11">['Via Napoleone Terzo', 'Piazza Vittorio Emanuele Secondo']</data>
       <data key="d12">tertiary</data>
       <data key="d13">50</data>
       <data key="d14">185.405</data>
@@ -45394,7 +45394,7 @@
       <data key="d8">[220274292, 196782700]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">["Via dell'Arancio", 'Piazza del Porto di Ripetta']</data>
+      <data key="d11">['Piazza del Porto di Ripetta', "Via dell'Arancio"]</data>
       <data key="d12">residential</data>
       <data key="d14">139.362</data>
       <data key="d15">LINESTRING (12.4768955 41.904512, 12.4754786 41.9046115, 12.4754554 41.9046101, 12.4754364 41.9046049, 12.4754286 41.9045993, 12.4754237 41.9045921, 12.4754141 41.904543, 12.4753603 41.9044558)</data>
@@ -45459,7 +45459,7 @@
     </edge>
     <edge source="970" target="971" id="0">
       <data key="d8">[234146816, 23337311]</data>
-      <data key="d11">['Via della Fontanella di Borghese', 'Largo Carlo Goldoni']</data>
+      <data key="d11">['Largo Carlo Goldoni', 'Via della Fontanella di Borghese']</data>
       <data key="d12">living_street</data>
       <data key="d9">False</data>
       <data key="d14">77.415</data>
@@ -45928,7 +45928,7 @@
       <data key="d8">[463432074, 23275868]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Piazza Vittorio Emanuele Secondo', 'Via Napoleone Terzo']</data>
+      <data key="d11">['Via Napoleone Terzo', 'Piazza Vittorio Emanuele Secondo']</data>
       <data key="d12">tertiary</data>
       <data key="d13">50</data>
       <data key="d14">212.952</data>
@@ -46092,7 +46092,7 @@
       <data key="d8">[190525657, 190525471]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via dei Volsci', 'Piazza dei Sanniti']</data>
+      <data key="d11">['Piazza dei Sanniti', 'Via dei Volsci']</data>
       <data key="d12">residential</data>
       <data key="d14">116.015</data>
       <data key="d15">LINESTRING (12.5166499 41.8987147, 12.5164022 41.8985864, 12.5155006 41.8981174)</data>
@@ -46110,7 +46110,7 @@
       <data key="d8">[119448806, 190525471]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via dei Volsci', 'Piazza dei Sanniti']</data>
+      <data key="d11">['Piazza dei Sanniti', 'Via dei Volsci']</data>
       <data key="d12">residential</data>
       <data key="d14">115.398</data>
       <data key="d15">LINESTRING (12.5177926 41.8993093, 12.5177723 41.8992988, 12.5176716 41.8992468, 12.5169022 41.8988497, 12.5166499 41.8987147)</data>
@@ -46275,7 +46275,7 @@
       <data key="d8">[23571585, 204186497]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via dei Marsi', 'Piazza dei Campani']</data>
+      <data key="d11">['Piazza dei Campani', 'Via dei Marsi']</data>
       <data key="d12">residential</data>
       <data key="d14">65.71600000000001</data>
       <data key="d15">LINESTRING (12.5146583 41.8957818, 12.5140622 41.8954707, 12.5140087 41.895442)</data>
@@ -46391,7 +46391,7 @@
       <data key="d8">[204186497, 204186502]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via dei Marsi', 'Piazza dei Campani']</data>
+      <data key="d11">['Piazza dei Campani', 'Via dei Marsi']</data>
       <data key="d12">residential</data>
       <data key="d14">91.734</data>
       <data key="d15">LINESTRING (12.5140087 41.895442, 12.5137263 41.8952906, 12.5130937 41.8949767)</data>
@@ -46417,7 +46417,7 @@
     <edge source="1021" target="2074" id="0">
       <data key="d8">[119448803, 24900148]</data>
       <data key="d10">1</data>
-      <data key="d11">['Via degli Anamari', 'Via dei Bruzi']</data>
+      <data key="d11">['Via dei Bruzi', 'Via degli Anamari']</data>
       <data key="d12">residential</data>
       <data key="d9">False</data>
       <data key="d14">176.10100000000003</data>
@@ -46827,7 +46827,7 @@
     <edge source="1047" target="2746" id="0">
       <data key="d8">[23442673, 27679331]</data>
       <data key="d10">2</data>
-      <data key="d11">["Viale dell'Obelisco", 'Viale Adamo Mickievicz']</data>
+      <data key="d11">['Viale Adamo Mickievicz', "Viale dell'Obelisco"]</data>
       <data key="d12">unclassified</data>
       <data key="d9">False</data>
       <data key="d14">188.816</data>
@@ -47083,7 +47083,7 @@
       <data key="d8">[185326013, 185325998]</data>
       <data key="d9">True</data>
       <data key="d10">2</data>
-      <data key="d12">['residential', 'unclassified']</data>
+      <data key="d12">['unclassified', 'residential']</data>
       <data key="d14">377.06300000000005</data>
       <data key="d11">Via Antoniniana</data>
       <data key="d15">LINESTRING (12.4952224 41.8793953, 12.4951014 41.8793162, 12.4950605 41.8792781, 12.4950397 41.8792277, 12.4950095 41.878828, 12.4949945 41.8786909, 12.4949865 41.878618, 12.4946003 41.8780748, 12.4944195 41.8777337, 12.4941946 41.8774137, 12.4940858 41.8773074, 12.4939388 41.877228, 12.493488 41.8770739, 12.4932187 41.8770116, 12.4930437 41.8769449, 12.4929186 41.8768816, 12.4927976 41.8768204)</data>
@@ -47272,8 +47272,8 @@
     <edge source="1074" target="3821" id="0">
       <data key="d8">[13280341, 201742806]</data>
       <data key="d9">True</data>
-      <data key="d10">['1', '2']</data>
-      <data key="d11">['Piazza di Porta Maggiore', 'Via di Porta Maggiore']</data>
+      <data key="d10">['2', '1']</data>
+      <data key="d11">['Via di Porta Maggiore', 'Piazza di Porta Maggiore']</data>
       <data key="d12">['tertiary', 'secondary']</data>
       <data key="d13">50</data>
       <data key="d14">160.532</data>
@@ -47366,7 +47366,7 @@
       <data key="d8">[98554681, 166170326]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via Severino Grattoni', 'Via Enrico Toti']</data>
+      <data key="d11">['Via Enrico Toti', 'Via Severino Grattoni']</data>
       <data key="d12">residential</data>
       <data key="d14">187.312</data>
       <data key="d15">LINESTRING (12.5141669 41.8903761, 12.5140947 41.8904137, 12.5138479 41.8905528, 12.5135387 41.890727, 12.5134775 41.8907629, 12.5133178 41.890698, 12.5131722 41.8906185, 12.512987 41.8904273, 12.512645 41.890095, 12.5125502 41.8900009)</data>
@@ -48509,7 +48509,7 @@
     <edge source="1147" target="3907" id="0">
       <data key="d8">[246167818, 48656015]</data>
       <data key="d9">True</data>
-      <data key="d10">['1', '2']</data>
+      <data key="d10">['2', '1']</data>
       <data key="d11">Piazza Giuseppe Verdi</data>
       <data key="d12">residential</data>
       <data key="d14">87.811</data>
@@ -49774,7 +49774,7 @@
       <data key="d8">[23339155, 139680029]</data>
       <data key="d9">True</data>
       <data key="d10">2</data>
-      <data key="d11">['Piazza di Santa Croce in Gerusalemme', 'Via Eleniana']</data>
+      <data key="d11">['Via Eleniana', 'Piazza di Santa Croce in Gerusalemme']</data>
       <data key="d12">secondary</data>
       <data key="d13">50</data>
       <data key="d14">171.962</data>
@@ -49962,7 +49962,7 @@
       <data key="d8">[23646009, 222227756]</data>
       <data key="d9">True</data>
       <data key="d10">2</data>
-      <data key="d11">['Piazza di Santa Croce in Gerusalemme', 'Via Eleniana']</data>
+      <data key="d11">['Via Eleniana', 'Piazza di Santa Croce in Gerusalemme']</data>
       <data key="d12">secondary</data>
       <data key="d13">50</data>
       <data key="d14">141.91899999999998</data>
@@ -50110,7 +50110,7 @@
       <data key="d8">[120513794, 222401997]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Piazza di Porta San Giovanni', 'Piazzale Appio']</data>
+      <data key="d11">['Piazzale Appio', 'Piazza di Porta San Giovanni']</data>
       <data key="d12">primary</data>
       <data key="d13">50</data>
       <data key="d14">70.076</data>
@@ -50165,7 +50165,7 @@
       <data key="d8">[27536136, 193903676, 23920951]</data>
       <data key="d16">viaduct</data>
       <data key="d9">True</data>
-      <data key="d10">['1', '2']</data>
+      <data key="d10">['2', '1']</data>
       <data key="d11">['Corso di Francia', 'Viale Maresciallo Pilsudski']</data>
       <data key="d12">primary_link</data>
       <data key="d13">50</data>
@@ -50313,7 +50313,7 @@
     <edge source="1250" target="2142" id="0">
       <data key="d8">[25767969, 53178434, 152146055, 152146056, 152259286, 152259287, 152259288, 152259289, 205007802, 205007803]</data>
       <data key="d9">True</data>
-      <data key="d11">['Via della Pilotta', 'Piazza della Pilotta']</data>
+      <data key="d11">['Piazza della Pilotta', 'Via della Pilotta']</data>
       <data key="d12">residential</data>
       <data key="d14">238.63</data>
       <data key="d15">LINESTRING (12.4850271 41.8972325, 12.4849867 41.8973318, 12.4849657 41.8973854, 12.4849537 41.8974203, 12.4848608 41.8977324, 12.4848486 41.8977656, 12.4847513 41.8980289, 12.4847374 41.8980657, 12.4845995 41.8984033, 12.4845844 41.8984402, 12.4844587 41.8987482, 12.4844317 41.8988142, 12.4837698 41.8987142)</data>
@@ -50332,7 +50332,7 @@
       <data key="d8">[23694713, 190022891]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Largo Corrado Ricci', "Via Tor de' Conti"]</data>
+      <data key="d11">["Via Tor de' Conti", 'Largo Corrado Ricci']</data>
       <data key="d12">residential</data>
       <data key="d13">30</data>
       <data key="d14">73.458</data>
@@ -50724,7 +50724,7 @@
       <data key="d8">[216601410, 119237150]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via Gallarate', 'Piazza Lodi']</data>
+      <data key="d11">['Piazza Lodi', 'Via Gallarate']</data>
       <data key="d12">secondary</data>
       <data key="d13">50</data>
       <data key="d14">39.077</data>
@@ -51036,7 +51036,7 @@
       <data key="d8">[23752977, 23764034]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via dei Falisci', 'Largo dei Falisci']</data>
+      <data key="d11">['Largo dei Falisci', 'Via dei Falisci']</data>
       <data key="d12">residential</data>
       <data key="d14">96.381</data>
       <data key="d15">LINESTRING (12.5133954 41.8971343, 12.5124913 41.8971964, 12.5123959 41.8972947, 12.5123734 41.8973179, 12.5123411 41.8973512)</data>
@@ -52139,7 +52139,7 @@
       <data key="d8">[25372260, 24866116]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Largo Italo Gemini', 'Via Gabriele Falloppio']</data>
+      <data key="d11">['Via Gabriele Falloppio', 'Largo Italo Gemini']</data>
       <data key="d12">residential</data>
       <data key="d14">93.578</data>
       <data key="d15">LINESTRING (12.5081786 41.909239, 12.5073835 41.9096796, 12.507303 41.9097644)</data>
@@ -52187,7 +52187,7 @@
       <data key="d8">[27381328, 27381325, 978214493]</data>
       <data key="d9">True</data>
       <data key="d10">2</data>
-      <data key="d11">['Piazzale di Porta Pia', 'Via Venti Settembre']</data>
+      <data key="d11">['Via Venti Settembre', 'Piazzale di Porta Pia']</data>
       <data key="d12">secondary</data>
       <data key="d13">50</data>
       <data key="d14">86.606</data>
@@ -52216,7 +52216,7 @@
     <edge source="1353" target="3010" id="0">
       <data key="d8">[28674035, 96639799]</data>
       <data key="d9">True</data>
-      <data key="d10">['1', '2']</data>
+      <data key="d10">['2', '1']</data>
       <data key="d11">['Viale Castro Pretorio', 'Piazza della Croce Rossa']</data>
       <data key="d12">tertiary</data>
       <data key="d13">50</data>
@@ -52341,7 +52341,7 @@
     <edge source="1357" target="3769" id="0">
       <data key="d8">[27030071, 103776367]</data>
       <data key="d9">True</data>
-      <data key="d11">['Viale Metronio', 'Via Numidia']</data>
+      <data key="d11">['Via Numidia', 'Viale Metronio']</data>
       <data key="d12">residential</data>
       <data key="d14">155.92899999999997</data>
       <data key="d15">LINESTRING (12.5012735 41.8792161, 12.5011388 41.8790524, 12.5017405 41.8787233, 12.5021595 41.8784786, 12.5024241 41.8783121)</data>
@@ -52467,7 +52467,7 @@
       <data key="d8">[23825500, 23825501]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via Mondovì', 'Via Ivrea']</data>
+      <data key="d11">['Via Ivrea', 'Via Mondovì']</data>
       <data key="d12">residential</data>
       <data key="d14">139.889</data>
       <data key="d15">LINESTRING (12.5154185 41.8773379, 12.5154706 41.8767491, 12.5163642 41.8768081)</data>
@@ -53301,7 +53301,7 @@
       <data key="d8">[49628123, 308118142]</data>
       <data key="d9">True</data>
       <data key="d10">2</data>
-      <data key="d11">['Viale Eritrea', 'Piazza Annibaliano']</data>
+      <data key="d11">['Piazza Annibaliano', 'Viale Eritrea']</data>
       <data key="d12">tertiary</data>
       <data key="d13">50</data>
       <data key="d14">183.216</data>
@@ -53406,7 +53406,7 @@
       <data key="d8">[1002485618, 23899100]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via Fezzan', 'Piazza Amba Alagi']</data>
+      <data key="d11">['Piazza Amba Alagi', 'Via Fezzan']</data>
       <data key="d12">tertiary</data>
       <data key="d13">50</data>
       <data key="d14">158.026</data>
@@ -53635,7 +53635,7 @@
       <data key="d8">[229933714, 23583446]</data>
       <data key="d9">True</data>
       <data key="d10">2</data>
-      <data key="d11">['Viale Eritrea', 'Piazza Annibaliano']</data>
+      <data key="d11">['Piazza Annibaliano', 'Viale Eritrea']</data>
       <data key="d12">tertiary</data>
       <data key="d13">50</data>
       <data key="d14">111.211</data>
@@ -54148,7 +54148,7 @@
       <data key="d8">[280660794, 23949478]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Largo Tenente Bellini', 'Via Nino Oxilia']</data>
+      <data key="d11">['Via Nino Oxilia', 'Largo Tenente Bellini']</data>
       <data key="d12">residential</data>
       <data key="d14">157.811</data>
       <data key="d15">LINESTRING (12.4933674 41.9262446, 12.4931409 41.9261676, 12.4928256 41.9260164, 12.4926675 41.9259486, 12.4923192 41.9257993, 12.4919309 41.9256029, 12.4917416 41.9255065)</data>
@@ -54197,7 +54197,7 @@
       <data key="d8">[190028490, 118762931]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Largo Ecuador', 'Via Polonia']</data>
+      <data key="d11">['Via Polonia', 'Largo Ecuador']</data>
       <data key="d12">residential</data>
       <data key="d14">100.667</data>
       <data key="d15">LINESTRING (12.4980227 41.9247764, 12.4985078 41.9240771, 12.4985344 41.9239604)</data>
@@ -54308,7 +54308,7 @@
     <edge source="1453" target="4302" id="0">
       <data key="d8">[200449563, 200449559]</data>
       <data key="d10">2</data>
-      <data key="d11">['Via di Novella', 'Piazza Acilia']</data>
+      <data key="d11">['Piazza Acilia', 'Via di Novella']</data>
       <data key="d12">residential</data>
       <data key="d13">50</data>
       <data key="d9">False</data>
@@ -54812,7 +54812,7 @@
       <data key="d8">[35408132, 201580879]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Piazza San Bernardo', 'Largo di Santa Susanna']</data>
+      <data key="d11">['Largo di Santa Susanna', 'Piazza San Bernardo']</data>
       <data key="d12">tertiary</data>
       <data key="d13">50</data>
       <data key="d14">37.628</data>
@@ -54997,9 +54997,9 @@
       <data key="d17">yes</data>
       <data key="d9">True</data>
       <data key="d10">2</data>
-      <data key="d11">['Circonvallazione della Stazione Tiburtina', 'Circonvallazione Nomentana']</data>
+      <data key="d11">['Circonvallazione Nomentana', 'Circonvallazione della Stazione Tiburtina']</data>
       <data key="d12">trunk</data>
-      <data key="d13">['50', '70']</data>
+      <data key="d13">['70', '50']</data>
       <data key="d14">1035.933</data>
       <data key="d15">LINESTRING (12.5282455 41.9187572, 12.5280021 41.9202309, 12.5279625 41.9205936, 12.5279309 41.9208313, 12.5277995 41.9216385, 12.5277306 41.9219613, 12.5276419 41.9224138, 12.5274421 41.9230706, 12.5273631 41.9233633, 12.5272581 41.923697, 12.5272128 41.9239774, 12.527183 41.9241644, 12.5271732 41.9242599, 12.5271787 41.9243487, 12.5271913 41.9244269, 12.5275652 41.9255219, 12.527904 41.9266315, 12.5279516 41.9268273, 12.5279906 41.9270248, 12.5280205 41.927239, 12.5280273 41.9273199, 12.5280328 41.9274028, 12.5280348 41.9274856, 12.5280355 41.9275704, 12.5280271 41.9279398)</data>
     </edge>
@@ -55724,7 +55724,7 @@
       <data key="d8">[240046396, 23920854]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Largo Belgrado', 'Via Antonio Gramsci']</data>
+      <data key="d11">['Via Antonio Gramsci', 'Largo Belgrado']</data>
       <data key="d12">residential</data>
       <data key="d13">50</data>
       <data key="d14">432.937</data>
@@ -55734,7 +55734,7 @@
       <data key="d8">[177923621, 240046391]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Largo Belgrado', 'Via dei Monti Parioli']</data>
+      <data key="d11">['Via dei Monti Parioli', 'Largo Belgrado']</data>
       <data key="d12">residential</data>
       <data key="d14">82.423</data>
       <data key="d13">50</data>
@@ -55744,7 +55744,7 @@
       <data key="d8">[240046394, 23920509]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Largo Belgrado', 'Via dei Monti Parioli']</data>
+      <data key="d11">['Via dei Monti Parioli', 'Largo Belgrado']</data>
       <data key="d12">residential</data>
       <data key="d13">50</data>
       <data key="d14">275.194</data>
@@ -56671,7 +56671,7 @@
       <data key="d8">[23920685, 76715038]</data>
       <data key="d9">True</data>
       <data key="d10">2</data>
-      <data key="d11">['Via Guidubaldo del Monte', 'Piazza Euclide']</data>
+      <data key="d11">['Piazza Euclide', 'Via Guidubaldo del Monte']</data>
       <data key="d12">tertiary</data>
       <data key="d13">50</data>
       <data key="d14">287.837</data>
@@ -57585,7 +57585,7 @@
       <data key="d10">2</data>
       <data key="d11">Circonvallazione Tiburtina</data>
       <data key="d12">trunk_link</data>
-      <data key="d13">['50', '40']</data>
+      <data key="d13">['40', '50']</data>
       <data key="d14">395.772</data>
       <data key="d15">LINESTRING (12.5324648 41.9058953, 12.5324669 41.9056448, 12.5324685 41.9054759, 12.5324753 41.905159, 12.5324124 41.9046738, 12.532316 41.9044024, 12.5321992 41.904131, 12.531939 41.9036176, 12.5314252 41.9028886, 12.5311691 41.9025394)</data>
     </edge>
@@ -57624,7 +57624,7 @@
       <data key="d9">True</data>
       <data key="d10">1</data>
       <data key="d12">tertiary_link</data>
-      <data key="d13">['50', '40']</data>
+      <data key="d13">['40', '50']</data>
       <data key="d14">288.03</data>
       <data key="d17">yes</data>
       <data key="d11">Via dei Monti di Pietralata</data>
@@ -58312,7 +58312,7 @@
       <data key="d8">[23945134, 23945127]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via Volsinio', 'Piazza Volsinio']</data>
+      <data key="d11">['Piazza Volsinio', 'Via Volsinio']</data>
       <data key="d12">residential</data>
       <data key="d14">130.047</data>
       <data key="d15">LINESTRING (12.5089868 41.9239791, 12.5092191 41.924077, 12.5095389 41.9242, 12.509946 41.9243432, 12.5100848 41.9244017, 12.5101297 41.9244731, 12.5101418 41.9245585, 12.5101068 41.924639)</data>
@@ -58828,7 +58828,7 @@
       <data key="d8">[190028505, 23949202]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Largo Ecuador', 'Via Bruxelles']</data>
+      <data key="d11">['Via Bruxelles', 'Largo Ecuador']</data>
       <data key="d12">residential</data>
       <data key="d14">301.036</data>
       <data key="d15">LINESTRING (12.4985344 41.9239604, 12.4987343 41.9238482, 12.5014393 41.9223301)</data>
@@ -59003,8 +59003,8 @@
       <data key="d8">[190502849, 23949357]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via di San Filippo Martire', 'Via Mafalda di Savoia']</data>
-      <data key="d12">['residential', 'unclassified']</data>
+      <data key="d11">['Via Mafalda di Savoia', 'Via di San Filippo Martire']</data>
+      <data key="d12">['unclassified', 'residential']</data>
       <data key="d13">50</data>
       <data key="d14">299.638</data>
       <data key="d15">LINESTRING (12.493586 41.926918, 12.4936936 41.9272601, 12.4937955 41.9275873, 12.4938734 41.9277594, 12.4940194 41.9279997, 12.4941786 41.9282299, 12.4943728 41.9284143, 12.4947324 41.9287405, 12.4949141 41.9289954, 12.4950195 41.9291591, 12.495132 41.9293152)</data>
@@ -60170,8 +60170,8 @@
     <edge source="1730" target="1798" id="0">
       <data key="d8">[308864864, 192075623, 23952559, 110597334, 203984761, 122185788]</data>
       <data key="d9">True</data>
-      <data key="d10">['1', '2']</data>
-      <data key="d11">['Via di San Sebastianello', 'Piazza di Spagna', 'Piazza del Popolo', 'Via del Babuino']</data>
+      <data key="d10">['2', '1']</data>
+      <data key="d11">['Piazza del Popolo', 'Piazza di Spagna', 'Via del Babuino', 'Via di San Sebastianello']</data>
       <data key="d12">residential</data>
       <data key="d14">937.2539999999999</data>
       <data key="d15">LINESTRING (12.4821033 41.908276, 12.4820454 41.9082044, 12.4820466 41.9081851, 12.4821189 41.9080725, 12.4821997 41.9079582, 12.4823148 41.9078126, 12.4824096 41.9076102, 12.4824694 41.907438, 12.4825436 41.9072279, 12.4825871 41.9070743, 12.4826156 41.9069781, 12.4826257 41.9068972, 12.4826008 41.9068445, 12.4819989 41.9066956, 12.4813185 41.9065308, 12.4812423 41.9065125, 12.4812079 41.9065435, 12.4811744 41.9065764, 12.4805476 41.9071083, 12.4798024 41.9077405, 12.4794608 41.9080303, 12.4794286 41.9080577, 12.4789596 41.9084557, 12.478731 41.9086496, 12.4784934 41.9088512, 12.4778964 41.9093578, 12.4774596 41.9097284, 12.4770528 41.9100679, 12.4770071 41.9101157, 12.4769486 41.910185, 12.4769048 41.910252, 12.4768837 41.9103087, 12.4768961 41.9103483, 12.4769148 41.9103701, 12.4769454 41.9103903, 12.4770157 41.9104122, 12.4770689 41.9104333, 12.4771171 41.9104605, 12.4771657 41.9104976, 12.4771995 41.9105292, 12.4772267 41.9105609, 12.4772499 41.9105946, 12.4772704 41.9106283, 12.4772842 41.910664, 12.4772995 41.9107125, 12.4773093 41.910761, 12.4773127 41.9108082, 12.4773104 41.9108497, 12.4773027 41.9108946, 12.4772843 41.9109448, 12.4772696 41.9109739, 12.4772496 41.911003)</data>
@@ -60553,7 +60553,7 @@
       <data key="d8">[156857300, 23953468]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Piazza Lotario', 'Via Giacomo Boni']</data>
+      <data key="d11">['Via Giacomo Boni', 'Piazza Lotario']</data>
       <data key="d12">residential</data>
       <data key="d14">206.43399999999997</data>
       <data key="d15">LINESTRING (12.5225967 41.9147275, 12.5223168 41.9149894, 12.5222004 41.9150291, 12.5220841 41.9150829, 12.5220049 41.9151242, 12.5218738 41.9151827, 12.521686 41.9152424, 12.5215081 41.9152869, 12.5212303 41.9153294, 12.5209948 41.9153508, 12.5207807 41.9153592, 12.5205627 41.9153549, 12.5203778 41.9153453)</data>
@@ -61045,8 +61045,8 @@
     <edge source="1774" target="4173" id="0">
       <data key="d8">[23036856, 167959405, 24896672]</data>
       <data key="d9">True</data>
-      <data key="d10">['1', '2']</data>
-      <data key="d11">['Piazzale del Verano', 'Viale Regina Elena']</data>
+      <data key="d10">['2', '1']</data>
+      <data key="d11">['Viale Regina Elena', 'Piazzale del Verano']</data>
       <data key="d12">secondary</data>
       <data key="d13">50</data>
       <data key="d14">427.003</data>
@@ -61110,7 +61110,7 @@
     <edge source="1776" target="2187" id="0">
       <data key="d8">[137472874, 23953740]</data>
       <data key="d9">True</data>
-      <data key="d10">['1', '2']</data>
+      <data key="d10">['2', '1']</data>
       <data key="d11">["Viale dell'Università", 'Viale Ippocrate']</data>
       <data key="d12">tertiary</data>
       <data key="d13">50</data>
@@ -61309,7 +61309,7 @@
     <edge source="1789" target="2863" id="0">
       <data key="d8">[121906065, 27858619]</data>
       <data key="d10">2</data>
-      <data key="d11">['Via Giacinto Carini', 'Piazza Rosolino Pilo']</data>
+      <data key="d11">['Piazza Rosolino Pilo', 'Via Giacinto Carini']</data>
       <data key="d12">residential</data>
       <data key="d13">50</data>
       <data key="d9">False</data>
@@ -61319,7 +61319,7 @@
     <edge source="1789" target="2865" id="0">
       <data key="d8">[27858620, 124048533]</data>
       <data key="d10">2</data>
-      <data key="d11">['Via Anton Giulio Barrili', 'Piazza Rosolino Pilo']</data>
+      <data key="d11">['Piazza Rosolino Pilo', 'Via Anton Giulio Barrili']</data>
       <data key="d12">residential</data>
       <data key="d13">50</data>
       <data key="d9">False</data>
@@ -61330,7 +61330,7 @@
       <data key="d8">[212505273, 27858627]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Piazza Rosolino Pilo', 'Via Maurizio Quadrio']</data>
+      <data key="d11">['Via Maurizio Quadrio', 'Piazza Rosolino Pilo']</data>
       <data key="d12">residential</data>
       <data key="d14">130.357</data>
       <data key="d15">LINESTRING (12.4623123 41.8817745, 12.4622234 41.8817787, 12.4611737 41.8818301, 12.4609661 41.8818362, 12.4608629 41.8818401, 12.4607405 41.8818427)</data>
@@ -61404,7 +61404,7 @@
       <data key="d8">[35274864, 93281609, 33289756]</data>
       <data key="d9">True</data>
       <data key="d10">2</data>
-      <data key="d11">['Largo di Porta San Pancrazio', 'Piazzale Aurelio', 'Viale delle Mura Gianicolensi']</data>
+      <data key="d11">['Piazzale Aurelio', 'Largo di Porta San Pancrazio', 'Viale delle Mura Gianicolensi']</data>
       <data key="d12">tertiary</data>
       <data key="d13">50</data>
       <data key="d14">146.63400000000001</data>
@@ -61509,7 +61509,7 @@
     <edge source="1798" target="4252" id="0">
       <data key="d8">[23442672, 23442669, 192075622]</data>
       <data key="d9">True</data>
-      <data key="d10">['1', '2']</data>
+      <data key="d10">['2', '1']</data>
       <data key="d11">['Piazza della Trinità dei Monti', 'Viale della Trinità dei Monti']</data>
       <data key="d12">tertiary</data>
       <data key="d13">50</data>
@@ -61558,7 +61558,7 @@
     <edge source="1800" target="4377" id="0">
       <data key="d8">[119237129, 119237138]</data>
       <data key="d9">True</data>
-      <data key="d10">['1', '2']</data>
+      <data key="d10">['2', '1']</data>
       <data key="d11">Via Casilina Vecchia</data>
       <data key="d12">tertiary</data>
       <data key="d13">30</data>
@@ -62003,7 +62003,7 @@
       <data key="d8">[153580979, 130655236]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via del Pigneto', 'Piazza Caballini']</data>
+      <data key="d11">['Piazza Caballini', 'Via del Pigneto']</data>
       <data key="d12">tertiary</data>
       <data key="d13">50</data>
       <data key="d14">227.32500000000002</data>
@@ -62085,7 +62085,7 @@
     <edge source="1831" target="4595" id="0">
       <data key="d8">[24163219, 367349822]</data>
       <data key="d10">2</data>
-      <data key="d11">['Piazza Dalmazia', 'Via Postumia']</data>
+      <data key="d11">['Via Postumia', 'Piazza Dalmazia']</data>
       <data key="d12">residential</data>
       <data key="d13">50</data>
       <data key="d9">False</data>
@@ -62104,7 +62104,7 @@
     <edge source="1832" target="4596" id="0">
       <data key="d8">[53799564, 367349981]</data>
       <data key="d10">2</data>
-      <data key="d11">['Via Dalmazia', 'Piazza Dalmazia']</data>
+      <data key="d11">['Piazza Dalmazia', 'Via Dalmazia']</data>
       <data key="d12">residential</data>
       <data key="d13">50</data>
       <data key="d9">False</data>
@@ -62276,7 +62276,7 @@
       <data key="d9">True</data>
       <data key="d10">1</data>
       <data key="d11">Via Dora</data>
-      <data key="d12">['residential', 'unclassified']</data>
+      <data key="d12">['unclassified', 'residential']</data>
       <data key="d14">107.131</data>
       <data key="d17">yes</data>
       <data key="d15">LINESTRING (12.5022754 41.9187101, 12.5021788 41.9186682, 12.5020492 41.9186592, 12.5014798 41.9186156, 12.5013526 41.918608, 12.5011953 41.918609, 12.5011202 41.9186392, 12.5010354 41.9186915)</data>
@@ -62754,7 +62754,7 @@
       <data key="d8">[308135185, 584602767]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Piazza di San Martino ai Monti', 'Via di San Martino ai Monti']</data>
+      <data key="d11">['Via di San Martino ai Monti', 'Piazza di San Martino ai Monti']</data>
       <data key="d12">residential</data>
       <data key="d14">132.571</data>
       <data key="d15">LINESTRING (12.4988995 41.8957121, 12.4976823 41.8952973, 12.4974471 41.8952097)</data>
@@ -62771,7 +62771,7 @@
     <edge source="1869" target="1875" id="0">
       <data key="d8">[24167736, 24167739, 81756179]</data>
       <data key="d9">True</data>
-      <data key="d11">["Via di Sant'Antonio all'Esquilino", "Largo di Sant'Alfonso", 'Via di San Vito']</data>
+      <data key="d11">["Largo di Sant'Alfonso", 'Via di San Vito', "Via di Sant'Antonio all'Esquilino"]</data>
       <data key="d12">residential</data>
       <data key="d14">177.481</data>
       <data key="d15">LINESTRING (12.499753 41.8958621, 12.4998888 41.8958921, 12.5000306 41.8958925, 12.5009403 41.8958274, 12.5009348 41.8958535, 12.5008261 41.8963659, 12.5008307 41.8964134, 12.500835 41.8964588, 12.5008891 41.8965118)</data>
@@ -62845,7 +62845,7 @@
       <data key="d8">[24167737, 24167738]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via Pellegrino Rossi', 'Via di San Vito']</data>
+      <data key="d11">['Via di San Vito', 'Via Pellegrino Rossi']</data>
       <data key="d12">residential</data>
       <data key="d14">141.795</data>
       <data key="d15">LINESTRING (12.5014841 41.8949144, 12.501495 41.8949949, 12.5015921 41.8957113, 12.5015959 41.8957399, 12.5020728 41.8957303, 12.5021245 41.8957564, 12.5021647 41.8957885)</data>
@@ -62930,7 +62930,7 @@
       <data key="d8">[52577542, 223971243, 223971244, 52577488, 381471163, 551466300]</data>
       <data key="d9">True</data>
       <data key="d10">2</data>
-      <data key="d11">['Piazza dei Tribunali', 'Piazza di Ponte Umberto Primo', 'Ponte Umberto I', 'Ponte Umberto Primo']</data>
+      <data key="d11">['Ponte Umberto Primo', 'Piazza dei Tribunali', 'Ponte Umberto I', 'Piazza di Ponte Umberto Primo']</data>
       <data key="d12">tertiary</data>
       <data key="d13">50</data>
       <data key="d14">230.12699999999998</data>
@@ -62951,7 +62951,7 @@
       <data key="d8">[111141666, 25661965]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Piazza Borghese', 'Via del Clementino']</data>
+      <data key="d11">['Via del Clementino', 'Piazza Borghese']</data>
       <data key="d12">residential</data>
       <data key="d14">117.63500000000002</data>
       <data key="d15">LINESTRING (12.4764432 41.9036279, 12.4760479 41.9034719, 12.4760291 41.9034643, 12.4755418 41.903269, 12.4751761 41.90315)</data>
@@ -63113,8 +63113,8 @@
     <edge source="1891" target="3029" id="0">
       <data key="d8">[220230155, 27412851, 303693268, 130269671]</data>
       <data key="d9">True</data>
-      <data key="d10">['1', '2']</data>
-      <data key="d11">['Piazza del Popolo', 'Via di Ripetta']</data>
+      <data key="d10">['2', '1']</data>
+      <data key="d11">['Via di Ripetta', 'Piazza del Popolo']</data>
       <data key="d12">residential</data>
       <data key="d14">116.82100000000001</data>
       <data key="d15">LINESTRING (12.4754355 41.9104029, 12.4755119 41.9103343, 12.475571 41.9102912, 12.4756342 41.9102601, 12.4757061 41.9102277, 12.4757801 41.9102058, 12.4758548 41.9101915, 12.4759599 41.9101817, 12.4760299 41.9101861, 12.476106 41.9101936, 12.4761661 41.9101891, 12.4762178 41.9101719, 12.4762482 41.910135, 12.4762566 41.9100755, 12.4762476 41.9099689, 12.476213 41.9097917)</data>
@@ -63290,7 +63290,7 @@
       <data key="d8">[10148347, 28193683, 28193703]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via Federico Cesi', 'Piazza della Libertà', 'Lungotevere dei Mellini']</data>
+      <data key="d11">['Lungotevere dei Mellini', 'Via Federico Cesi', 'Piazza della Libertà']</data>
       <data key="d12">residential</data>
       <data key="d14">134.342</data>
       <data key="d15">LINESTRING (12.4710716 41.9086213, 12.4710794 41.9086353, 12.4710993 41.9086638, 12.4711157 41.9086809, 12.4711368 41.9086988, 12.4711579 41.9087147, 12.4711825 41.9087297, 12.4712015 41.9087398, 12.4712202 41.9087482, 12.4716535 41.9088951, 12.471712 41.9089072, 12.4717344 41.9089097, 12.4717587 41.9089105, 12.4717814 41.9089081, 12.4718028 41.9089013, 12.4718201 41.908892, 12.4718331 41.908878, 12.4721965 41.9084168)</data>
@@ -63658,7 +63658,7 @@
     <edge source="1916" target="3259" id="0">
       <data key="d8">[121911153, 267027985, 48285811, 201474076]</data>
       <data key="d9">True</data>
-      <data key="d10">['1', '2']</data>
+      <data key="d10">['2', '1']</data>
       <data key="d11">Circonvallazione Nomentana</data>
       <data key="d12">['tertiary', 'tertiary_link']</data>
       <data key="d13">50</data>
@@ -64012,7 +64012,7 @@
       <data key="d8">[26664099, 190477924]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via Stamira', 'Piazza Ruggero di Sicilia']</data>
+      <data key="d11">['Piazza Ruggero di Sicilia', 'Via Stamira']</data>
       <data key="d12">residential</data>
       <data key="d14">115.262</data>
       <data key="d15">LINESTRING (12.5209455 41.9116299, 12.5210713 41.9116179, 12.521199 41.9116298, 12.5213673 41.9116536, 12.5215444 41.9116895, 12.5217087 41.9117365, 12.5219484 41.9118102, 12.5220394 41.9118442, 12.5222523 41.9119349)</data>
@@ -64093,7 +64093,7 @@
       <data key="d8">[261968672, 23463866]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via Michele di Lando', 'Piazza Bologna']</data>
+      <data key="d11">['Piazza Bologna', 'Via Michele di Lando']</data>
       <data key="d12">residential</data>
       <data key="d14">137.859</data>
       <data key="d15">LINESTRING (12.5232688 41.9139173, 12.5231742 41.9139097, 12.5217516 41.913801, 12.5216114 41.9137911)</data>
@@ -64264,7 +64264,7 @@
       <data key="d8">[24432504, 165613073]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via Pietro Verri', 'Via Ludovico Muratori']</data>
+      <data key="d11">['Via Ludovico Muratori', 'Via Pietro Verri']</data>
       <data key="d12">residential</data>
       <data key="d14">145.455</data>
       <data key="d15">LINESTRING (12.5009413 41.8893631, 12.5010019 41.889556, 12.5010495 41.8897183, 12.5010463 41.8897405, 12.5010317 41.8897592, 12.5010042 41.8897809, 12.5009661 41.8897981, 12.5008594 41.8898306, 12.4999255 41.8901149)</data>
@@ -64301,7 +64301,7 @@
       <data key="d8">[24432513, 211042754]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via Francesco Giambullari', 'Via Giovanni Mario Crescimbeni']</data>
+      <data key="d11">['Via Giovanni Mario Crescimbeni', 'Via Francesco Giambullari']</data>
       <data key="d12">residential</data>
       <data key="d14">129.578</data>
       <data key="d15">LINESTRING (12.4999255 41.8901149, 12.4998528 41.8900179, 12.4998227 41.8899854, 12.4997637 41.8899533, 12.499673 41.8899457, 12.499496 41.8899722, 12.4985057 41.8901486)</data>
@@ -64397,7 +64397,7 @@
       <data key="d8">[24593795, 216271509]</data>
       <data key="d9">True</data>
       <data key="d10">['2', '3']</data>
-      <data key="d11">['Piazzale Labicano', 'Via Casilina']</data>
+      <data key="d11">['Via Casilina', 'Piazzale Labicano']</data>
       <data key="d12">secondary</data>
       <data key="d13">50</data>
       <data key="d14">90.20000000000002</data>
@@ -64438,7 +64438,7 @@
     <edge source="1962" target="1964" id="0">
       <data key="d8">[203755074, 24468852]</data>
       <data key="d9">True</data>
-      <data key="d11">["Piazza Pietro d'Illiria", 'Via di Santa Sabina']</data>
+      <data key="d11">['Via di Santa Sabina', "Piazza Pietro d'Illiria"]</data>
       <data key="d12">residential</data>
       <data key="d14">84.882</data>
       <data key="d15">LINESTRING (12.4807517 41.884672, 12.4804879 41.8844819, 12.4802901 41.8843134, 12.4800346 41.8841271)</data>
@@ -64623,7 +64623,7 @@
       <data key="d8">[31875385, 50602036, 24492142]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via delle Carine', 'Via Frangipane', 'Via Vittorino da Feltre']</data>
+      <data key="d11">['Via Frangipane', 'Via delle Carine', 'Via Vittorino da Feltre']</data>
       <data key="d12">residential</data>
       <data key="d14">289.79400000000004</data>
       <data key="d15">LINESTRING (12.4903029 41.8924657, 12.490349 41.8924769, 12.4909299 41.8926062, 12.491337 41.8926932, 12.4914002 41.8927086, 12.4913788 41.8927649, 12.4911168 41.8934512, 12.491089 41.8934756, 12.4910517 41.8934789, 12.4902074 41.8932849, 12.4901452 41.8933218, 12.4898834 41.893258)</data>
@@ -64829,7 +64829,7 @@
     <edge source="1990" target="1992" id="0">
       <data key="d8">[778306401, 24535265]</data>
       <data key="d9">True</data>
-      <data key="d11">['Piazza del Tempio di Diana', 'Via Eufemiano']</data>
+      <data key="d11">['Via Eufemiano', 'Piazza del Tempio di Diana']</data>
       <data key="d12">residential</data>
       <data key="d14">58.169</data>
       <data key="d15">LINESTRING (12.4823296 41.8835094, 12.4819272 41.8832209, 12.4818303 41.8831416)</data>
@@ -65002,7 +65002,7 @@
     </edge>
     <edge source="2008" target="2026" id="0">
       <data key="d8">[140343110, 140343111, 140343113, 217773783, 140343115, 140343116, 135618679, 140343118, 140343119, 140343120, 140343122, 140343123, 140343124, 140343126, 140343127, 217773784, 134473594, 375678814]</data>
-      <data key="d11">['Clivo di Scauro', 'Piazza dei Santi Giovanni e Paolo', 'Via di San Paolo della Croce']</data>
+      <data key="d11">['Clivo di Scauro', 'Via di San Paolo della Croce', 'Piazza dei Santi Giovanni e Paolo']</data>
       <data key="d12">residential</data>
       <data key="d9">False</data>
       <data key="d14">389.256</data>
@@ -65748,7 +65748,7 @@
     <edge source="2058" target="4403" id="0">
       <data key="d8">[93470432, 201496101]</data>
       <data key="d9">True</data>
-      <data key="d10">['1', '3']</data>
+      <data key="d10">['3', '1']</data>
       <data key="d11">Via Cernaia</data>
       <data key="d12">secondary</data>
       <data key="d13">50</data>
@@ -66088,7 +66088,7 @@
       <data key="d8">[114252240, 200083571]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via Saturnia', 'Piazza Pompei']</data>
+      <data key="d11">['Piazza Pompei', 'Via Saturnia']</data>
       <data key="d12">residential</data>
       <data key="d13">50</data>
       <data key="d14">126.647</data>
@@ -66187,7 +66187,7 @@
     <edge source="2094" target="2532" id="0">
       <data key="d8">[27031220, 46946220]</data>
       <data key="d9">True</data>
-      <data key="d10">['1', '2']</data>
+      <data key="d10">['2', '1']</data>
       <data key="d11">['Via Domenico Alberto Azuni', 'Via Flaminia']</data>
       <data key="d12">residential</data>
       <data key="d13">50</data>
@@ -66207,7 +66207,7 @@
       <data key="d8">[312897885, 184686126]</data>
       <data key="d9">True</data>
       <data key="d10">2</data>
-      <data key="d11">['Via Luisa di Savoia', 'Piazzale Flaminio']</data>
+      <data key="d11">['Piazzale Flaminio', 'Via Luisa di Savoia']</data>
       <data key="d12">primary</data>
       <data key="d13">50</data>
       <data key="d14">52.921</data>
@@ -66289,7 +66289,7 @@
       <data key="d8">[121464280, 312897886]</data>
       <data key="d9">True</data>
       <data key="d10">2</data>
-      <data key="d11">['Via Luisa di Savoia', 'Piazzale Flaminio']</data>
+      <data key="d11">['Piazzale Flaminio', 'Via Luisa di Savoia']</data>
       <data key="d12">primary</data>
       <data key="d13">50</data>
       <data key="d14">75.994</data>
@@ -66364,7 +66364,7 @@
       <data key="d8">[25631623, 25631803, 128665326, 28677638]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via dei Cestari', 'Via del Piè di Marmo', 'Piazza della Minerva', 'Via di Santa Caterina da Siena']</data>
+      <data key="d11">['Piazza della Minerva', 'Via del Piè di Marmo', 'Via dei Cestari', 'Via di Santa Caterina da Siena']</data>
       <data key="d12">residential</data>
       <data key="d14">221.30700000000004</data>
       <data key="d15">LINESTRING (12.4773304 41.8976732, 12.4773397 41.8977247, 12.4773474 41.8977671, 12.4777756 41.8977505, 12.4780818 41.8977214, 12.4781151 41.8977169, 12.4782236 41.8977024, 12.478293 41.8976871, 12.4783674 41.8976571, 12.4784522 41.8976118, 12.4784826 41.8975854, 12.4785105 41.8975667, 12.4786187 41.8975185, 12.4786625 41.8975045, 12.4787471 41.8975059, 12.4788491 41.8975154, 12.4789536 41.8975354, 12.4791137 41.8975747, 12.4792763 41.8976245, 12.4793982 41.8976524, 12.4796728 41.8977128, 12.4797198 41.8977198, 12.4797629 41.8977128)</data>
@@ -66500,7 +66500,7 @@
       <data key="d8">[980662288, 28160193, 28157827, 25661868]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via Metastasio', 'Piazza di Firenze', "Via d'Ascanio", 'Via dei Prefetti']</data>
+      <data key="d11">["Via d'Ascanio", 'Via Metastasio', 'Via dei Prefetti', 'Piazza di Firenze']</data>
       <data key="d12">residential</data>
       <data key="d14">251.86700000000002</data>
       <data key="d15">LINESTRING (12.4777506 41.9025071, 12.4777127 41.902523, 12.4776618 41.9025324, 12.4771934 41.9025, 12.4768259 41.9024653, 12.4762771 41.9023663, 12.4760225 41.9022977, 12.4758652 41.9022554, 12.4759509 41.9020922, 12.4759586 41.9020746, 12.4761563 41.9016373, 12.4761594 41.9016304, 12.4762273 41.9014795)</data>
@@ -66778,8 +66778,8 @@
       <data key="d8">[25694093, 25694094, 247815600, 204163761, 204163767]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Piazzale Ferdowsi', 'Via Omero', 'Via Valmichi']</data>
-      <data key="d12">['residential', 'unclassified']</data>
+      <data key="d11">['Via Omero', 'Piazzale Ferdowsi', 'Via Valmichi']</data>
+      <data key="d12">['unclassified', 'residential']</data>
       <data key="d14">299.915</data>
       <data key="d15">LINESTRING (12.4805255 41.9162156, 12.4806693 41.9161361, 12.4808681 41.9160469, 12.4809575 41.9159882, 12.4810079 41.9159453, 12.4810265 41.9159069, 12.4809891 41.9157821, 12.4809632 41.9157016, 12.4809559 41.9156482, 12.4809667 41.9156097, 12.4809996 41.9155885, 12.4810454 41.9155805, 12.4810804 41.9155908, 12.4811297 41.9156145, 12.481204 41.9156749, 12.481282 41.9157439, 12.4813403 41.9157771, 12.4813951 41.9157815, 12.4814512 41.915778, 12.4815193 41.9157617, 12.4818447 41.9156355, 12.4819506 41.9156089, 12.482059 41.915605, 12.4821706 41.9156317, 12.4822704 41.9156788, 12.4823628 41.9157767, 12.4823884 41.9158775, 12.4823607 41.9159883, 12.4822873 41.9160704, 12.4821713 41.9161559, 12.4819081 41.9162801)</data>
     </edge>
@@ -67002,7 +67002,7 @@
       <data key="d13">50</data>
       <data key="d14">397.64900000000006</data>
       <data key="d16">yes</data>
-      <data key="d11">['Ponte Giacomo Matteotti', 'Lungotevere Michelangelo']</data>
+      <data key="d11">['Lungotevere Michelangelo', 'Ponte Giacomo Matteotti']</data>
       <data key="d15">LINESTRING (12.4716652 41.9143532, 12.4716151 41.9143909, 12.471575 41.9144159, 12.471561 41.9144243, 12.4715444 41.9144327, 12.4715255 41.9144403, 12.4715042 41.9144445, 12.4714866 41.9144452, 12.4714441 41.9144429, 12.4710889 41.9143934, 12.4699962 41.9142594, 12.4699694 41.9142553, 12.4699452 41.9142488, 12.4699208 41.9142378, 12.4699003 41.914226, 12.4698823 41.9142132, 12.4698639 41.9141938, 12.4698509 41.9141744, 12.4698406 41.9141488, 12.4698357 41.9141194, 12.4698359 41.914096, 12.4698613 41.9140092, 12.4700423 41.9133914, 12.4702937 41.9126288, 12.4703316 41.9125143, 12.4704479 41.9120853)</data>
     </edge>
     <edge source="2140" target="3351" id="0">
@@ -67101,7 +67101,7 @@
     <edge source="2147" target="4113" id="0">
       <data key="d8">[985174688, 25768313, 28159241, 25661550]</data>
       <data key="d9">True</data>
-      <data key="d11">["Salita de' Crescenzi", 'Via della Rotonda', "Via di Sant'Eustachio"]</data>
+      <data key="d11">["Via di Sant'Eustachio", "Salita de' Crescenzi", 'Via della Rotonda']</data>
       <data key="d12">residential</data>
       <data key="d14">250.654</data>
       <data key="d15">LINESTRING (12.476415 41.8977056, 12.4764494 41.8982147, 12.4764519 41.8982514, 12.4764414 41.8983305, 12.4764414 41.8984542, 12.4764468 41.89879, 12.4765206 41.899017, 12.47638 41.8990109, 12.4760284 41.8989958, 12.4760229 41.8989191, 12.4760143 41.8988007, 12.4760126 41.8987934, 12.4759781 41.8986429, 12.4759706 41.8986099, 12.4759243 41.8984568, 12.4759129 41.8984362)</data>
@@ -67272,7 +67272,7 @@
       <data key="d8">[201610341, 167959407]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via Alessandria', 'Piazza Regina Margherita']</data>
+      <data key="d11">['Piazza Regina Margherita', 'Via Alessandria']</data>
       <data key="d12">residential</data>
       <data key="d14">115.094</data>
       <data key="d15">LINESTRING (12.5056133 41.913832, 12.5059024 41.9140249, 12.5066591 41.9145144)</data>
@@ -67448,7 +67448,7 @@
       <data key="d8">[26592072, 190477921]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via Berengario', 'Piazza Ruggero di Sicilia']</data>
+      <data key="d11">['Piazza Ruggero di Sicilia', 'Via Berengario']</data>
       <data key="d12">residential</data>
       <data key="d14">203.94700000000003</data>
       <data key="d15">LINESTRING (12.5225142 41.9117884, 12.5222279 41.9116302, 12.5227316 41.9101801, 12.5227586 41.910112)</data>
@@ -69429,7 +69429,7 @@
     <edge source="2299" target="3911" id="0">
       <data key="d8">[189558674, 155166962]</data>
       <data key="d9">True</data>
-      <data key="d10">['1', '2']</data>
+      <data key="d10">['2', '1']</data>
       <data key="d11">["Via Emilio de' Cavalieri", 'Viale Gioacchino Rossini']</data>
       <data key="d12">residential</data>
       <data key="d14">134.925</data>
@@ -69558,7 +69558,7 @@
       <data key="d8">[52255698, 28160522, 28160515, 26837446]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Piazza di San Silvestro', 'Via del Pozzetto', "Via di Sant'Andrea delle Fratte", 'Via del Bufalo']</data>
+      <data key="d11">['Via del Bufalo', 'Via del Pozzetto', 'Piazza di San Silvestro', "Via di Sant'Andrea delle Fratte"]</data>
       <data key="d12">residential</data>
       <data key="d13">20</data>
       <data key="d14">271.013</data>
@@ -69803,7 +69803,7 @@
       <data key="d8">[26785824, 121464279]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via Francesco Carrara', 'Via Flaminia']</data>
+      <data key="d11">['Via Flaminia', 'Via Francesco Carrara']</data>
       <data key="d12">residential</data>
       <data key="d14">114.6</data>
       <data key="d15">LINESTRING (12.4753317 41.9129891, 12.4754916 41.9126103, 12.475396 41.9125834, 12.4746954 41.9123859)</data>
@@ -70767,7 +70767,7 @@
       <data key="d8">[27314357, 288991670, 288991671]</data>
       <data key="d10">1</data>
       <data key="d11">Salita dei Parioli</data>
-      <data key="d12">['residential', 'unclassified']</data>
+      <data key="d12">['unclassified', 'residential']</data>
       <data key="d9">False</data>
       <data key="d14">627.0100000000004</data>
       <data key="d20">no</data>
@@ -70794,7 +70794,7 @@
       <data key="d8">[26801835, 95199588]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via Carlo Dolci', 'Via Giuseppe Ceracchi']</data>
+      <data key="d11">['Via Giuseppe Ceracchi', 'Via Carlo Dolci']</data>
       <data key="d12">residential</data>
       <data key="d14">316.39300000000003</data>
       <data key="d15">LINESTRING (12.4747222 41.9245651, 12.4741225 41.9246078, 12.4739923 41.9246205, 12.4739192 41.9246165, 12.4738534 41.9245994, 12.4737968 41.9245664, 12.4737385 41.9245276, 12.4736902 41.9244728, 12.4736558 41.924408, 12.4735065 41.9239315, 12.4733346 41.9234108, 12.4745717 41.9233889)</data>
@@ -71953,7 +71953,7 @@
       <data key="d8">[200083572, 27029908]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Piazza Pompei', 'Via Iberia']</data>
+      <data key="d11">['Via Iberia', 'Piazza Pompei']</data>
       <data key="d12">residential</data>
       <data key="d14">55.783</data>
       <data key="d15">LINESTRING (12.5061264 41.8794788, 12.5061044 41.8794764, 12.506075 41.879472, 12.5060544 41.87947, 12.5060195 41.8794686, 12.5059853 41.8794684, 12.5059598 41.8794696, 12.5054581 41.879519)</data>
@@ -71989,7 +71989,7 @@
       <data key="d8">[24650569, 27029908]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via Elvia Recina', 'Piazza Pompei']</data>
+      <data key="d11">['Piazza Pompei', 'Via Elvia Recina']</data>
       <data key="d12">residential</data>
       <data key="d14">43.723</data>
       <data key="d15">LINESTRING (12.506779 41.8796859, 12.5063904 41.8795578, 12.5063574 41.8795472, 12.5062954 41.8795279)</data>
@@ -72066,7 +72066,7 @@
       <data key="d8">[26957305, 26957327]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Piazza Apollodoro', 'Via Flaminia']</data>
+      <data key="d11">['Via Flaminia', 'Piazza Apollodoro']</data>
       <data key="d12">residential</data>
       <data key="d13">50</data>
       <data key="d14">171.27100000000002</data>
@@ -72600,7 +72600,7 @@
       <data key="d8">[392668951, 124214095]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Piazza Tuscolo', 'Via Soana']</data>
+      <data key="d11">['Via Soana', 'Piazza Tuscolo']</data>
       <data key="d12">secondary</data>
       <data key="d13">50</data>
       <data key="d14">35.564</data>
@@ -73381,7 +73381,7 @@
       <data key="d8">[121900401, 93814014]</data>
       <data key="d9">True</data>
       <data key="d10">2</data>
-      <data key="d11">['Via Rabirio', 'Via Nedo Nadi']</data>
+      <data key="d11">['Via Nedo Nadi', 'Via Rabirio']</data>
       <data key="d12">residential</data>
       <data key="d13">50</data>
       <data key="d14">91.425</data>
@@ -73456,7 +73456,7 @@
       <data key="d8">[190361290, 27208540, 27208533]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via Pomponio Mela', 'Piazza Copernico', 'Piazza Tolomeo']</data>
+      <data key="d11">['Piazza Copernico', 'Piazza Tolomeo', 'Via Pomponio Mela']</data>
       <data key="d12">residential</data>
       <data key="d14">83.451</data>
       <data key="d15">LINESTRING (12.5318739 41.8856754, 12.532037 41.8857572, 12.532089 41.8857911, 12.5324816 41.8860011, 12.5325534 41.8860409, 12.5325689 41.8860659, 12.5325831 41.8861035, 12.5325922 41.8861626)</data>
@@ -73630,7 +73630,7 @@
       <data key="d8">[22820808, 27208354]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via Prenestina', 'Circonvallazione Casilina']</data>
+      <data key="d11">['Circonvallazione Casilina', 'Via Prenestina']</data>
       <data key="d12">residential</data>
       <data key="d13">50</data>
       <data key="d14">148.797</data>
@@ -73880,7 +73880,7 @@
       <data key="d8">[248095763, 210676300, 210676302, 366694371]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via Florida', 'Largo Arenula', 'Via Arenula']</data>
+      <data key="d11">['Via Arenula', 'Largo Arenula', 'Via Florida']</data>
       <data key="d12">tertiary</data>
       <data key="d13">50</data>
       <data key="d14">110.795</data>
@@ -74126,7 +74126,7 @@
       <data key="d8">[27858260, 27858263]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via Giacomo Medici', 'Via Pietro Roselli']</data>
+      <data key="d11">['Via Pietro Roselli', 'Via Giacomo Medici']</data>
       <data key="d12">residential</data>
       <data key="d14">348.572</data>
       <data key="d15">LINESTRING (12.4636905 41.8878364, 12.4622116 41.8865486, 12.4621579 41.8864762, 12.462167 41.8857415, 12.4621715 41.8851764, 12.4621682 41.8851185)</data>
@@ -74702,7 +74702,7 @@
     </edge>
     <edge source="2683" target="2685" id="0">
       <data key="d8">[27474872, 27474873]</data>
-      <data key="d11">['Via Todi', 'Via Campello sul Clitunno']</data>
+      <data key="d11">['Via Campello sul Clitunno', 'Via Todi']</data>
       <data key="d12">residential</data>
       <data key="d9">False</data>
       <data key="d14">163.208</data>
@@ -75269,7 +75269,7 @@
       <data key="d8">[27525154, 82885004, 110155894]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via Aquilio Manio', 'Via Fabio Numerio', 'Via Tarquinio Prisco']</data>
+      <data key="d11">['Via Fabio Numerio', 'Via Aquilio Manio', 'Via Tarquinio Prisco']</data>
       <data key="d12">residential</data>
       <data key="d13">50</data>
       <data key="d14">213.535</data>
@@ -75647,7 +75647,7 @@
     <edge source="2753" target="3819" id="0">
       <data key="d8">[236894418, 137470205, 308868118]</data>
       <data key="d9">True</data>
-      <data key="d10">['1', '2']</data>
+      <data key="d10">['2', '1']</data>
       <data key="d11">['Largo del Tritone', 'Via del Tritone']</data>
       <data key="d12">tertiary</data>
       <data key="d13">50</data>
@@ -75891,7 +75891,7 @@
       <data key="d8">[33654266, 27805407]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Vicolo del Leopardo', 'Vicolo del Cedro']</data>
+      <data key="d11">['Vicolo del Cedro', 'Vicolo del Leopardo']</data>
       <data key="d12">residential</data>
       <data key="d13">30</data>
       <data key="d14">122.515</data>
@@ -75966,7 +75966,7 @@
       <data key="d8">[33654622, 142947154, 835565674, 190525599]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Piazza Trilussa', 'Piazza di San Giovanni della Malva', 'Via di Ponte Sisto']</data>
+      <data key="d11">['Via di Ponte Sisto', 'Piazza di San Giovanni della Malva', 'Piazza Trilussa']</data>
       <data key="d12">residential</data>
       <data key="d13">30</data>
       <data key="d14">116.55399999999999</data>
@@ -76075,7 +76075,7 @@
       <data key="d8">[27806172, 27806204, 27806269, 33684238]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via Giggi Zanazzo', 'Via di Monte Fiore', 'Piazza del Drago', 'Via di Santa Bonosa']</data>
+      <data key="d11">['Via Giggi Zanazzo', 'Via di Santa Bonosa', 'Via di Monte Fiore', 'Piazza del Drago']</data>
       <data key="d12">residential</data>
       <data key="d13">30</data>
       <data key="d14">162.957</data>
@@ -76213,7 +76213,7 @@
       <data key="d8">[203142275, 200307284, 27806429, 204183255]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">["Via dell'Arco De' Tolomei", 'Piazza in Piscinula', "Via dell'Arco de' Tolomei"]</data>
+      <data key="d11">["Via dell'Arco De' Tolomei", "Via dell'Arco de' Tolomei", 'Piazza in Piscinula']</data>
       <data key="d12">residential</data>
       <data key="d13">30</data>
       <data key="d14">73.74799999999999</data>
@@ -76305,7 +76305,7 @@
       <data key="d8">[190598706, 27806527]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via di San Michele', 'Piazza dei Mercanti']</data>
+      <data key="d11">['Piazza dei Mercanti', 'Via di San Michele']</data>
       <data key="d12">residential</data>
       <data key="d13">30</data>
       <data key="d14">113.952</data>
@@ -76484,7 +76484,7 @@
     <edge source="2810" target="3197" id="0">
       <data key="d8">[33686043, 27806639]</data>
       <data key="d10">2</data>
-      <data key="d11">["Vicolo dell'Atleta", 'Via dei Salumi']</data>
+      <data key="d11">['Via dei Salumi', "Vicolo dell'Atleta"]</data>
       <data key="d12">residential</data>
       <data key="d13">30</data>
       <data key="d9">False</data>
@@ -76505,7 +76505,7 @@
       <data key="d8">[27806656, 200307285]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via in Piscinula', 'Piazza in Piscinula']</data>
+      <data key="d11">['Piazza in Piscinula', 'Via in Piscinula']</data>
       <data key="d12">residential</data>
       <data key="d13">30</data>
       <data key="d14">129.348</data>
@@ -76867,7 +76867,7 @@
       <data key="d8">[248089692, 129413494, 169787247]</data>
       <data key="d9">True</data>
       <data key="d10">2</data>
-      <data key="d11">['Piazza Ippolito Nievo', 'Viale di Trastevere']</data>
+      <data key="d11">['Viale di Trastevere', 'Piazza Ippolito Nievo']</data>
       <data key="d12">secondary</data>
       <data key="d13">50</data>
       <data key="d14">439.028</data>
@@ -77132,7 +77132,7 @@
       <data key="d8">[300573394, 902218615]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via Michele Carcani', 'Largo Antonio Ruberti']</data>
+      <data key="d11">['Largo Antonio Ruberti', 'Via Michele Carcani']</data>
       <data key="d12">residential</data>
       <data key="d14">135.565</data>
       <data key="d15">LINESTRING (12.4716894 41.8828611, 12.4717061 41.8828828, 12.4717149 41.8828959, 12.4717205 41.8829098, 12.4717191 41.8829227, 12.4717116 41.8829358, 12.4717012 41.8829455, 12.471684 41.8829537, 12.4716636 41.882958, 12.4716445 41.8829598, 12.4707669 41.8830237, 12.4705562 41.8830354, 12.4705297 41.8830351, 12.4704856 41.8830312, 12.4704603 41.8830263, 12.4704361 41.8830199, 12.4704078 41.8830105, 12.4702968 41.8829659, 12.4702284 41.8829383)</data>
@@ -78062,7 +78062,7 @@
       <data key="d8">[212128601, 28159322, 28159302]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Largo del Teatro Valle', 'Via del Teatro Valle', 'Via dei Redentoristi']</data>
+      <data key="d11">['Via dei Redentoristi', 'Via del Teatro Valle', 'Largo del Teatro Valle']</data>
       <data key="d12">residential</data>
       <data key="d14">141.353</data>
       <data key="d15">LINESTRING (12.4746308 41.8969344, 12.4749916 41.8969808, 12.4750881 41.8969832, 12.4750842 41.89791)</data>
@@ -78070,7 +78070,7 @@
     <edge source="2923" target="3444" id="0">
       <data key="d8">[125831640, 128665341]</data>
       <data key="d10">1</data>
-      <data key="d11">['Largo del Teatro Valle', "Piazza di Sant'Andrea della Valle"]</data>
+      <data key="d11">["Piazza di Sant'Andrea della Valle", 'Largo del Teatro Valle']</data>
       <data key="d12">residential</data>
       <data key="d9">False</data>
       <data key="d14">22.573</data>
@@ -78214,7 +78214,7 @@
       <data key="d8">[36779753, 125566953]</data>
       <data key="d9">True</data>
       <data key="d10">2</data>
-      <data key="d11">['Via del Plebiscito', 'Piazza del Gesù']</data>
+      <data key="d11">['Piazza del Gesù', 'Via del Plebiscito']</data>
       <data key="d12">tertiary</data>
       <data key="d13">50</data>
       <data key="d14">91.708</data>
@@ -78335,7 +78335,7 @@
       <data key="d8">[55221112, 28160494]</data>
       <data key="d9">True</data>
       <data key="d10">2</data>
-      <data key="d11">['Piazza di San Silvestro', 'Via di San Claudio']</data>
+      <data key="d11">['Via di San Claudio', 'Piazza di San Silvestro']</data>
       <data key="d12">residential</data>
       <data key="d14">107.703</data>
       <data key="d13">50</data>
@@ -78661,7 +78661,7 @@
       <data key="d8">[51081552, 28674260, 240195356]</data>
       <data key="d9">True</data>
       <data key="d10">2</data>
-      <data key="d11">["Corso d'Italia", 'Sottovia Ignazio Guidi']</data>
+      <data key="d11">['Sottovia Ignazio Guidi', "Corso d'Italia"]</data>
       <data key="d12">primary</data>
       <data key="d13">50</data>
       <data key="d14">498.13</data>
@@ -78788,7 +78788,7 @@
       <data key="d8">[216601411, 24152742]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via Gallarate', 'Piazza Lodi']</data>
+      <data key="d11">['Piazza Lodi', 'Via Gallarate']</data>
       <data key="d12">secondary</data>
       <data key="d13">50</data>
       <data key="d14">19.847</data>
@@ -78841,7 +78841,7 @@
       <data key="d8">[322765955, 24152741]</data>
       <data key="d9">True</data>
       <data key="d10">2</data>
-      <data key="d11">['Via Nuoro', 'Via Ozieri']</data>
+      <data key="d11">['Via Ozieri', 'Via Nuoro']</data>
       <data key="d12">residential</data>
       <data key="d14">10.591999999999999</data>
       <data key="d15">LINESTRING (12.5225449 41.8869861, 12.5225656 41.8870118, 12.5226074 41.8870692)</data>
@@ -79497,7 +79497,7 @@
     <edge source="3049" target="3523" id="0">
       <data key="d8">[10140405, 200237038]</data>
       <data key="d9">True</data>
-      <data key="d11">['Via delle Zoccolette', 'Via dei Pettinari']</data>
+      <data key="d11">['Via dei Pettinari', 'Via delle Zoccolette']</data>
       <data key="d12">residential</data>
       <data key="d14">83.16999999999999</data>
       <data key="d15">LINESTRING (12.4713866 41.8928043, 12.4714489 41.8928529, 12.4717498 41.8930686, 12.4721109 41.8928146)</data>
@@ -79560,7 +79560,7 @@
       <data key="d8">[347395130, 122185775, 140754165, 140754166, 189465655, 23060474]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Piazza della Suburra', 'Via Leonina', 'Via Urbana']</data>
+      <data key="d11">['Via Leonina', 'Piazza della Suburra', 'Via Urbana']</data>
       <data key="d12">residential</data>
       <data key="d13">30</data>
       <data key="d14">194.722</data>
@@ -79993,7 +79993,7 @@
       <data key="d8">[23899289, 200449578]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via Lucrino', 'Piazza Acilia']</data>
+      <data key="d11">['Piazza Acilia', 'Via Lucrino']</data>
       <data key="d12">residential</data>
       <data key="d13">50</data>
       <data key="d14">120.418</data>
@@ -80060,7 +80060,7 @@
     </edge>
     <edge source="3095" target="3491" id="0">
       <data key="d8">[100603915, 146380980, 361966503]</data>
-      <data key="d11">['Via Giuseppe Caraci', 'Via Carlo della Valle']</data>
+      <data key="d11">['Via Carlo della Valle', 'Via Giuseppe Caraci']</data>
       <data key="d12">residential</data>
       <data key="d9">False</data>
       <data key="d14">494.83699999999993</data>
@@ -80268,7 +80268,7 @@
     </edge>
     <edge source="3116" target="3117" id="0">
       <data key="d8">[32500814, 53367767]</data>
-      <data key="d11">['Via Scipione Rivera', "Largo Nicolò De' Lapi"]</data>
+      <data key="d11">["Largo Nicolò De' Lapi", 'Via Scipione Rivera']</data>
       <data key="d12">residential</data>
       <data key="d9">False</data>
       <data key="d14">102.902</data>
@@ -80401,7 +80401,7 @@
       <data key="d8">[42752305, 190022921]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Largo Corrado Ricci', 'Via del Colosseo']</data>
+      <data key="d11">['Via del Colosseo', 'Largo Corrado Ricci']</data>
       <data key="d12">residential</data>
       <data key="d14">34.123999999999995</data>
       <data key="d15">LINESTRING (12.4885021 41.8934345, 12.4885542 41.8933362, 12.4887674 41.8932125)</data>
@@ -80499,7 +80499,7 @@
     </edge>
     <edge source="3132" target="4151" id="0">
       <data key="d8">[32119964, 164343797]</data>
-      <data key="d11">['Via del Pigneto', "Via Bartolomeo d'Alviano"]</data>
+      <data key="d11">["Via Bartolomeo d'Alviano", 'Via del Pigneto']</data>
       <data key="d12">residential</data>
       <data key="d9">False</data>
       <data key="d14">56.967</data>
@@ -80623,7 +80623,7 @@
     <edge source="3145" target="3146" id="0">
       <data key="d8">[32566449, 277600086]</data>
       <data key="d9">True</data>
-      <data key="d11">['Piazza di Santa Caterina della Rota', 'Via in Caterina']</data>
+      <data key="d11">['Via in Caterina', 'Piazza di Santa Caterina della Rota']</data>
       <data key="d12">residential</data>
       <data key="d14">82.654</data>
       <data key="d15">LINESTRING (12.4699979 41.8955089, 12.4698257 41.8953809, 12.4697801 41.8953514, 12.4692019 41.8950646)</data>
@@ -80649,7 +80649,7 @@
     <edge source="3150" target="3516" id="0">
       <data key="d8">[136547104, 190525601, 95340420, 128665330, 128665332]</data>
       <data key="d10">2</data>
-      <data key="d11">['Via del Gianicolo', "Piazza di Sant'Onofrio"]</data>
+      <data key="d11">["Piazza di Sant'Onofrio", 'Via del Gianicolo']</data>
       <data key="d12">tertiary</data>
       <data key="d13">50</data>
       <data key="d9">False</data>
@@ -80687,7 +80687,7 @@
     <edge source="3157" target="3516" id="0">
       <data key="d8">[27804995, 190525660, 190598709]</data>
       <data key="d10">2</data>
-      <data key="d11">['Via del Gianicolo', "Piazza di Sant'Onofrio", 'Passeggiata del Gianicolo']</data>
+      <data key="d11">["Piazza di Sant'Onofrio", 'Via del Gianicolo', 'Passeggiata del Gianicolo']</data>
       <data key="d12">tertiary</data>
       <data key="d13">50</data>
       <data key="d9">False</data>
@@ -81139,7 +81139,7 @@
       <data key="d8">[223967048, 35022252]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Piazza di Porta Metronia', 'Piazzale Metronio']</data>
+      <data key="d11">['Piazzale Metronio', 'Piazza di Porta Metronia']</data>
       <data key="d12">secondary</data>
       <data key="d13">50</data>
       <data key="d14">28.592</data>
@@ -81148,8 +81148,8 @@
     <edge source="3208" target="3211" id="1">
       <data key="d8">[223967047, 35022255]</data>
       <data key="d9">True</data>
-      <data key="d10">['1', '2']</data>
-      <data key="d11">['Piazza di Porta Metronia', 'Piazzale Metronio']</data>
+      <data key="d10">['2', '1']</data>
+      <data key="d11">['Piazzale Metronio', 'Piazza di Porta Metronia']</data>
       <data key="d12">secondary</data>
       <data key="d13">50</data>
       <data key="d14">28.637999999999998</data>
@@ -81169,7 +81169,7 @@
       <data key="d8">[25695921, 106129575]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Piazza di Porta Metronia', 'Via della Navicella']</data>
+      <data key="d11">['Via della Navicella', 'Piazza di Porta Metronia']</data>
       <data key="d12">tertiary</data>
       <data key="d13">50</data>
       <data key="d14">74.752</data>
@@ -81179,7 +81179,7 @@
       <data key="d8">[35022258, 35022261]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Piazza di Porta Metronia', 'Piazzale Metronio']</data>
+      <data key="d11">['Piazzale Metronio', 'Piazza di Porta Metronia']</data>
       <data key="d12">secondary</data>
       <data key="d13">50</data>
       <data key="d14">33.152</data>
@@ -81198,7 +81198,7 @@
       <data key="d8">[185805115, 35274861]</data>
       <data key="d9">True</data>
       <data key="d10">2</data>
-      <data key="d11">['Largo di Porta San Pancrazio', 'Piazzale Aurelio']</data>
+      <data key="d11">['Piazzale Aurelio', 'Largo di Porta San Pancrazio']</data>
       <data key="d12">tertiary</data>
       <data key="d13">50</data>
       <data key="d14">64.354</data>
@@ -81546,7 +81546,7 @@
     <edge source="3249" target="3801" id="0">
       <data key="d8">[148525609, 148525610, 148525611, 148113076, 107292731, 217556093, 107292735]</data>
       <data key="d9">True</data>
-      <data key="d10">['1', '3']</data>
+      <data key="d10">['3', '1']</data>
       <data key="d11">['Via Acciaioli', 'Corso Vittorio Emanuele Secondo']</data>
       <data key="d12">tertiary</data>
       <data key="d13">50</data>
@@ -82640,7 +82640,7 @@
     </edge>
     <edge source="3373" target="3999" id="0">
       <data key="d8">[128751473, 25649781]</data>
-      <data key="d11">['Piazza di San Salvatore in Lauro', 'Via della Rondinella']</data>
+      <data key="d11">['Via della Rondinella', 'Piazza di San Salvatore in Lauro']</data>
       <data key="d12">residential</data>
       <data key="d9">False</data>
       <data key="d14">45.68299999999999</data>
@@ -82656,7 +82656,7 @@
     <edge source="3374" target="3462" id="0">
       <data key="d8">[203738627, 130351733, 50809107, 130351725]</data>
       <data key="d9">True</data>
-      <data key="d11">["Via dell'Arco di Parma", "Via della Maschera d'Oro", 'Piazza Lancellotti']</data>
+      <data key="d11">['Piazza Lancellotti', "Via della Maschera d'Oro", "Via dell'Arco di Parma"]</data>
       <data key="d12">residential</data>
       <data key="d14">220.558</data>
       <data key="d15">LINESTRING (12.4723966 41.9008975, 12.4722751 41.9009041, 12.471814 41.90088, 12.4716975 41.9008697, 12.4716223 41.900863, 12.4714946 41.9008586, 12.4709271 41.9008318, 12.4708774 41.9008314, 12.4708316 41.9008364, 12.4707859 41.9008433, 12.4707526 41.9008517, 12.4707192 41.9008621, 12.4706955 41.9008718, 12.4706717 41.9008835, 12.4706285 41.9009125, 12.4706109 41.9009295, 12.4705991 41.9009451, 12.4705905 41.9009687, 12.4705708 41.901079, 12.4705679 41.9010951, 12.4704939 41.9015432)</data>
@@ -82686,7 +82686,7 @@
     </edge>
     <edge source="3378" target="3681" id="0">
       <data key="d8">[127840346, 128665317, 138265846, 127840343]</data>
-      <data key="d11">['Piazza San Vincenzo Pallotti', 'Via Giulia']</data>
+      <data key="d11">['Via Giulia', 'Piazza San Vincenzo Pallotti']</data>
       <data key="d12">residential</data>
       <data key="d9">False</data>
       <data key="d14">180.934</data>
@@ -82812,7 +82812,7 @@
       <data key="d17">yes</data>
       <data key="d9">True</data>
       <data key="d10">2</data>
-      <data key="d11">['Lungotevere Gianicolense', 'Sottovia Lungotevere in Sassia']</data>
+      <data key="d11">['Sottovia Lungotevere in Sassia', 'Lungotevere Gianicolense']</data>
       <data key="d12">primary</data>
       <data key="d13">50</data>
       <data key="d14">155.75400000000002</data>
@@ -82837,7 +82837,7 @@
     <edge source="3393" target="3934" id="0">
       <data key="d8">[303404946, 123817468, 22880326]</data>
       <data key="d9">True</data>
-      <data key="d11">['Via della Consolazione', 'Piazza della Consolazione', 'Foro Romano']</data>
+      <data key="d11">['Via della Consolazione', 'Foro Romano', 'Piazza della Consolazione']</data>
       <data key="d12">residential</data>
       <data key="d14">190.603</data>
       <data key="d15">LINESTRING (12.4827459 41.8913328, 12.4827581 41.8913454, 12.4827707 41.8913584, 12.4828176 41.8913971, 12.4828654 41.8914281, 12.4833994 41.8917065, 12.4834113 41.8917164, 12.4835361 41.8918196, 12.4837631 41.8919861, 12.4842009 41.8917781, 12.4845521 41.8915902)</data>
@@ -82950,9 +82950,9 @@
       <data key="d8">[146380738, 165905660]</data>
       <data key="d9">True</data>
       <data key="d10">2</data>
-      <data key="d11">['Circonvallazione della Stazione Tiburtina', 'Circonvallazione Nomentana']</data>
+      <data key="d11">['Circonvallazione Nomentana', 'Circonvallazione della Stazione Tiburtina']</data>
       <data key="d12">trunk</data>
-      <data key="d13">['50', '70']</data>
+      <data key="d13">['70', '50']</data>
       <data key="d14">478.89</data>
       <data key="d17">yes</data>
       <data key="d15">LINESTRING (12.5278518 41.9268658, 12.5278415 41.9267816, 12.5278114 41.9266469, 12.5276548 41.9261203, 12.5274587 41.9255455, 12.5270821 41.9244438, 12.5270653 41.9243623, 12.5270579 41.9242809, 12.5270613 41.9241891, 12.5271231 41.9237499, 12.5271943 41.9234521, 12.5274443 41.922657)</data>
@@ -83033,7 +83033,7 @@
     <edge source="3413" target="4084" id="0">
       <data key="d8">[146380732, 159039029, 146380791]</data>
       <data key="d9">True</data>
-      <data key="d10">['1', '2']</data>
+      <data key="d10">['2', '1']</data>
       <data key="d12">trunk_link</data>
       <data key="d13">40</data>
       <data key="d14">281.378</data>
@@ -83051,7 +83051,7 @@
     <edge source="3415" target="4669" id="0">
       <data key="d8">[102218489, 689215452, 222401999]</data>
       <data key="d9">True</data>
-      <data key="d11">['Piazza di Porta San Giovanni', 'Piazzale Appio']</data>
+      <data key="d11">['Piazzale Appio', 'Piazza di Porta San Giovanni']</data>
       <data key="d12">primary_link</data>
       <data key="d20">yes</data>
       <data key="d14">126.10700000000003</data>
@@ -83080,7 +83080,7 @@
     <edge source="3416" target="4708" id="0">
       <data key="d8">[33600916, 1014320975]</data>
       <data key="d9">True</data>
-      <data key="d10">['4', '2']</data>
+      <data key="d10">['2', '4']</data>
       <data key="d11">Via Taranto</data>
       <data key="d12">primary</data>
       <data key="d13">50</data>
@@ -84103,7 +84103,7 @@
       <data key="d8">[892469697, 121996222]</data>
       <data key="d9">True</data>
       <data key="d10">2</data>
-      <data key="d11">['Piazza di Porta Portese', 'Lungotevere Porto di Ripa Grande']</data>
+      <data key="d11">['Lungotevere Porto di Ripa Grande', 'Piazza di Porta Portese']</data>
       <data key="d12">primary</data>
       <data key="d13">50</data>
       <data key="d14">95.811</data>
@@ -84283,7 +84283,7 @@
     <edge source="3579" target="4718" id="0">
       <data key="d8">[308130432, 1005129133]</data>
       <data key="d9">True</data>
-      <data key="d10">['1', '2']</data>
+      <data key="d10">['2', '1']</data>
       <data key="d11">Via Tembien</data>
       <data key="d12">secondary</data>
       <data key="d13">50</data>
@@ -85046,7 +85046,7 @@
       <data key="d8">[232148104, 129170657, 20894094]</data>
       <data key="d9">True</data>
       <data key="d10">4</data>
-      <data key="d11">['Lungotevere Michelangelo', 'Lungotevere delle Armi']</data>
+      <data key="d11">['Lungotevere delle Armi', 'Lungotevere Michelangelo']</data>
       <data key="d12">primary</data>
       <data key="d13">50</data>
       <data key="d14">12.061000000000002</data>
@@ -85231,7 +85231,7 @@
     <edge source="3690" target="3822" id="0">
       <data key="d8">[23560288, 353687529, 353687525, 20567062]</data>
       <data key="d9">True</data>
-      <data key="d10">['1', '2']</data>
+      <data key="d10">['2', '1']</data>
       <data key="d11">Piazza di Porta Maggiore</data>
       <data key="d12">secondary</data>
       <data key="d13">50</data>
@@ -85307,7 +85307,7 @@
       <data key="d8">[59150265, 121900403]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via Pastrengo', 'Via Venti settembre']</data>
+      <data key="d11">['Via Venti settembre', 'Via Pastrengo']</data>
       <data key="d12">secondary</data>
       <data key="d13">50</data>
       <data key="d14">65.78</data>
@@ -85680,7 +85680,7 @@
     </edge>
     <edge source="3774" target="3775" id="0">
       <data key="d8">[179188136, 106520517, 179188134]</data>
-      <data key="d11">['Via Pusiano', 'Largo Bientina', 'Largo Bradano']</data>
+      <data key="d11">['Largo Bradano', 'Via Pusiano', 'Largo Bientina']</data>
       <data key="d12">residential</data>
       <data key="d9">False</data>
       <data key="d14">101.02900000000001</data>
@@ -85933,7 +85933,7 @@
       <data key="d8">[200449562, 200449556]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via dei Giordani', 'Piazza Acilia']</data>
+      <data key="d11">['Piazza Acilia', 'Via dei Giordani']</data>
       <data key="d12">residential</data>
       <data key="d13">50</data>
       <data key="d14">176.07100000000003</data>
@@ -86117,7 +86117,7 @@
     <edge source="3845" target="4634" id="0">
       <data key="d8">[152146052, 23590221, 23590222, 232418213]</data>
       <data key="d10">1</data>
-      <data key="d11">['Salita di Montecavallo', 'Piazza del Quirinale', 'Via della Dataria']</data>
+      <data key="d11">['Piazza del Quirinale', 'Salita di Montecavallo', 'Via della Dataria']</data>
       <data key="d12">residential</data>
       <data key="d9">False</data>
       <data key="d14">178.89900000000003</data>
@@ -86720,7 +86720,7 @@
     </edge>
     <edge source="3953" target="4228" id="0">
       <data key="d8">[190296554, 223439319]</data>
-      <data key="d11">['Piazza di Spagna', 'Piazza Mignanelli']</data>
+      <data key="d11">['Piazza Mignanelli', 'Piazza di Spagna']</data>
       <data key="d12">residential</data>
       <data key="d9">False</data>
       <data key="d14">79.495</data>
@@ -88304,7 +88304,7 @@
     </edge>
     <edge source="4222" target="4650" id="0">
       <data key="d8">[59961345, 189536618]</data>
-      <data key="d11">['Largo Adriano Carcani', 'Via Omero']</data>
+      <data key="d11">['Via Omero', 'Largo Adriano Carcani']</data>
       <data key="d12">residential</data>
       <data key="d9">False</data>
       <data key="d14">111.95100000000001</data>
@@ -88532,7 +88532,7 @@
     <edge source="4280" target="4290" id="0">
       <data key="d8">[53367769, 199074527]</data>
       <data key="d10">2</data>
-      <data key="d11">['Via Raimondo Montecuccoli', 'Via Ottavio Piccolomini']</data>
+      <data key="d11">['Via Ottavio Piccolomini', 'Via Raimondo Montecuccoli']</data>
       <data key="d12">residential</data>
       <data key="d9">False</data>
       <data key="d14">109.383</data>
@@ -88767,7 +88767,7 @@
       <data key="d8">[35408186, 201580895]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Piazza San Bernardo', 'Largo di Santa Susanna']</data>
+      <data key="d11">['Largo di Santa Susanna', 'Piazza San Bernardo']</data>
       <data key="d12">tertiary</data>
       <data key="d13">50</data>
       <data key="d14">65.048</data>
@@ -89006,7 +89006,7 @@
     </edge>
     <edge source="4374" target="4375" id="0">
       <data key="d8">[148645340, 207400724, 207400716]</data>
-      <data key="d11">['Piazza di Santa Balbina', 'Via di Santa Balbina']</data>
+      <data key="d11">['Via di Santa Balbina', 'Piazza di Santa Balbina']</data>
       <data key="d12">residential</data>
       <data key="d9">False</data>
       <data key="d14">281.403</data>
@@ -89462,7 +89462,7 @@
       <data key="d8">[290266289, 235322573]</data>
       <data key="d9">True</data>
       <data key="d10">2</data>
-      <data key="d11">['Via Nicola Salvi', 'Via degli Annibaldi']</data>
+      <data key="d11">['Via degli Annibaldi', 'Via Nicola Salvi']</data>
       <data key="d12">secondary</data>
       <data key="d13">50</data>
       <data key="d14">12.725000000000001</data>
@@ -89509,7 +89509,7 @@
     <edge source="4477" target="4723" id="0">
       <data key="d8">[151167242, 22890649, 1018912802, 151167243]</data>
       <data key="d9">True</data>
-      <data key="d10">['1', '2']</data>
+      <data key="d10">['2', '1']</data>
       <data key="d12">residential</data>
       <data key="d14">177.66799999999995</data>
       <data key="d11">['Via Ipponio', 'Via Norico']</data>
@@ -89845,7 +89845,7 @@
       <data key="d8">[902218616, 27856502]</data>
       <data key="d9">True</data>
       <data key="d10">1</data>
-      <data key="d11">['Via Michele Carcani', 'Largo Antonio Ruberti']</data>
+      <data key="d11">['Largo Antonio Ruberti', 'Via Michele Carcani']</data>
       <data key="d12">residential</data>
       <data key="d14">121.12700000000001</data>
       <data key="d15">LINESTRING (12.4702525 41.8828605, 12.4703403 41.8828969, 12.4703679 41.8829077, 12.470383 41.8829131, 12.4703988 41.8829182, 12.4704146 41.8829226, 12.4704311 41.8829267, 12.4704487 41.8829299, 12.4704672 41.8829323, 12.4704873 41.8829338, 12.4705061 41.8829337, 12.4705207 41.8829333, 12.4716894 41.8828611)</data>
@@ -90355,7 +90355,7 @@
       <data key="d14">18.395</data>
       <data key="d15">LINESTRING (12.5214227 41.9290971, 12.5215652 41.9290241, 12.5216049 41.9290023)</data>
     </edge>
-    <data key="d0">2022-02-04 21:37:39</data>
+    <data key="d0">2022-02-05 07:15:51</data>
     <data key="d1">OSMnx 1.1.2</data>
     <data key="d2">epsg:4326</data>
     <data key="d3">True</data>

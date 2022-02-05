@@ -2061,7 +2061,7 @@
     </edge>
     <edge source="32" target="276" id="1">
       <data key="d7">[591858484, 319228149]</data>
-      <data key="d14">['Via Don Giovanni Bregoli', 'Via Giuseppe Ungaretti']</data>
+      <data key="d14">['Via Giuseppe Ungaretti', 'Via Don Giovanni Bregoli']</data>
       <data key="d11">residential</data>
       <data key="d8">False</data>
       <data key="d12">232.302</data>
@@ -2682,7 +2682,7 @@
       <data key="d7">[73530937, 74670509]</data>
       <data key="d9">2</data>
       <data key="d10">SP11</data>
-      <data key="d14">['Via Visano', 'Via Per Isorella']</data>
+      <data key="d14">['Via Per Isorella', 'Via Visano']</data>
       <data key="d11">tertiary</data>
       <data key="d16">6</data>
       <data key="d8">False</data>
@@ -2705,7 +2705,7 @@
     </edge>
     <edge source="70" target="102" id="0">
       <data key="d7">[207246032, 45420262, 45420263]</data>
-      <data key="d10">['SP6', 'SP11']</data>
+      <data key="d10">['SP11', 'SP6']</data>
       <data key="d14">Via Acquafredda</data>
       <data key="d11">['tertiary', 'secondary']</data>
       <data key="d8">False</data>
@@ -4010,7 +4010,7 @@
     </edge>
     <edge source="208" target="210" id="0">
       <data key="d7">[150736196, 319228150]</data>
-      <data key="d14">['Via Papa Giovanni Ventitreesimo', 'Via Aldo Moro']</data>
+      <data key="d14">['Via Aldo Moro', 'Via Papa Giovanni Ventitreesimo']</data>
       <data key="d11">unclassified</data>
       <data key="d8">False</data>
       <data key="d12">358.54</data>
@@ -4425,7 +4425,7 @@
       <data key="d8">False</data>
       <data key="d12">76.796</data>
     </edge>
-    <data key="d0">2022-02-04 21:37:31</data>
+    <data key="d0">2022-02-05 07:15:44</data>
     <data key="d1">OSMnx 1.1.2</data>
     <data key="d2">epsg:4326</data>
     <data key="d3">True</data>
