@@ -12,6 +12,8 @@
 \date{\today}
 \author{Giacomo Boldini, Alessio Diana, Federica Zaglio}
 
+\usepackage{hyperref}
+
 \begin{document}
 
 	\maketitle
@@ -29,7 +31,7 @@
 		model and the implementation, including some euristichs and symmetry breaking
 		strategies. In the section \ref{Results} we will describe the results and
 		the possible search strategies. In the last section \ref{Future work} we 
-		will propose some possible changes and improvements of the current model.
+		will propose some possible changes and improvements to the current model.
 		
 	\end{abstract}
 
@@ -52,19 +54,19 @@
 			time
 		\item We know the travel time between nodes
 		\item Every deliverer can carry at most 16 pizzas
-		\item Multiple travel from and to the pizzeria are allowed even in the 
+		\item Multiple travels from and to the pizzeria are allowed even in the 
 			delivery window
 	\end{enumerate}
 
 	\subsection{Goal}
 
-	Our goal is:
+	Our goals are:
 	\begin{enumerate}
-		\item Write a program that solves the problem (in MiniZinc)
-		\item Write a benchmark suite using 5 different towns of increasing size
+		\item write a program that solves the problem (in MiniZinc)
+		\item write a benchmark suite using 5 different towns of increasing size
 			and 10 input sets for each one. The input sets must enforce that all
 			the deliverers do at least two travels
-		\item On one configuration that runs in a couple of minutes, try
+		\item on one configuration that runs in a couple of minutes, try
 			different search strategies. Use the most promising one to solve a
 			difficult input set
 	\end{enumerate}
@@ -81,7 +83,7 @@
 	\begin{enumerate}
 		\item $d$: the number of deliverers available
 		\item $mdist$: the 2-d matrix representing the travel distance between
-			every node in the graph generated using Dijkstra(including those
+			every node in the graph generated using Dijkstra (including those
 			that are not a destination)
 		\item $k$: the side dimension of $mdist$
 		\item a set of $N$ orders specifing the destination $dest$, the delivery 
@@ -89,57 +91,80 @@
 			%TODO: cambiare il nome della struttura dati "ORARIO"
 	\end{enumerate}
 
-	\subsection{Assumption}
+	\subsection{Assumptions}
 	In order to make the problem a little easier, we made the following 
-	semplification:
+	semplifications:
 	\begin{enumerate}
-		\item The graph is undirected so \texttt{mdist}	is symmetric and 
-			\texttt{mdist[x, y] = mdist[y, x]}.
-		\item A deliverer can do only a single travel in one half-an-hour. In other
+		\item the graph is undirected so \texttt{mdist}	is symmetric and 
+			\texttt{mdist[x, y] = mdist[y, x]}
+		\item a deliverer can do only a single travel in one half-an-hour. In other
 			words, the orders that are assigned to him/her are delivered creating 
 			a circuit starting from the pizzeria, visiting all the destinations 
-			and ending in the pizzeria.
+			and ending in the pizzeria
 	\end{enumerate}
 
 	\subsection{Implementation}
+
+
+	\textbf{TODO:} 
+	\begin{itemize}
+		\item Scrivere di sched, P, dist che hanno le stesse pos valorizzate.
+		\item Def. da minizinc
+		\item trovare il modo di inserire il simbolo / piegato al contrario
+		\item Spiegare che tante cose servono per semplificare i calcoli
+	\end{itemize}
 	
-	The time is divided in 6 slots of half-an-hours (19.00 - 22.00). Let's call
+	The time is divided in 6 slots of half-an-hour (19.00 - 22.00). Let's call
 	$h$ one of these slots of time.
 	There are $d$ deliverers available for doing deliveries.
-	Each deliverer $d$ has a set of orders to handle, for each slot of time $h$.
+	Each deliverer, $d$, has a set of orders to handle for each slot of time $h$.
 
     \paragraph*{Scheduling}
 	These informations are stored in a boolean 3-d matrix called 
-	\texttt{scheduling}, in which: \texttt{scheduling[$d$, orderID, $h$] = true}
+	\texttt{scheduling} in which: 
+	
+	\begin{center}
+		\texttt{scheduling[$d$, orderID, $h$] = true}
+	\end{center}
+	
 	means that the deliverer $d$ has to deliver the order with id 
 	\texttt{orderID} in the time slot $h$. In every slot $h$, the deliverer must 
 	reach all nodes specified as \textit{destinations} of the orders assigned to 
-	him/her, starting from node $1$ (pizzeria) and returning back to it (a sort
-	of "circuit" starting and ending with the same node, that reaches all the 
+	him/her, starting from node $1$ (pizzeria) and returning back to it. This creates
+	 a sort of "circuit" starting and ending with the same node, that reaches all the 
 	nodes specified in a matrix row).
 
 	Obviously, one order can be delivered only once during the evening by only
-	one deliverer, in the half-an-hour specified by the client.
+	one deliverer, in the delivery window computed from the requested time.
+
+	\begin{center}
+		\texttt{array[1..d, 1..N, 1..h] of var bool: scheduling;}
+	\end{center}
 
 	\paragraph*{Pizzas\_carried}
 	During the evening there are $N$ orders to be delivered, each of which is made of
 	16 pizzas at most. This ensure that we need only a deliverer to deliver the 
 	entire order.
 	Since we can deliver more than one order in a single travel, we need to
-	record the total number of pizzas that a deliverer has in his/her bag.\\
-	To do this, we use a 2-d matrix called \texttt{pizzas\_carried}, in which 
-	the first dimension represents the deliverer(domain $[1,d]$) and the second 
-	represents the half-an-hour considered(domain $[1,h]$).
+	record the total number of pizzas that a deliverer has in his/her bag.
+	To do this, we use a 2-d matrix called \texttt{pizzas\_carried}
+	the first dimension represents the deliverer $d$ and the second 
+	represents the half-an-hour $h$ considered.
 
-	\paragraph*{Ea}
+
+	\begin{center}
+		\texttt{array[1..d, 1..h] of var 0..16: pizzas\_carried;}
+	\end{center}
+
+	\paragraph*{Ea - Estimated arrival}
 	In order to ensure that all deliveries arrive in time, we use \texttt{ea} which
 	stands for estimated arrival. This array contains, for every order, the arrival 
-	time, in minutes, from the starting time(19.00). At every order, we sum the number 
+	time, in minutes, from the starting time (19.00). At every order, we sum the number 
 	of minutes that must pass before the delivery take place, so doing this way,
-	we are sure that the delivery is done in the right half-an-hour.
-	For example, if the delivery is requested for 20.00, the destination is five minutes 
+	we are sure that the delivery is done in the right delivery window.
+	For example, if the delivery is requested for 20.00, if the destination is five minutes 
 	far from the pizzeria and no other delivery is made before that, we will sum 60 to 
-	be sure about the right half-an-hour and 5 for the travel time. So the \texttt{ea}
+	be sure about the right delivery window and 5 for the travel time. So the \texttt{ea}
 	for this delivery will be 65.
 
 	\paragraph*{P} The main goal of the project is to minimize the travel distance 
@@ -147,12 +172,17 @@
 	is to deliver more than one delivery in a single travel. This is convenient 
 	if the deliveries are made in a way that minimize the travel between the nodes.
 	To encode this information, we use \texttt{P}, which is a 3-d matrix that stores
-	all the nodes that every deliverer has to make in one half-an-hour. The useful thing
-	about this matrix is that it allows us to control the order of each delivery made 
-	by every deliverer in one half-an-hour and compute the travel distance.
+	all the nodes that every deliverer has to make in one travel. 
+	%The useful thing
+	%about this matrix is that it allows us to control the order of each delivery made 
+	%by every deliverer in one travel and compute the travel distance.
 	
 	\paragraph*{X} This 3-d matrix is used to support the creation of all the other 
-	constraints because is used to make easier the computation of the distancies.
+	constraints, because it's used to make the computation of the distances easier.
+	In this matrix, meangingful \textit{positions} of the matrix $P$ are stored for each 
+	$d$ and $h$. Each row contains the positions of the matrix P (destination nodes) 
+	that $d$ deliverer has to reach in the $h$ half-an-hour. This matrix allows us to control the order of each delivery made by every deliverer in one travel and, as consequence, compute the corresponding travel distances (stored in $distances$).
+
 	% magari un esempio non sarebbe male
 
 	\paragraph*{Distances}
@@ -160,16 +190,115 @@
 	the partial distances needed to reach every delivery node. Using this matrix we can 
 	enforce that all the deliveries are delivered in time and, since we want to minimize 
 	the travel distance, it allows us to combine deliveries that belongs to different
-	time slots(eg. 19.15 and 19.30) but only if they are adjacent because of the maximum 
+	time slots (eg. 19.15 and 19.30) but only if they are adjacent because of the maximum 
 	delivery time of 30 minutes.
 
 	\paragraph*{}
+	The matrices $scheduling$, $P$ and $distances$ are strictly related to each other.
+	They encode the same concept but using different informations. First of
+	all they have the same sizes \texttt{[1..d,1..N,1..h]} and if one cell is meaningful in
+	one	of them, it is also meaningful in the others.
+	In particular, in a position 
+	\texttt{[id,iN,ih]}:
+	\begin{itemize}
+		\item \textit{sheduling = 1} means that the order \textit{iN} has to be
+		accomplished by the deliverer \texttt{id} in the \texttt{ih} half-an-hour;
+		\item \textit{P = n} means that the order \textit{iN} has to be
+		accomplished by the deliverer \texttt{id} in the \texttt{ih} half-an-hour 
+		reaching the node \texttt{n} in the graph
+		\item \textit{distances = l} means that the order \texttt{iN} has to be
+		accomplished by the deliverer \texttt{id} in the \texttt{ih} half-an-hour 
+		and it will take \texttt{l} minutes to reach it, starting from the beginning of the
+		corresponding half-an-hour (partial time) 
+		 
+	\end{itemize}
+	All the others meaningless positions are set to zero in all the matrices.
 
+	\subsection{Constraints}
 
+	To ensure \texttt{scheduling} consistency, the following constraints are made:
+	\begin{itemize}
+		\item \texttt{sum(scheduling) = N;} ensures that all the order are fulfilled %and
+		\item \texttt{forall(j in 1..N)(\\
+			sum([scheduling[id,j,ih]| id in 1..d, ih in 1..h]) = 1\\
+		  );} ensures that only one delivever takes care of one order. 
+	\end{itemize}
+
+	\paragraph*{}
+	To construct the matrix \texttt{P} a simple product between a \texttt{scheduling} row and the array of the destinations \texttt{dest} is
+	made:\\
+	\texttt{forall(id in 1..d, ih in 1..h, iN in 1..N)(\\
+		P[id, iN, ih] = scheduling[id, iN, ih] * dest[iN]\\
+	  );}
 	
+	Thanks to this product, we are able to make meangingful the same positions
+	as \texttt{scheduling}.
+
+	\paragraph*{}
+	To ensure \texttt{X} consistency, it has to contain all the meaningful
+	positions in the matrix \texttt{P}. Since we need a simple way to sequentially compute all the informations related in a single row, we push all the meaningless values (zeros) to the end of the row. \\ 
+	\texttt{
+			forall(id in 1..d, ih in 1..h, iN in 1..N)(\\
+			if P[id, iN, ih] > 0 then\\ 
+			  count([ X[id, iNN, ih] | iNN in 1..N] ,iN,1) \\
+			  else \\
+			  count([ X[id, iNN, ih] | iNN in 1..N] ,iN,0) \\
+			endif\\
+			/\ \\
+			( X[id,iN,ih]=0 -> forall(j in iN..N) (X[id,j,ih] = 0) )\\
+		  );
+		  }
+
+	\paragraph*{}
+	To compute distances means to fill the \texttt{distances} matrix.
+    To do this, we have to use the matrix \texttt{X}. 
+	Considering a single row, we must take care of the following cases:
+	\begin{itemize}
+		\item the first (meaningful) cell
+		\item the other (meaningful) cells
+	\end{itemize}
+	
+	In the first case, the distance of the node \texttt{P[X[1]]} is the 
+	distance between the pizzeria (node number 1) and this node (\texttt{mdist[1, P[X[1]]]}). This value is put in \texttt{distances[X[1]]}.\\
+	In the last case, the distance to reach the node in \texttt{x[i]} is 
+	the sum of the distance between this and the previous node, and all 
+	the distances to reach the latter. 
+    % TODO: DA SCRIVERE IN MATEMATICHESE!! COME DICE MINOOO!!! 
+	\begin{verbatim}
+forall(id in 1..d, iN in 1..N, ih in 1..h)(
+    if X[id,iN,ih] !=0 then
+        if iN == 1 then
+      	    distances[id, X[id,iN,ih], ih] = 
+               mdist[1, P[id, X[id,iN,ih], ih]] 
+        else
+      	    distances[id, X[id,iN,ih], ih] = 
+         	   mdist[P[id, X[id,iN - 1,ih], ih], P[id, X[id,iN,ih], ih]] 
+         	   + sum([distances[id,P[id, X[id,iNN,ih], ih],ih]
+                      | iNN in 1..iN-1])
+        endif
+    endif
+);
+	\end{verbatim}
+
+	\paragraph*{}
+	Also, using \texttt{X} matrix, we must check the "travel consistency" which 
+	means that the deliverer must be able to return back to the pizzeria before the start of the next half-an-hour. 
+	To do this, we implement the so called "hat condition". This condition 
+	identify the last meangingful position in one row and enforce that 
+	\vspace{5em}
+
+	\begin{itemize}
+		\item sched,X,P consistency
+		\item distances computation
+		\item ea
+		\item pizzas\_carried
+	\end{itemize}
+
 
 	\section{Results}
 	\label{Results}
+
+
 
 	\section{Future work}
 	\label{Future work}

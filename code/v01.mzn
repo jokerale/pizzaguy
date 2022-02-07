@@ -1,5 +1,6 @@
 include "globals.mzn";
-%include "data/data_Asola_4.dzn";
+%include "data/Montichiari_dijkstra.dzn";
+%include "data/temp-order.dzn";
 
 %%%%%% INPUT %%%%%%
 % orario = [21.00, 19.45, 20.30];
@@ -28,6 +29,7 @@ int: d;
 
 % Time of service
 int: start = 19;
+
 int: end = 22;
 
 % Half-an-hours of service 
@@ -73,9 +75,10 @@ array[1..d, 1..N, 1..h] of var bool: scheduling;
 array[1..d, 1..h] of var 0..16: pizzas_carried;
 
 % array[1..N] of var int: ea; % estimated arrival time for each order 
- array[1..N] of var 0..h*30: ea; % estimated arrival time for each order 
+array[1..N] of var 0..h*30: ea; % estimated arrival time for each order 
 
-array[1..d, 1..N, 1..h] of var 0..k: P; % destinations to reach
+
+array[1..d, 1..N, 1..h] of var array2set(dest) union {0}: P; % destinations to reach
 %array[1..d, 1..N, 1..h] of var array2set(dest) union {0}: P; % destinations to reach
 
 array[1..d, 1..N, 1..h] of var 0..N: X; % positions of the destinations to reach collapsed
@@ -85,7 +88,7 @@ array[1..d, 1..N, 1..h] of var 0..29: distances; % partial distances to reach th
 
 %%%%%% CONSTRAINTS %%%%%%
 
-% All the order must be assigned ...;
+% All the order must be assigned ...
 constraint sum(scheduling) = N;
 % .. to only one deliver.
 constraint forall(j in 1..N)(
@@ -148,8 +151,8 @@ constraint forall(id in 1..d, iN in 1..N, ih in 1..h)(
     else
       distances[id, X[id,iN,ih], ih] = 
          mdist[P[id, X[id,iN - 1,ih], ih], P[id, X[id,iN,ih], ih]] 
-         + sum([distances[id,P[id, X[id,iNN,ih], ih],ih] | iNN in 1..iN-1])
-       
+         %+ sum([distances[id,P[id, X[id,iNN,ih], ih],ih] | iNN in 1..iN-1])
+         + distances[id,X[id,iN-1,ih], ih]
     endif
   
   endif
@@ -176,7 +179,7 @@ constraint forall(id in 1..d, iN in 1..N, ih in 1..h)(
 
 constraint forall(j in 1..N)(
     ea[j] = sum([scheduling[id,j,ih] * (distances[id,j,ih]+((ih-1)*30)) | id in 1..d, ih in 1..h])  
-    %ea[j] = sum([(distances[id,j,ih]+((ih-1)*30)) | id in 1..d, ih in 1..h])  
+    %ea[j] = sum([(distances[id,j,ih]+((iNh-1)*30)) | id in 1..d, ih in 1..h])  
   );
   
 
@@ -199,11 +202,17 @@ constraint forall(iN in 1..N)(
   ea[iN] >= ra[iN] /\ ea[iN] < ra[iN]+30 
 );
 
-constraint forall(ik in 1..k)(
- ( count(dest,k,0) -> count(P,k,0) )
- /\
- ( count(dest,k,1) -> count(P,k,1) )
-);
+
+% Trying to optimize
+% constraint forall(ik in 1..k)(
+%  ( count(dest,k,0) -> count(P,k,0) )
+%  /\
+%  ( count(dest,k,1) -> count(P,k,1) )
+% );
+
+
+
+
 % constraint forall(ik in 1..k)(
 %   let{
 %        var int: c;
@@ -215,7 +224,7 @@ constraint forall(ik in 1..k)(
 
 
 
-solve :: int_search( X,
+solve :: int_search( P,
         first_fail, indomain_random) minimize sum(ea);
 %solve satisfy;
 %solve minimize sum(ea);
