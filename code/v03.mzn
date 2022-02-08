@@ -69,14 +69,14 @@ constraint forall(iN in 1..N)(
 
 % For each order, consider only the 2 possible half-an-hour
 % All the rest must be 0.
-constraint forall(id in 1..d, iN in 1..N, ih in 1..h diff hra[N] ) (
+constraint forall(id in 1..d, iN in 1..N, ih in (1..h diff hra[iN]) ) (
   scheduling[id,iN,ih] = 0
   /\
   distances[id,iN,ih] = 0
   /\
   P[id,iN,ih] = 0
   %/\
-  %X[id,iN,ih] = 0
+  %count( [X[id,iNN,ih] | iNN in 1..N], iN, 0)
 );
 
 
@@ -161,7 +161,7 @@ constraint forall(iN in 1..N)(
 
 
 % PIZZA_CARRIED
-% constraint sum(pizzas_carried) = sum(num_pizze); MAYBE UNUSEFUL
+% constraint sum(pizzas_carried) = sum(num_pizze); %MAYBE UNUSEFUL
 constraint forall(id in 1..d, ih in 1..h)(
   pizzas_carried[id, ih] = sum([ num_pizze[iN] | iN in 1..N where scheduling[id, iN, ih] = 1])
   );
