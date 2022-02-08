@@ -178,6 +178,10 @@ print(out)
 #f1.close()
 
 
+solver_time_l = [line for line in my_string.split('\n') if "%%%mzn-stat: solveTime=" in line]
+solve_time = int(solver_time_l.split('=')[1])
+print("SOLVE TIME RETREIVED: " + str(solve_time))
+
 if 'UNSAT' in out or 'UNKNOWN' in out: 
     exit()
 
