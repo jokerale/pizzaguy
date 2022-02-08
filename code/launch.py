@@ -152,7 +152,7 @@ fig.savefig('graph.png')
 
 
 # command to execute
-cmd = 'minizinc --solver Gecode --time-limit ' + str(timelimit) + ' v01.mzn ' + filename_dij + ' data/temp-order.dzn'  
+cmd = 'minizinc --solver Gecode --time-limit ' + str(timelimit) + ' v03.mzn ' + filename_dij + ' data/temp-order.dzn --statistics'  
 
 
 print('Grafo (' + filename + '): ' + str(g is not None))
@@ -178,11 +178,11 @@ print(out)
 #f1.close()
 
 
-solver_time_l = [line for line in my_string.split('\n') if "%%%mzn-stat: solveTime=" in line]
-solve_time = int(solver_time_l.split('=')[1])
+solver_time_l = [line for line in out.split('\n') if "%%%mzn-stat: solveTime=" in line]
+solve_time = float(solver_time_l[0].split('=')[1])
 print("SOLVE TIME RETREIVED: " + str(solve_time))
 
-if 'UNSAT' in out or 'UNKNOWN' in out: 
+if ('UNSAT' in out) or ('UNKNOWN' in out): 
     exit()
 
 # Save image of paths
