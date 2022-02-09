@@ -148,25 +148,6 @@ constraint forall(iN in 1..N)(
     % construction
     ea[iN] = sum([scheduling[id,iN,ih] * (distances[id,iN,ih]+((ih-1)*30)) | id in 1..d, ih in 1..h])
     /\
-    % must arrive in the delivery time windowata structures seen before, we use this 3-d matrix to
-store all the partial distances needed to reach every delivery node. Using this
-matrix we can enforce that all the deliveries are delivered in time and, since
-we want to minimize the travel distance, it allows us to combine deliveries that
-belongs to different time slots (eg. 19.15 and 19.30) but only if they are adjacent
-because of the maximum delivery time of 30 minutes.
-The matrices scheduling, P and distances are strictly related to each other.
-They encode the same concept but using different informations. First of all
-they have the same sizes [1..d,1..N,1..h] and if one cell is meaningful in
-one of them, it is also meaningful in the others. In particular, in a position
-[id,iN,ih]:
-sheduling = 1 means that the order iN has to be accomplished by the
-deliverer id in the ih half-an-hour;
-P = n means that the order iN has to be accomplished by the deliverer
-id in the ih half-an-hour reaching the node n in the graph
-distances = l means that the order iN has to be accomplished by the
-deliverer id in the ih half-an-hour and it will take l minutes to reach
-4
-
     ea[iN] >= ra[iN] 
     /\ 
     ea[iN] < ra[iN]+30 

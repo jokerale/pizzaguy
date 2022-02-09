@@ -231,6 +231,18 @@
 	\end{itemize}
 	All the others meaningless positions are set to zero in all the matrices.
 
+	\paragraph*{Total\_travel}
+	We use this 2D matrix, in order to store the total travel distance of deliverer \textit{id} in one half-an-hour \textit{ih}.
+	As describe above, in the matrix \textit{distance} there are partial distances: from pizzeria to first delivery node, 
+	from first delivery node and the second one and so on until the last delivery node.
+	If we add the distance between this last delivery node and the pizzeria (that is the path to return to the pizzeria)
+	we have the total travel distance.
+	As already mentioned, our goal is minimize this value.
+
+	\begin{center}
+		\texttt{array[1..d, 1..h] of var 0..29: total\_travel;}
+	\end{center}
+
 	\subsection{Constraints}
 
 	To ensure \texttt{scheduling} consistency, the following constraints are made:
