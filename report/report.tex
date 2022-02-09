@@ -146,7 +146,7 @@
 	entire order.
 	Since we can deliver more than one order in a single travel, we need to
 	record the total number of pizzas that a deliverer has in his/her bag.
-	To do this, we use a 2-d matrix called \texttt{pizzas\_carried}
+	To do this, we use a 2-d matrix called \texttt{pizzas\_carried} where
 	the first dimension represents the deliverer $d$ and the second 
 	represents the half-an-hour $h$ considered.
 
@@ -165,23 +165,37 @@
 	far from the pizzeria and no other delivery is made before that, we will sum 60 to 
 	be sure about the right delivery window and 5 for the travel time. So the \texttt{ea}
 	for this delivery will be 65.
+	
+	\begin{center}
+		\texttt{array[1..N] of var 0..h*30: ea;}
+	\end{center}
+	
 
 	\paragraph*{P} The main goal of the project is to minimize the travel distance 
 	covered by all the deliverers in the evening. To do so, a possible strategy
 	is to deliver more than one delivery in a single travel. This is convenient 
-	if the deliveries are made in a way that minimize the travel between the nodes.
+	if the deliveries are made in a way that minimize the distance travelled between the nodes.
 	To encode this information, we use \texttt{P}, which is a 3-d matrix that stores
-	all the nodes that every deliverer has to make in one travel. 
+	all the nodes that every deliverer has to visit in one travel. 
+
+	\begin{center}
+		\texttt{array[1..d, 1..N, 1..h] of var array2set(dest) union {0}: P;}
+	\end{center}
 	%The useful thing
 	%about this matrix is that it allows us to control the order of each delivery made 
 	%by every deliverer in one travel and compute the travel distance.
 	
 	\paragraph*{X} This 3-d matrix is used to support the creation of all the other 
-	constraints, because it's used to make the computation of the distances easier.
+	constraints, making the computation of the distances easier.
 	In this matrix, meangingful \textit{positions} of the matrix $P$ are stored for each 
 	$d$ and $h$. Each row contains the positions of the matrix P (destination nodes) 
-	that $d$ deliverer has to reach in the $h$ half-an-hour. This matrix allows us to control the order of each delivery made by every deliverer in one travel and, as consequence, compute the corresponding travel distances (stored in $distances$).
+	that $d$ deliverer has to reach in the $h$ half-an-hour. This matrix allows 
+	us to control the order of each delivery made by every deliverer in one travel
+	and, as consequence, compute the corresponding travel distances (stored in $distances$).
 
+	\begin{center}
+		\texttt{array[1..d, 1..N, 1..h] of var 0..N: X;}
+	\end{center}
 	% magari un esempio non sarebbe male
 
 	\paragraph*{Distances}
@@ -191,6 +205,10 @@
 	the travel distance, it allows us to combine deliveries that belongs to different
 	time slots (eg. 19.15 and 19.30) but only if they are adjacent because of the maximum 
 	delivery time of 30 minutes.
+
+	\begin{center}
+		\texttt{array[1..d, 1..N, 1..h] of var 0..29: distances;}
+	\end{center}
 
 	\paragraph*{}
 	The matrices $scheduling$, $P$ and $distances$ are strictly related to each other.
@@ -225,7 +243,7 @@
 
 	\paragraph*{}
 	To construct the matrix \texttt{P} a simple product between a \texttt{scheduling} row and the array of the destinations \texttt{dest} is
-	made:\\
+	made:
 	\begin{verbatim}
 forall(id in 1..d, ih in 1..h, iN in 1..N)(
    P[id, iN, ih] = scheduling[id, iN, ih] * dest[iN]
@@ -239,7 +257,9 @@ forall(id in 1..d, ih in 1..h, iN in 1..N)(
 	The \texttt{X} matrix has to contain all the meaningful	positions in the matrix
 	\texttt{P}. To ensure this, we need a simple way to sequentially compute all the
 	informations related in a single row, so we push all the meaningless values (zeros)
-	to the end of the row. \\ 
+	to the end of the row and, for every value greater than zero, found in a row of
+	\texttt{P}, we enforce the corresponding row of \texttt{X} to contain it.
+
 	\begin{verbatim}
 forall(id in 1..d, ih in 1..h, iN in 1..N)(
    if P[id, iN, ih] > 0 then
@@ -262,7 +282,7 @@ forall(id in 1..d, ih in 1..h, iN in 1..N)(
 		\item the other (meaningful) cells
 	\end{itemize}
 	
-	In the first case, if \texttt{X[1]} is the firt meaningful position in the 
+	In the first case, if \texttt{X[1]} is the first meaningful position in the 
 	matrix P and \texttt{P[X[1]]} is the first visited node in a travel,
 	the distance of the node \texttt{P[X[1]]} is computed summing the 
 	distance between the pizzeria (node number 1) and this node (\texttt{mdist[1, P[X[1]]]}).
@@ -293,9 +313,25 @@ forall(id in 1..d, iN in 1..N, ih in 1..h)(
 	means that the deliverer must be able to return back to the pizzeria before the 
 	start of the next half-an-hour. 
 	To do this, we implement the so called \textit{"hat condition"}. This condition 
-	identify the last meangingful position in one row and enforce that, from that position,
-	the sum	of the distance to reach that node plus the distance to return back 
-	to the pizzeria is less	than 30.
+	identify the last meangingful position in one row of the matrix \texttt{X}
+	and enforce that, from that position, the sum of the distance to reach
+	that node plus the distance to return back to the pizzeria is less than 30.
+
+\begin{verbatim}
+forall(id in 1..d, iN in 1..N, ih in 1..h)(
+   if X[id,iN,ih] !=0 then
+      if iN+1 == N+1 then
+         distances[id, X[id,iN,ih], ih] 
+            + mdist[P[id, X[id,iN,ih], ih],1] < 30
+      else
+         if X[id,iN+1,ih] == 0 then
+            distances[id, X[id,iN,ih], ih] 
+               + mdist[P[id, X[id,iN,ih], ih],1] < 30
+         endif
+      endif
+   endif
+);
+\end{verbatim}
 
 	\paragraph*{}
 	To make \texttt{ea} consistent, which is the array that allow us to record the expected arrival
@@ -339,7 +375,7 @@ forall(id in 1..d, ih in 1..h)(
 	\paragraph*{}
 	Some of the data structures previously analized could have been avoided if we 
 	wanted to have a more lightweight model. We introduced them to make simpler the
-	creation of the constraint and to keep the model more readable.
+	creation of the constraint and to keep the model readable.
 	% SCEGLIERE SE SCRIVERE CHE NON SAPPIAMO SE L'AUMENTO DELLE STRUTTURE CHE 
 	% VENGONO UTILIZZATE NEL MODELLO POSSA AVER PEGGIORATO LE SUE PRESTAZIONI GLOBALI 
 
@@ -361,15 +397,16 @@ forall(id in 1..d, iN in 1..N, ih in 1..h)(
 	\subsubsection{Symmetry breaking strategy}
 	Having more than one deliverer implies the possibility of having the same solution 
 	multiple times. For example, if we have three delivery and two deliverers, known that
-	the best strategy is to deliver the first two togheter a the third alone, one solution is 
+	the best strategy is to deliver the first two togheter and the third alone, one solution is 
 	to give the first two to the deliverer \texttt{d1} and the third to the deliverer \texttt{d2}.
 	A simmetric and equivalent solution is to give the first two to \texttt{d2} and 
 	the third to \texttt{d1}.
 
 	In order to avoid this kind of problem, we impose an ordering on the deliverers by 
-	counting the number of pizzas that are carried in one hal-an-hour. This enforce that 
+	counting the number of pizzas that are carried in one half-an-hour. This enforce that 
 	the first deliverer carries a number of pizzas greater of equal to the number of
-	pizzas carried by the second, the same thing is done for every pair of deliverers.
+	pizzas carried by the second deliverer, the second deliverer a number of pizzas greater or 
+	equal to the number of pizzas of the third deliverer and so on.
 \begin{verbatim}
 forall(ih in 1..h, id in 1..d-1)(
   pizzas_carried[id,ih] >= pizzas_carried[id+1,ih]
@@ -379,6 +416,17 @@ forall(ih in 1..h, id in 1..d-1)(
 	\section{Results}
 	\label{Results}
 
+	In this section, we will describe how the model behave, mainly in terms of solving
+	time, using different input data and using different search strategies.
+
+
+
+	\paragraph*{}
+	As said before, the data structures used in the model are, in somme way, redundant
+	to have a better readability. We are not sure if having a lower number of data 
+	structures and a more complex constraint generation would have made the model
+	faster in finding the best solution.
+	
 
 
 	\section{Future work}
