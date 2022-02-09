@@ -1,5 +1,5 @@
 include "globals.mzn";
-%include "data/Visano_dijkstra.dzn";
+%include "data/Montichiari_dijkstra.dzn";
 %include "data/temp-order.dzn";
 
 %% VERY IMPORTANT:
@@ -34,8 +34,8 @@ array[1..N] of int: dest;        % the node where to deliver
 
 array[1..N] of int: ra = [ round(floor(orario[iN]-start)*60 + (orario[iN] - floor(orario[iN]))*100) | iN in 1..N]; % requested arrival time (in minutes from start time)
 
-array[1..N] of int:         hra0 = [ floor(ra[iN]/31) + 1 | iN in 1..N ];
-array[1..N] of int:         hra1 = [ if hra0[iN] != h then hra0[iN]+1 else hra0[iN] endif | iN in 1..N ];
+array[1..N] of int:         hra0 = [ floor(ra[iN]/29) + 1 | iN in 1..N ];
+array[1..N] of int:         hra1 = [ if hra0[iN] != h then ( if (ra[iN] mod 30 == 0) then hra0[iN] else hra0[iN]+1 endif) else hra0[iN] endif | iN in 1..N ];
 array[1..N] of set of 1..h: hra  = [{hra0[iN]} union {hra1[iN]} | iN in 1..N]; % set of valid half-an-hour, for each order
 
 
@@ -53,6 +53,7 @@ array[1..d, 1..N, 1..h] of var 0..N: X;          % positions of the destinations
 
 array[1..d, 1..N, 1..h] of var 0..29: distances; % partial distances to reach the node (COULD BE INT)
 
+array[1..d, 1..h] of var 0..29: total_travel;    % 
 
 
 
@@ -72,12 +73,12 @@ constraint forall(iN in 1..N)(
 % All the rest must be 0.
 constraint forall(id in 1..d, iN in 1..N, ih in (1..h diff hra[iN]) ) (
   scheduling[id,iN,ih] = 0
-  /\
-  distances[id,iN,ih] = 0
+  %/\
+  %distances[id,iN,ih] = 0
   /\
   P[id,iN,ih] = 0
-  %/\
-  %count( [X[id,iNN,ih] | iNN in 1..N], iN, 0)
+  /\
+  count( [X[id,iNN,ih] | iNN in 1..N], iN, 0) % maybe ok
 );
 
 
@@ -98,63 +99,74 @@ constraint forall(id in 1..d, ih in 1..h)(
 constraint forall(id in 1..d, iN in 1..N, ih in 1..h)(
   if P[id, iN, ih] > 0 then 
 %   if P[id, iN, ih] != 0 then
-    count([ X[id, iNN, ih] | iNN in 1..N] ,iN,1)
-    else 
-    count([ X[id, iNN, ih] | iNN in 1..N] ,iN,0) 
+    count([ X[id, iNN, ih] | iNN in 1..N], iN, 1)
+  else
+    ( 
+    count([ X[id, iNN, ih] | iNN in 1..N], iN, 0) 
+    /\
+    distances[id,iN,ih] = 0
+    )
   endif
   /\
   % push 0s at the bottom  -- WE COULD DO IT IN A DIFFERENT WAY
-  ( X[id,iN,ih]=0 -> forall(j in iN..N) (X[id,j,ih] = 0) )
+  ( X[id,iN,ih] == 0 -> forall(iNN in iN..N) (X[id,iNN,ih] = 0) )
 );
 
-% DISTANCES (?)
-constraint forall(id in 1..d, iN in 1..N, ih in 1..h)(%hra[iN])( % (??) should work
-  count([X[id,iNN,ih]| iNN in 1..N], iN, 0) -> distances[id,iN,ih] = 0
-);
+% DISTANCES (?) - in the previous constraint
+% constraint forall(id in 1..d, iN in 1..N, ih in 1..h)(   %hra[iN])( % (??) should work
+%   count([X[id,iNN,ih]| iNN in 1..N], iN, 0) -> distances[id,iN,ih] = 0
+% );
 
 % calculate distances
 constraint forall(id in 1..d, iN in 1..N, ih in 1..h)( %{hra[iN]} union {hra1[iN]})( % seems not working
   
   if X[id,iN,ih] !=0 then
-  
+  (
     if iN == 1 then
       distances[id, X[id,iN,ih], ih] = mdist[1, P[id, X[id,iN,ih], ih]] 
     else
       distances[id, X[id,iN,ih], ih] = 
-         mdist[P[id, X[id,iN-1,ih], ih], P[id, X[id,iN,ih], ih]] 
-         + distances[id,X[id,iN-1,ih], ih]  %+ sum([distances[id,P[id, X[id,iNN,ih], ih],ih] | iNN in 1..iN-1])
+         distances[id,X[id,iN-1,ih], ih]  %+ sum([distances[id,P[id, X[id,iNN,ih], ih],ih] | iNN in 1..iN-1])
+         + mdist[P[id, X[id,iN-1,ih], ih], P[id, X[id,iN,ih], ih]] 
     endif
-  
+  )
   endif
   
 );
 
-% constraint on total distances
+% total_travel 
 constraint forall(id in 1..d, iN in 1..N, ih in 1..h)(%hra[iN])( % (??) should work
   
-  if X[id,iN,ih] !=0 then
-    if iN+1 == N+1 then
-      distances[id, X[id,iN,ih], ih] + mdist[P[id, X[id,iN,ih], ih],1] < 30
-      %/\
-      %distances[id, X[id,iN,ih], ih] + mdist[P[id, X[id,iN,ih], ih],1] >= (ih-1)*30
-    else
-      if X[id,iN+1,ih] == 0 then
-        distances[id, X[id,iN,ih], ih] + mdist[P[id, X[id,iN,ih], ih],1] < 30
-        %/\
-        %distances[id, X[id,iN,ih], ih] + mdist[P[id, X[id,iN,ih], ih],1] >= (ih-1)*30
-      endif
-    endif
-    
-  endif
+  ( X[id,iN,ih] !=0 /\ ( iN+1 == N+1 \/ X[id,iN+1,ih] == 0) )
+    -> (total_travel[id,ih] = distances[id, X[id,iN,ih], ih] + mdist[P[id, X[id,iN,ih], ih],1])
+       
 );
 
 
 % EA
 constraint forall(iN in 1..N)(
     % construction
-    ea[iN] = sum([scheduling[id,iN,ih] * (distances[id,iN,ih]+((ih-1)*30)) | id in 1..d, ih in 1..h])  
+    ea[iN] = sum([scheduling[id,iN,ih] * (distances[id,iN,ih]+((ih-1)*30)) | id in 1..d, ih in 1..h])
     /\
-    % must arrive in the delivery time window
+    % must arrive in the delivery time windowata structures seen before, we use this 3-d matrix to
+store all the partial distances needed to reach every delivery node. Using this
+matrix we can enforce that all the deliveries are delivered in time and, since
+we want to minimize the travel distance, it allows us to combine deliveries that
+belongs to different time slots (eg. 19.15 and 19.30) but only if they are adjacent
+because of the maximum delivery time of 30 minutes.
+The matrices scheduling, P and distances are strictly related to each other.
+They encode the same concept but using different informations. First of all
+they have the same sizes [1..d,1..N,1..h] and if one cell is meaningful in
+one of them, it is also meaningful in the others. In particular, in a position
+[id,iN,ih]:
+sheduling = 1 means that the order iN has to be accomplished by the
+deliverer id in the ih half-an-hour;
+P = n means that the order iN has to be accomplished by the deliverer
+id in the ih half-an-hour reaching the node n in the graph
+distances = l means that the order iN has to be accomplished by the
+deliverer id in the ih half-an-hour and it will take l minutes to reach
+4
+
     ea[iN] >= ra[iN] 
     /\ 
     ea[iN] < ra[iN]+30 
@@ -201,12 +213,12 @@ constraint forall(ih in 1..h, id in 1..d-1)(
 
 
 %solve :: int_search( X,
-%       first_fail, indomain_random) minimize sum(distances);
+%       first_fail, indomain_random) minimize sum(total_travel);
 %solve satisfy;
-solve minimize sum(distances);
+solve minimize sum(total_travel);
 
 %solve :: int_search( X,
-%        most_constrained, indomain_random) minimize sum(distances);
+%        most_constrained, indomain_random) minimize sum(total_travel);
 
 
 
@@ -231,18 +243,18 @@ output
 %          if(j=N /\ i=d) then "\n" else "" endif
 %            | ih in 1..h, i in 1..d, j in 1..N] ++
            
-%        ["\nP\n"] ++    
-%        ["deliver\t"] ++ ["ord-" ++ show(i) ++"\t" | i in 1..N] ++ ["\n"] ++
-%        ["-------\t"] ++ ["------\t" | i in 1..N] ++ ["\n"] ++
+       ["\nP\n"] ++    
+       ["deliver\t"] ++ ["ord-" ++ show(i) ++"\t" | i in 1..N] ++ ["\n"] ++
+       ["-------\t"] ++ ["------\t" | i in 1..N] ++ ["\n"] ++
        
-%        [
-%          if(i=1 /\ j=1) then "(h"++show(ih)++")\n" else "" endif ++
-%          if (j=1) then show(i) ++ "\t" else "" endif ++
-%          show(P[i,j,ih]) ++ "\t" ++
-%          %"(" ++ show(i) ++ " " ++ show(j) ++ " " ++ show(k) ++ ") " ++
-%          if(j=N) then "\n" else "" endif ++
-%          if(j=N /\ i=d) then "\n" else "" endif
-%            | ih in 1..h, i in 1..d, j in 1..N] ++
+       [
+         if(i=1 /\ j=1) then "(h"++show(ih)++")\n" else "" endif ++
+         if (j=1) then show(i) ++ "\t" else "" endif ++
+         show(P[i,j,ih]) ++ "\t" ++
+         %"(" ++ show(i) ++ " " ++ show(j) ++ " " ++ show(k) ++ ") " ++
+         if(j=N) then "\n" else "" endif ++
+         if(j=N /\ i=d) then "\n" else "" endif
+           | ih in 1..h, i in 1..d, j in 1..N] ++
        
 %        ["\nX\n"] ++
 %        ["deliver\t"] ++ ["ord-" ++ show(i) ++"\t" | i in 1..N] ++ ["\n"] ++
@@ -276,7 +288,17 @@ output
        ++["\nra: "] ++ [show(ra)]
        ++ ["\nhra: "] ++ [show(hra)] ++ ["\n"]
        ++["\nsum(distances): "] ++ [show(sum(distances))] ++ ["\n"]
+       ++["\nsum(total_travel): "] ++ [show(sum(total_travel))] ++ ["\n"]
        
+       ++["\n TRAVEL TIME"]
+       ++[
+         show(id) ++ "|" ++ show(ih) ++ ": " ++ show(total_travel[id,ih]) ++ "\n" 
+           | ih in 1..h, id in 1..d] 
+       ++["\n PIZZA CARRIED\n"]
+       ++[
+         show(id) ++ "|" ++ show(ih) ++ ": " ++ show(pizzas_carried[id,ih]) ++ "\n" 
+           | ih in 1..h, id in 1..d] 
+       ++["\n"]
        ++[
          if(i=1 /\ j=1) then "(h"++show(ih)++")\n" else "" endif ++
          if (j=1) then show(i) ++ "\t" else "" endif ++

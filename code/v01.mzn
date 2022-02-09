@@ -96,7 +96,7 @@ constraint forall(id in 1..d, iN in 1..N, ih in 1..h)(
   % calculate distances
   
   if X[id,iN,ih] !=0 then
-  
+  (
     if iN == 1 then
       distances[id, X[id,iN,ih], ih] = mdist[1, P[id, X[id,iN,ih], ih]] 
     else
@@ -105,7 +105,7 @@ constraint forall(id in 1..d, iN in 1..N, ih in 1..h)(
          %+ sum([distances[id,P[id, X[id,iNN,ih], ih],ih] | iNN in 1..iN-1])
          + distances[id,X[id,iN-1,ih], ih]
     endif
-  
+  )
   endif
   
 );
@@ -153,7 +153,7 @@ constraint forall(iN in 1..N)(
   ea[iN] >= ra[iN] /\ ea[iN] < ra[iN]+30 
 );
 
-
+-N 9 -d 2
 % Trying to optimize
 % constraint forall(ik in 1..k)(
 %  ( count(dest,k,0) -> count(P,k,0) )
@@ -189,10 +189,10 @@ constraint forall(id in 1..d, ih in 1..h)(
 
 
 
-%solve :: int_search( P,
-%        first_fail, indomain_random) minimize sum(distances);
+solve :: int_search( P,
+        first_fail, indomain_random) minimize sum(distances);
 %solve satisfy;
-solve minimize sum(distances);
+%solve minimize sum(distances);
 
 
 output   
