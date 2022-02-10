@@ -13,6 +13,7 @@
 \author{Giacomo Boldini, Alessio Diana, Federica Zaglio}
 
 \usepackage{hyperref}
+\usepackage{cleveref}
 
 \begin{document}
 
@@ -21,54 +22,63 @@
 	\begin{abstract}
 
 		In this report, we will describe the Pizza Guy project. This project 
-		aims to find the best possible schedule of a set of orders in order to
-		minimize the distance travelled by the deliverers in a evening of 
+		aims to find the best possible schedule of a set of orders that
+		minimizes the distance travelled by the deliverers in a evening of 
 		work. Our solution is developed using a CLP(FD) model and implemented 
 		in MiniZinc. All the remaing part of the project(data retrieving, cleaning
 		and visualization) are done using Python.\\	
-		In the section \ref{Assignment} we will describe the problem and the goal
-		we want to reach, in the section \ref{Model} we will the describe the 
+		In the \cref{Assignment} we will describe the problem and the goal
+		we want to reach, in the \cref{Model} we will the describe the 
 		model and the implementation, including some euristichs and symmetry breaking
-		strategies. In the section \ref{Results} we will describe the results and
-		the possible search strategies. In the last section \ref{Future work} we 
+		strategies. In the \cref{Results} we will describe the results and
+		the possible search strategies. In the last \cref{Future work} we 
 		will propose some possible changes and improvements to the current model.
 		
 	\end{abstract}
 
 	\tableofcontents
 
+	\pagebreak
+
 	\section{Assignment}
 	\label{Assignment}
+	The main problem we want to solve can be described as follow: there is a pizzeria in the 
+	town that delivers pizzas at home; we want to find the best schedule of the set of orders 
+	(for a single evening) that minimize the total travelled distance by the deliverers 
+	respecting the delivery times requested by the customer.
 	
-	The assignment gives us the following informations:
+	The assignment gives us the following informations about the problem:
 	\begin{enumerate}
-		\item An order is made of:
+		\item an order consists of:
 		\begin{enumerate}
-			\item the delivery address
-			\item the desired delivery time
-			\item the number of pizzas
+			\item a delivery address;
+			\item a desired delivery time;
+			\item a number of pizzas;
 		\end{enumerate}
-		\item The delivery time has a granularity of 15 minutes (from 
-			19.00 to 22.00)
-		\item The delivery window is up to 30 minutes later than the delivery 
-			time
-		\item We know the travel time between nodes
-		\item Every deliverer can carry at most 16 pizzas
-		\item Multiple travels from and to the pizzeria are allowed even in the 
-			delivery window
+		\item the desired delivery time has a granularity of 15 minutes (from 
+			19.00 to 22.00);
+		\item the delivery window is up to 30 minutes later than desired delivery 
+			time;
+		\item the street topology of the city can be seen as a graph: the nodes represent
+			the addresses and they are connected by edges that contain travel time 
+			between nodes; so, we know the distance between each pair of addresses
+			in the town;
+		\item every deliverer can carry at most 16 pizzas;
+		\item multiple travels from and to the pizzeria are allowed even in the 
+			delivery window.
 	\end{enumerate}
 
 	\subsection{Goal}
 
-	Our goals are:
+	The goals of this work are:
 	\begin{enumerate}
-		\item write a program that solves the problem (in MiniZinc)
+		\item write a program that solves the problem (in MiniZinc);
 		\item write a benchmark suite using 5 different towns of increasing size
-			and 10 input sets for each one. The input sets must enforce that all
-			the deliverers do at least two travels
+			and 10 input sets for each one; the input sets must enforce that all
+			the deliverers do at least two travels;
 		\item on one configuration that runs in a couple of minutes, try
-			different search strategies. Use the most promising one to solve a
-			difficult input set
+			different search strategies and then use the most promising one to solve a
+			difficult input set.
 	\end{enumerate}
 
 	\section{Model}
@@ -393,6 +403,10 @@ forall(id in 1..d, ih in 1..h)(
 
 	\subsubsection{Euristichs}
 
+	\begin{itemize}
+		\item Nuovo taglio mezz'ore
+	\end{itemize}
+
 	Creating the model, we included some easy euristichs that can restrict the dimension
 	of the search space. As seen before the delivery must take place in the 30-minutes delivery window
 	that starts from the desired delivery time.\\
@@ -406,7 +420,7 @@ forall(id in 1..d, iN in 1..N, ih in 1..h)(
 );
 	\end{verbatim}
 
-	\subsubsection{Symmetry breaking strategy}
+	\subsubsection{Simmetry breaking strategy}
 	Having more than one deliverer implies the possibility of having the same solution 
 	multiple times. For example, if we have three delivery and two deliverers, known that
 	the best strategy is to deliver the first two togheter and the third alone, one solution is 
@@ -429,7 +443,7 @@ forall(ih in 1..h, id in 1..d-1)(
 	\label{Results}
 
 	In this section, we will describe how the model behave, mainly in terms of solving
-	time, using different input data and using different search strategies.
+	time, using different input data and different search strategies.
 
 
 

@@ -87,10 +87,26 @@ constraint forall(id in 1..d, iN in 1..N, ih in hra[iN])(
   P[id, iN, ih] = scheduling[id, iN, ih] * dest[iN]
 );
 
+%% ADDED
+constraint forall(dd in array2set(dest))(
+  count(P, dd) = count(dest, dd)
+);
+
+%constraint alldifferent_except_0(X);
+
+
+
 % For each line of P, the number of zeros must be the same as the
 % number of zeros in the same line of X.
 constraint forall(id in 1..d, ih in 1..h)(
-  count([P[id,iN,ih] | iN in 1..N],0) = count([X[id,iN,ih] | iN in 1..N],0)
+%  count([P[id,iN,ih] | iN in 1..N],0) = count([X[id,iN,ih] | iN in 1..N],0)
+  let {
+    var int: c = count([P[id,iNN,ih] | iNN in 1..N],0)
+  }
+  in forall(iN in N-c+1..N)(
+    X[id,iN,ih] = 0
+  )
+  
 );
 
 
@@ -107,9 +123,9 @@ constraint forall(id in 1..d, iN in 1..N, ih in 1..h)(
     distances[id,iN,ih] = 0
     )
   endif
-  /\
-  % push 0s at the bottom  -- WE COULD DO IT IN A DIFFERENT WAY
-  ( X[id,iN,ih] == 0 -> forall(iNN in iN..N) (X[id,iNN,ih] = 0) )
+  %/\
+  % push 0s at the bottom  -- BECAME REDUNTANT
+  %( X[id,iN,ih] == 0 -> forall(iNN in iN..N) (X[id,iNN,ih] = 0) )
 );
 
 % DISTANCES (?) - in the previous constraint
@@ -193,8 +209,10 @@ constraint forall(ih in 1..h, id in 1..d-1)(
 
 
 
-%solve :: int_search( X,
-%       first_fail, indomain_random) minimize sum(total_travel);
+%solve :: int_search( X, first_fail, indomain_random)
+%          ::restart_linear(1000)
+%           minimize sum(total_travel);
+       
 %solve satisfy;
 solve minimize sum(total_travel);
 

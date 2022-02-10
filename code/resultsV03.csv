@@ -1,4 +1,0 @@
-,var,vsa,vca,initTime,solveTime,solutions,variables,propagators,propagations,nodes,failures,restarts,peakDepth
-0,P,default,default,0.707845,300.228,4.0,5653.0,6026.0,97520010.0,447037.0,223468.0,0.0,162.0
-1,P,anti_first_fail,indomain,0.783716,300.231,2.0,5653.0,6026.0,117107291.0,802085.0,401342.0,0.0,105.0
-2,P,anti_first_fail,indomain_max,0.714453,300.252,3.0,5653.0,6026.0,134290787.0,999748.0,499837.0,0.0,94.0
