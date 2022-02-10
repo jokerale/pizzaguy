@@ -12,9 +12,18 @@
 \date{\today}
 \author{Giacomo Boldini, Alessio Diana, Federica Zaglio}
 
+%\usepackage{geometry}
+\usepackage{xcolor}
 \usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    frenchlinks=true,
+    linkcolor={blue!50!black},
+    citecolor={green!50!black},
+    urlcolor={red!80!black}
+}
+\usepackage{amsmath}
 \usepackage{cleveref}
-
 \begin{document}
 
 	\maketitle
@@ -23,7 +32,7 @@
 
 		In this report, we will describe the Pizza Guy project. This project 
 		aims to find the best possible schedule of a set of orders that
-		minimizes the distance travelled by the deliverers in a evening of 
+		minimizes the distance traveled by the deliverers in a evening of 
 		work. Our solution is developed using a CLP(FD) model and implemented 
 		in MiniZinc. All the remaing part of the project(data retrieving, cleaning
 		and visualization) are done using Python.\\	
@@ -40,12 +49,12 @@
 
 	\pagebreak
 
-	\section{Assignment}
+	\section{The problem}
 	\label{Assignment}
-	The main problem we want to solve can be described as follow: there is a pizzeria in the 
-	town that delivers pizzas at home; we want to find the best schedule of the set of orders 
-	(for a single evening) that minimize the total travelled distance by the deliverers 
-	respecting the delivery times requested by the customer.
+	The main problem we want to solve can be described as follow: the best pizzeria in the 
+	town delivers pizzas at home; we want to find the best schedule of the set of orders 
+	(for a single evening) that minimize the total traveled distance by the deliverers 
+	respecting the delivery times requested by the customers.
 	
 	The assignment gives us the following informations about the problem:
 	\begin{enumerate}
@@ -61,24 +70,29 @@
 			time;
 		\item the street topology of the city can be seen as a graph: the nodes represent
 			the addresses and they are connected by edges that contain travel time 
-			between nodes; so, we know the distance between each pair of addresses
+			between nodes; so, we know the distance (in terms of time) between each pair of addresses
 			in the town;
 		\item every deliverer can carry at most 16 pizzas;
 		\item multiple travels from and to the pizzeria are allowed even in the 
 			delivery window.
 	\end{enumerate}
 
-	\subsection{Goal}
+	To solve the problem means to assign a set of sorted lists of orders 
+ 	to every deliverer. Each list represents a travel and all the orders in it 
+	must be handled (or, in other words, the destination of this order must be reached) 
+	in the specified sequence.
+
+	\subsection{Assignment}
 
 	The goals of this work are:
 	\begin{enumerate}
 		\item write a program that solves the problem (in MiniZinc);
 		\item write a benchmark suite using 5 different towns of increasing size
 			and 10 input sets for each one; the input sets must enforce that all
-			the deliverers do at least two travels;
+			the deliverers do at least two travels (in \cref{subsec:test-5-cities})
 		\item on one configuration that runs in a couple of minutes, try
 			different search strategies and then use the most promising one to solve a
-			difficult input set.
+			difficult input set (in \cref{subsec:test-strategies}).
 	\end{enumerate}
 
 	\section{Model}
@@ -93,35 +107,51 @@
 	\begin{enumerate}
 		\item $d$: the number of deliverers available
 		\item $mdist$: the 2-d matrix representing the travel distance between
-			every node in the graph generated using Dijkstra (including those
+			every pair of nodes in the graph generated using Dijkstra (including those
 			that are not a destination)
 		\item $k$: the side dimension of $mdist$
-		\item a set of $N$ orders specifing the destination $dest$, the delivery 
-			time $orario$ and the number of pizzas $num\_pizzas$
+		\item a set of $N$ orders, each of them made by a destination $dest$, a delivery 
+			time $orario$ and a number of pizzas $num\_pizzas$
+
+			\begin{equation*}
+				\begin{split}
+					\text{orario} &= [o_1, o_2, \dots, o_N];\\
+					\text{num\_pizze} &= [np_1, np_2, \dots, np_N];\\
+					\text{dest} &= [d_1, d_2, \dots, d_N];
+				\end{split}	
+			\end{equation*}
+
 			%TODO: cambiare il nome della struttura dati "ORARIO"
 	\end{enumerate}
 
 	\subsection{Assumptions}
+	\label{subsec-assumptions}
 	In order to make the problem a little easier, we made the following 
 	semplifications:
 	\begin{enumerate}
-		\item the graph is undirected so \texttt{mdist}	is symmetric and 
+		\item the graph is undirected, so \texttt{mdist} is symmetric: 
+		\begin{center}
 			\texttt{mdist[x, y] = mdist[y, x]}
+		\end{center} 
 		\item a deliverer can do only a single travel in one half-an-hour. In other
 			words, the orders that are assigned to him/her are delivered creating 
 			a circuit starting from the pizzeria, visiting all the destinations 
-			and ending in the pizzeria
+			and ending in the pizzeria in one half-an-hour;
+		\item distances and travels time are considered the same thing;
+		\item the set of orders is known before the start of the evening;
+		\item all the time needed by the deliverer to interacts with customers (give them the pizzas,
+			eventually handle the payment and other stuff) is supposed to be zero. %upon delivery
 	\end{enumerate}
 
 	\subsection{Implementation}
 
 
-	\textbf{TODO:} 
-	\begin{itemize}
-		\item Scrivere di sched, P, dist che hanno le stesse pos valorizzate.
-		\item Def. da minizinc
-		\item Spiegare che tante cose servono per semplificare i calcoli
-	\end{itemize}
+	%\textbf{TODO:} 
+	%\begin{itemize}
+	%	\item Scrivere di sched, P, dist che hanno le stesse pos valorizzate.
+	%	\item Def. da minizinc
+	%	\item Spiegare che tante cose servono per semplificare i calcoli
+	%\end{itemize}
 	
 	The time is divided in 6 slots of half-an-hour (19.00 - 22.00). Let's call
 	$h$ one of these slots of time.
@@ -138,13 +168,13 @@
 	
 	means that the deliverer $d$ has to deliver the order with id 
 	\texttt{orderID} in the time slot $h$. In every slot $h$, the deliverer must 
-	reach all nodes specified as \textit{destinations} of the orders assigned to 
+	reach all nodes specified as \textit{destinations} (\texttt{dest}) of the orders assigned to 
 	him/her, starting from node $1$ (pizzeria) and returning back to it. This creates
-	 a sort of "circuit" starting and ending with the same node, that reaches all the 
-	nodes specified in a matrix row).
+	 a sort of \textit{circuit} starting and ending with the same node, that reaches all the 
+	nodes specified in the matrix row.
 
 	Obviously, one order can be delivered only once during the evening by only
-	one deliverer, in the delivery window computed from the requested time.
+	one deliverer, and must be done in the delivery window computed from the requested time.
 
 	\begin{center}
 		\texttt{array[1..d, 1..N, 1..h] of var bool: scheduling;}
@@ -168,7 +198,7 @@
 	\paragraph*{Ea - Estimated arrival}
 	In order to ensure that all deliveries arrive in time, we use \texttt{ea} which
 	stands for estimated arrival. This array contains, for every order, the arrival 
-	time, in minutes, from the starting time (19.00). At every order, we sum the number 
+	time (in minutes) from the starting time (19.00). At every order, we sum the number 
 	of minutes that must pass before the delivery take place, so doing this way,
 	we are sure that the delivery is done in the right delivery window.
 	For example, if the delivery is requested for 20.00, if the destination is five minutes 
@@ -184,9 +214,9 @@
 	\paragraph*{P} The main goal of the project is to minimize the travel distance 
 	covered by all the deliverers in the evening. To do so, a possible strategy
 	is to deliver more than one delivery in a single travel. This is convenient 
-	if the deliveries are made in a way that minimize the distance travelled between the nodes.
+	if the deliveries are made in a way that minimize the distance traveled between the nodes.
 	To encode this information, we use \texttt{P}, which is a 3-d matrix that stores
-	all the nodes that every deliverer has to visit in one travel. 
+	all the nodes that every deliverer has to visit in one travel, according to \texttt{scheduling}. 
 
 	\begin{center}
 		\texttt{array[1..d, 1..N, 1..h] of var array2set(dest) union {0}: P;}
@@ -201,7 +231,7 @@
 	$d$ and $h$. Each row contains the positions of the matrix P (destination nodes) 
 	that $d$ deliverer has to reach in the $h$ half-an-hour. This matrix allows 
 	us to control the order of each delivery made by every deliverer in one travel
-	and, as consequence, compute the corresponding travel distances (stored in $distances$).
+	and, as consequence, compute the corresponding travel distances (stored in \texttt{distances}).
 
 	\begin{center}
 		\texttt{array[1..d, 1..N, 1..h] of var 0..N: X;}
@@ -210,9 +240,9 @@
 
 	\paragraph*{Distances}
 	Using the data structures seen before, we use this 3-d matrix to store all
-	the partial distances needed to reach every delivery node. Using this matrix we can 
-	enforce that all the deliveries are delivered in time and, since we want to minimize 
-	the travel distance, it allows us to combine deliveries that belongs to different
+	the partial distances needed to reach every delivery node starting from 0 for each
+	half-an-hour. Using this matrix we can enforce that all the deliveries are delivered in 
+	time and, since we want to minimize the traveled distance, it allows us to combine deliveries that belongs to different
 	time slots (eg. 19.15 and 19.30) but only if they are adjacent because of the maximum 
 	delivery time of 30 minutes.
 
@@ -242,12 +272,12 @@
 	All the others meaningless positions are set to zero in all the matrices.
 
 	\paragraph*{Total\_travel}
-	We use this 2D matrix, in order to store the total travel distance of deliverer \textit{id} in one half-an-hour \textit{ih}.
-	As describe above, in the matrix \textit{distance} there are partial distances: from pizzeria to first delivery node, 
-	from first delivery node and the second one and so on until the last delivery node.
+	We use this 2-d matrix in order to store the total travel distance of deliverer \textit{id} in one half-an-hour \textit{ih}.
+	As described above, in the matrix \textit{distance} there are partial distances: from pizzeria to first delivery node, 
+	from first delivery node and the second one and so on, until the last delivery node.
 	If we add the distance between this last delivery node and the pizzeria (that is the path to return to the pizzeria)
 	we have the total travel distance.
-	As already mentioned, our goal is minimize this value.
+	As already mentioned, our goal is minimize the sum of all these values.
 
 	\begin{center}
 		\texttt{array[1..d, 1..h] of var 0..29: total\_travel;}
@@ -267,30 +297,33 @@
 	To construct the matrix \texttt{P} a simple product between a \texttt{scheduling} row and the array of the destinations \texttt{dest} is
 	made:
 	\begin{verbatim}
-forall(id in 1..d, ih in 1..h, iN in 1..N)(
+forall(id in 1..d, iN in 1..N, ih in hra[iN])(
    P[id, iN, ih] = scheduling[id, iN, ih] * dest[iN]
 );
 	\end{verbatim}
 	
 	Thanks to this product, we are able to make meangingful the same positions
-	as \texttt{scheduling}.
+	of \texttt{scheduling}.
 
 	\paragraph*{}
 	The \texttt{X} matrix has to contain all the meaningful	positions in the matrix
 	\texttt{P}. To ensure this, we need a simple way to sequentially compute all the
-	informations related in a single row, so we push all the meaningless values (zeros)
-	to the end of the row and, for every value greater than zero, found in a row of
-	\texttt{P}, we enforce the corresponding row of \texttt{X} to contain it.
+	informations related in a single row. For every value greater than zero found in a row 
+	of \texttt{P}, we enforce the corresponding row of \texttt{X} to contain it. 
+	Also, we want to push all the meaningless values (zeros) to the end of the row: this is done
+	by another constraint described below (\cref{subsubsec:restrict-search-space} (3)).	
 
 	\begin{verbatim}
-forall(id in 1..d, ih in 1..h, iN in 1..N)(
-   if P[id, iN, ih] > 0 then
-      count([ X[id, iNN, ih] | iNN in 1..N] ,iN,1) 
+forall(id in 1..d, iN in 1..N, ih in 1..h)(
+   if P[id, iN, ih] > 0 then 
+      count([ X[id, iNN, ih] | iNN in 1..N], iN, 1)
    else
-      count([ X[id, iNN, ih] | iNN in 1..N] ,iN,0)
+   (
+      count([ X[id, iNN, ih] | iNN in 1..N], iN, 0) 
+      /\
+      distances[id,iN,ih] = 0
+   )
    endif
-   /\
-   ( X[id,iN,ih]=0 -> forall(j in iN..N) (X[id,j,ih] = 0) )
 );
 	\end{verbatim}
 
@@ -300,20 +333,27 @@ forall(id in 1..d, ih in 1..h, iN in 1..N)(
     To do this, we have to use the matrix \texttt{X}. 
 	Considering a single row, we must take care of the following cases:
 	\begin{itemize}
-		\item the first (meaningful) cell
-		\item the other (meaningful) cells
+		\item the first (meaningful) cell;
+		\item the other (meaningful) cells.
 	\end{itemize}
+	
 	
 	In the first case, if \texttt{X[1]} is the first meaningful position in the 
 	matrix P and \texttt{P[X[1]]} is the first visited node in a travel,
 	the distance of the node \texttt{P[X[1]]} is computed summing the 
-	distance between the pizzeria (node number 1) and this node (\texttt{mdist[1, P[X[1]]]}).
+	distance between the pizzeria (node number 1) and this node: \texttt{mdist[1, P[X[1]]]}.
 	This value is put in \texttt{distances[X[1]]}.\\
 	
 	In the last case, the distance to reach the node in \texttt{X[i]} is 
 	the sum of the distance between the node \texttt{X[i]} and \texttt{X[i-1]}, and all 
 	the distances previusly computed to reach the latter. 
     % TODO: DA SCRIVERE IN MATEMATICHESE!! COME DICE MINOOO!!! 
+	
+	For the sake of simplicity, in the example above, the matrices \text{P} and \text{X} are treated 
+	like arrays to avoid writing all the other indexes that are fixed because we are considering a single 
+	row.
+
+	
 	\begin{verbatim}
 forall(id in 1..d, iN in 1..N, ih in 1..h)(
    if X[id,iN,ih] !=0 then
@@ -334,59 +374,36 @@ forall(id in 1..d, iN in 1..N, ih in 1..h)(
 	Moreover, using \texttt{X}, we must check the "travel consistency", which 
 	means that the deliverer must be able to return back to the pizzeria before the 
 	start of the next half-an-hour. 
-	To do this, we implement the so called \textit{"hat condition"}. This condition 
-	identify the last meangingful position in one row of the matrix \texttt{X}
-	and enforce that, from that position, the sum of the distance to reach
-	that node plus the distance to return back to the pizzeria is less than 30.
-
-\begin{verbatim}
-forall(id in 1..d, iN in 1..N, ih in 1..h)(
-   if X[id,iN,ih] !=0 then
-      if iN+1 == N+1 then
-         distances[id, X[id,iN,ih], ih] 
-            + mdist[P[id, X[id,iN,ih], ih],1] < 30
-      else
-         if X[id,iN+1,ih] == 0 then
-            distances[id, X[id,iN,ih], ih] 
-               + mdist[P[id, X[id,iN,ih], ih],1] < 30
-         endif
-      endif
-   endif
-);
-\end{verbatim}
+	To do this, we store the computed travel distance in \texttt{total\_travel} and its 
+	domain \texttt{[0..29]} ensures this property.  
 
 	\paragraph*{}
 	To make \texttt{ea} consistent, which is the array that allow us to record the expected arrival
 	time of each delivery, we take into account the row representing the delivery in the 
 	\texttt{scheduling} matrix and the same position in the \texttt{distances} matrix. Since 
 	\texttt{scheduling} is a boolean matrix, only the meaningful position in 
-	\texttt{distances} will be used. To this value is added 30 for every half-an-hour passed,
-	from the starting time to the beginning of the corresponding half-an-hour. 
+	\texttt{distances} will be used. For every half-an-hour from the starting time to the 
+	beginning of the corresponding half-an-hour, 30 is added to this value. 
+	In addition, we must constraint that every delivery is delivered within 
+	30 minutes starting from the desired delivery time.
 	\begin{verbatim}
-forall(j in 1..N)(
-   ea[j] = sum([ scheduling[id,j,ih] 
-                 * (distances[id,j,ih]+((ih-1)*30))
-               | id in 1..d, ih in 1..h ])  
+forall(iN in 1..N)(
+   ea[iN] = sum([scheduling[id,iN,ih]
+            * (distances[id,iN,ih]+((ih-1)*30)) 
+               | id in 1..d, ih in 1..h])
+   /\
+   ea[iN] >= ra[iN] 
+   /\ 
+   ea[iN] < ra[iN]+30 
 );
 	\end{verbatim}
 
-	In addition to the constraint seen before, the following enforce that every delivery
-	in delivered within 30 minutes starting from the desired delivery time.
-	\begin{verbatim}
-forall(iN in 1..N)(
-   ea[iN] >= ra[iN] /\ ea[iN] < ra[iN]+30 
-);		  
-	\end{verbatim}
 
 	\paragraph*{}
-	The consistency of \texttt{pizzas\_carried} is trivial. First of all, we check that
-	the number of pizzas carried in the evening is equal to the number of total pizzas in the 
-	orders. Than, for every order, we enforce that the number of pizzas carried by a deliverer 
-	in one half-an-hour is the same as the number of pizzas in the orders that he/she 
-	is taking care of in the same half-an-hour.
+	The consistency of \texttt{pizzas\_carried} is trivial. For every order, we enforce that the 
+	number of pizzas carried by a deliverer in one half-an-hour is the same as the number of 
+	pizzas in the orders that he/she is taking care of in the same half-an-hour.
 	\begin{verbatim}
-sum(pizzas_carried) = sum(num_pizze);
-
 forall(id in 1..d, ih in 1..h)(
    pizzas_carried[id, ih] = sum([ num_pizze[j]
                                 | j in 1..N 
@@ -398,27 +415,72 @@ forall(id in 1..d, ih in 1..h)(
 	Some of the data structures previously analized could have been avoided if we 
 	wanted to have a more lightweight model. We introduced them to make simpler the
 	creation of the constraint and to keep the model readable.
+	
 	% SCEGLIERE SE SCRIVERE CHE NON SAPPIAMO SE L'AUMENTO DELLE STRUTTURE CHE 
 	% VENGONO UTILIZZATE NEL MODELLO POSSA AVER PEGGIORATO LE SUE PRESTAZIONI GLOBALI 
 
-	\subsubsection{Euristichs}
-
-	\begin{itemize}
-		\item Nuovo taglio mezz'ore
-	\end{itemize}
-
+	\subsubsection{Restrict the search space}
+	\label{subsubsec:restrict-search-space}
 	Creating the model, we included some easy euristichs that can restrict the dimension
-	of the search space. As seen before the delivery must take place in the 30-minutes delivery window
-	that starts from the desired delivery time.\\
-	This allows us to constrain the \texttt{scheduling} matrix to have zeros before
-	and after the desired delivery window.
-	\begin{verbatim}
-forall(id in 1..d, iN in 1..N, ih in 1..h)(
-  ( (ih*30) <= ra[iN] -> scheduling[id,iN,ih] = 0 )
-  /\
-  ( ((ih-1)*30) > (ra[iN]+15) -> scheduling[id,iN,ih] = 0 )
+	of the search space:
+
+	\begin{enumerate}
+
+		\item domain restrictions.
+		
+		As said in \cref{Model}, the domain for each decision variable has been
+		strictly restriced to the only possible values that they can assume. 
+		For example, a cell of \texttt{distances}, that represent the partial travel time
+		to reach a destination, can't be greater than 29 since we want that each deliverer 
+		returns back to the pizzeria before the next half-an-hour. Another example is the domain
+		of \texttt{P}: in this case we restrict the domain from \texttt{0..k} (which is correct) 
+		to only the set of possible destinations. This reduces a lot the number of possibility in 
+		the domain. 
+
+		\item for each order, exclude all the non-possible half-an-hour.
+		
+		Every order has a requested delivery time that becomes a delivery window. 
+		We know that all the half-an-hours before and after this delivery window
+		are not usable. So, for each order we computed its \textit{valid} half-an-hour 
+		indeces (\texttt{hra}) that are used to access the matrices \texttt{scheduling}, \textbf{???}\texttt{distances} 
+		and \texttt{P} in \textit{not-valid} half-an-hour to set it equal to zero.   
+		Also, a consideration on \texttt{X} matrix is made: for each \textit{not-valid} 
+		half-an-hour for a specific order, we know that this order index will be not present
+		in the corresponding row of \texttt{X}.
+
+		\textbf{maybe distances}
+
+		\begin{verbatim}
+forall(id in 1..d, iN in 1..N, ih in (1..h diff hra[iN]) ) (
+   scheduling[id,iN,ih] = 0
+   /\
+   P[id,iN,ih] = 0
+   /\
+   count( [X[id,iNN,ih] | iNN in 1..N], iN, 0)
 );
-	\end{verbatim}
+		\end{verbatim}
+
+		\item enforce useless cells of matrix \texttt{X} to zero.
+		
+		Each line of \texttt{X} contains the indexes of the corresponding line of \texttt{P}
+		that are meangingful (different from zero). Also, all the zero in this (\texttt{X}) 
+		line must be pushed to the end of it. Knowning this, if we count the number of zeros
+		in each line of \texttt{P} we can contraint the same number of cells to be zero, starting
+		from the end of line of \texttt{X}.
+
+		\begin{verbatim}
+forall(id in 1..d, ih in 1..h)(
+   let {
+      var int: c = count([P[id,iNN,ih] | iNN in 1..N],0)
+   }
+   in forall(iN in N-c+1..N)(
+      X[id,iN,ih] = 0
+   )  
+);
+		\end{verbatim}
+		
+
+	\end{enumerate}
 
 	\subsubsection{Simmetry breaking strategy}
 	Having more than one deliverer implies the possibility of having the same solution 
@@ -430,36 +492,86 @@ forall(id in 1..d, iN in 1..N, ih in 1..h)(
 
 	In order to avoid this kind of problem, we impose an ordering on the deliverers by 
 	counting the number of pizzas that are carried in one half-an-hour. This enforce that 
-	the first deliverer carries a number of pizzas greater of equal to the number of
+	the first deliverer carries a number of pizzas greater or equal to the number of
 	pizzas carried by the second deliverer, the second deliverer a number of pizzas greater or 
 	equal to the number of pizzas of the third deliverer and so on.
 \begin{verbatim}
 forall(ih in 1..h, id in 1..d-1)(
-  pizzas_carried[id,ih] >= pizzas_carried[id+1,ih]
+   pizzas_carried[id,ih] >= pizzas_carried[id+1,ih]
 );
 \end{verbatim}
 
+%
+%	\paragraph*{???}
+%	As said before, the data structures used in the model are, in some way, redundant
+%	to have a better readability. We are not sure if having a lower number of data 
+%	structures and a more complex constraint generation would have made the model
+%	faster in finding the best solution.
+%
 	\section{Results}
 	\label{Results}
 
 	In this section, we will describe how the model behave, mainly in terms of solving
 	time, using different input data and different search strategies.
 
-
-
-	\paragraph*{}
-	As said before, the data structures used in the model are, in somme way, redundant
-	to have a better readability. We are not sure if having a lower number of data 
-	structures and a more complex constraint generation would have made the model
-	faster in finding the best solution.
+	For doing that, we consider 5 italian city of increasing size (listed by increasing dimension): 
+	\textit{Visano(BS)}, \textit{Asola(MN)}, \textit{Montichiari(BS)}, \textit{Brescia (BS)} and \textit{Roma (Roma)}.
+	Their street graphs have the following characteristics:%features:
+	\begin{table*}[h]
+		\centering
+		\begin{tabular}{l|ll}
+			City & nodes & edges \\
+			\hline
+			Visano & 297 & 378 to\\
+			Asola & 480 & 664 \\
+			Montichiari & 1130 & 1509 \\
+			Brescia & 3925 & 5464 \\
+			Roma & 4729 & 7277 \\
+		\end{tabular}		
+	\end{table*}
 	
+	As preprocessing step, for each of them we computed the shortest path beetween all the pairs
+	of nodes using Dijkstra. This produced the corresponding $mdist \in M^{nodes \times nodes}$.
+	For assumption (2) in \cref{subsec-assumptions}, these matrices are symmetric.   
+
+	\subsection{Search strategies comparison}
+	\label{subsec:test-strategies}
+	Choosen a configuration of the problem that runs in a couple of minutes,
+	we tested how it performs (in terms of solving time) changing the search strategies.
+	The configuration choosen has:
+	\begin{center}
+		$N = 12$ (orders), $d = 2$ (deliverers), city = Visano.		
+	\end{center}
+
+	\subsection{5 city of increasing size}
+	\label{subsec:test-5-cities}
+	Using one of the best search strategies, we tried to solve the problem using all the 5 increasing 
+	size cities in order to see how solving time changes. The timeout is set to 5 minutes for each execution.
+	In this case the configuration choosen has:
+	\begin{center}
+		$N = 12$ (orders), $d = 2$ (deliverers), city = Visano.	$\leftarrow$ TO CHANGE
+	\end{center}
+
+
+	\subsection{Increasing the size of the problem}
+	\label{subsec:test-size-of-problem}
+	Using one of the best search strategies, we tried to solve a set of problems in the same city (Visano)
+	with different complexities, represented by number of order $N$ and number of deliverer $d$. 
+	The timeout is set to 5 minutes for each execution.
+	
+	
+
+	\section{Conclusions}
 
 
 	\section{Future work}
 	\label{Future work}
-	Only total travelled distance is minimized (for now). Maybe a balancing 
+	Only total traveled distance is minimized (for now). Maybe a balancing 
 	function is needed or maybe not.
 
+	We tried to express all the constraints at \texttt{"row-level"}, but 
+
+	Consider the time needed to give the pizza and take the money... 
 \end{document}
 
 

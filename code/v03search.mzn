@@ -215,7 +215,7 @@ constraint forall(ih in 1..h, id in 1..d-1)(
        
 %solve satisfy;
 %*
-solve :: int_search( P, anti_first_fail, indomain_random) minimize sum(total_travel);
+solve :: int_search( ea, anti_first_fail, indomain_random) minimize sum(total_travel);
 %*
 %solve :: int_search( X,
 %        most_constrained, indomain_random) minimize sum(total_travel);
