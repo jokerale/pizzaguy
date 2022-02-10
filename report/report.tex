@@ -118,7 +118,7 @@
 					\text{orario} &= [o_1, o_2, \dots, o_N];\\
 					\text{num\_pizze} &= [np_1, np_2, \dots, np_N];\\
 					\text{dest} &= [d_1, d_2, \dots, d_N];
-				\end{split}	
+				\end{split}	blue
 			\end{equation*}
 
 			%TODO: cambiare il nome della struttura dati "ORARIO"
@@ -532,7 +532,9 @@ forall(ih in 1..h, id in 1..d-1)(
 	
 	As preprocessing step, for each of them we computed the shortest path beetween all the pairs
 	of nodes using Dijkstra. This produced the corresponding $mdist \in M^{nodes \times nodes}$.
-	For assumption (2) in \cref{subsec-assumptions}, these matrices are symmetric.   
+	For assumption (2) in \cref{subsec-assumptions}, these matrices are symmetric.
+
+	In addition to the model tests, we report a \textit{real-world} result of an execution of the model, obtained using some pre- and post-processing techniques.  
 
 	\subsection{Search strategies comparison}
 	\label{subsec:test-strategies}
@@ -542,6 +544,14 @@ forall(ih in 1..h, id in 1..d-1)(
 	\begin{center}
 		$N = 12$ (orders), $d = 2$ (deliverers), city = Visano.		
 	\end{center}
+
+	First of all a preliminary analysis, then a more specific on a subset of combinations 
+	with 20 seconds timeout.
+
+
+	\subsubsection{Solving time}
+
+	\subsubsection{Search tree statistics}
 
 	\subsection{5 city of increasing size}
 	\label{subsec:test-5-cities}
@@ -558,6 +568,11 @@ forall(ih in 1..h, id in 1..d-1)(
 	Using one of the best search strategies, we tried to solve a set of problems in the same city (Visano)
 	with different complexities, represented by number of order $N$ and number of deliverer $d$. 
 	The timeout is set to 5 minutes for each execution.
+	
+	\subsection{Real-world application}
+
+	Using \textit{Python} and \textit{OpenStreetMap} we were able to execute the model
+	on a graph obtained by a real-world map and plot the results directly on the streetmap.
 	
 	
 

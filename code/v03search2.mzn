@@ -103,14 +103,10 @@ constraint forall(id in 1..d, ih in 1..h)(
   let {
     var int: c = count([P[id,iNN,ih] | iNN in 1..N],0)
   }
-  in 
-  forall(iN in N-c+1..N)(
+  in forall(iN in N-c+1..N)(
     X[id,iN,ih] = 0
   )
-  /\
-  forall(iN in 1..N-c)(
-   X[id,iN,ih] > 0 % o maggiore
-  )
+  
 );
 
 
@@ -213,13 +209,14 @@ constraint forall(ih in 1..h, id in 1..d-1)(
 
 
 
-solve :: bool_search( scheduling, first_fail, indomain_min)
+%solve :: int_search( X, first_fail, indomain_random)
 %          ::restart_linear(1000)
-           minimize sum(total_travel);
+%           minimize sum(total_travel);
        
 %solve satisfy;
-%solve minimize sum(total_travel);
-
+%*
+solve :: int_search( scheduling, smallest, indomain_split_random) minimize sum(total_travel);
+%*
 %solve :: int_search( X,
 %        most_constrained, indomain_random) minimize sum(total_travel);
 

@@ -186,83 +186,86 @@ if ('UNSAT' in out) or ('UNKNOWN' in out):
     exit()
 
 # Save image of paths
+if(plot):
+    print("I'm plotting things")
 
-st = out.split("ELABORATION_DATA")
-st_lista = st[1].split("\n")
-
-travels = []
-for i in st_lista:
-    if i.count(";") >= 2:
-        travels.append(i.strip())
-
-first_line = travels[0].split(";")
-# Ricavo solo i viaggio di ogni deliverer per ogni mezz'ora
-travels = travels[1:len(travels)]
-
-dfTravels = pd.DataFrame(columns=['deliverer', 'h', 'dest'])
-
-for i in travels:
-    temp = i.split(";")
-
-    x = temp[2].split(" ")
-
-    if temp[2] != '':
-        df2 = pd.DataFrame([[ int(temp[0]), int(temp[1]),  str(temp[2])   ]],columns=['deliverer', 'h', 'dest'])
-    else:
-        df2 = pd.DataFrame([[ int(temp[0]), int(temp[1]), ""  ]],columns=['deliverer', 'h', 'dest'])
+    st = out.split("ELABORATION_DATA")
+    st_lista = st[1].split("\n")
     
-    dfTravels = pd.concat([dfTravels,df2], ignore_index=True)
-
-print(dfTravels)
-
-df = dfTravels[dfTravels['dest'] != ""]
-paths = []
-fig , ax = ox.plot_graph_route(g, ox.shortest_path(g,1,1,weight='lenght'), node_size=2, figsize=(50,50), show=False, orig_dest_size=250, route_color = 'red', route_alpha=0)
-
-def rgb_to_hex(rgb):
-    return '#%02x%02x%02x' % rgb
-
-del_colors = []
-for i in range(int(first_line[0])):
-    del_colors.append(rgb_to_hex(tuple(np.random.choice(range(256), size=3))))
-
-print('COLORS: ' + str(del_colors))
-
-for i in range(len(df)):
-    # Get nodes
-    nodes = [1]
-    #for j in df['dest'].iloc[i]:
-    split = df['dest'].iloc[i].split(" ")
-    for s in split:
-        nodes.append(int(s))
-    nodes.append(1)
-
-    print(nodes)
-
-    route = []
-    for j in range(len(nodes) - 1):
-        route.append(ox.shortest_path(g, nodes[j], nodes[j+1], weight="length"))
-
-    #paths.append(route)
-    color = del_colors[int(df['deliverer'].iloc[i]) - 1]
-
-
-    ox.plot_graph_routes(g, route, node_size=2, node_alpha=1, ax=ax, route_colors = [ str(color) for i in range(len(route))], orig_dest_size=250, route_alpha=0.7, show=False)
-
-
-
-ox.plot_graph_route(g, ox.shortest_path(g,1,1,weight='lenght'), node_size=10, figsize=(50,50), show=False, orig_dest_size=250, route_color = 'red', route_alpha=1)
-#ox.plot_graph_routes(g, paths, node_size=2, node_alpha=1, ax=ax, route_colors = 'green',orig_dest_size=250, route_alpha=1)
-
-from matplotlib.lines import Line2D
-custom_lines = [
-    Line2D([0], [0], color=del_colors[i], lw=10) for i in range(len(del_colors))]
-
-    #            Line2D([0], [0], color=cmap(.5), lw=4),
-    #            Line2D([0], [0], color=cmap(1.), lw=4)]
-
-ax.legend(custom_lines, ['deliverer #'+str(i+1) for i in range(len(del_colors)) ], fontsize = 62 )
-
-
-
-fig.savefig('graph_paths.png', dpi=300)
+    travels = []
+    for i in st_lista:
+        if i.count(";") >= 2:
+            travels.append(i.strip())
+    
+    first_line = travels[0].split(";")
+    # Ricavo solo i viaggio di ogni deliverer per ogni mezz'ora
+    travels = travels[1:len(travels)]
+    
+    dfTravels = pd.DataFrame(columns=['deliverer', 'h', 'dest'])
+    
+    for i in travels:
+        temp = i.split(";")
+    
+        x = temp[2].split(" ")
+    
+        if temp[2] != '':
+            df2 = pd.DataFrame([[ int(temp[0]), int(temp[1]),  str(temp[2])   ]],columns=['deliverer', 'h', 'dest'])
+        else:
+            df2 = pd.DataFrame([[ int(temp[0]), int(temp[1]), ""  ]],columns=['deliverer', 'h', 'dest'])
+        
+        dfTravels = pd.concat([dfTravels,df2], ignore_index=True)
+    
+    print(dfTravels)
+    
+    df = dfTravels[dfTravels['dest'] != ""]
+    paths = []
+    fig , ax = ox.plot_graph_route(g, ox.shortest_path(g,1,1,weight='lenght'), node_size=2, figsize=(50,50), show=False, orig_dest_size=250, route_color = 'red', route_alpha=0)
+    
+    def rgb_to_hex(rgb):
+        return '#%02x%02x%02x' % rgb
+    
+    del_colors = []
+    for i in range(int(first_line[0])):
+        del_colors.append(rgb_to_hex(tuple(np.random.choice(range(256), size=3))))
+    
+    print('COLORS: ' + str(del_colors))
+    
+    for i in range(len(df)):
+        # Get nodes
+        nodes = [1]
+        #for j in df['dest'].iloc[i]:
+        split = df['dest'].iloc[i].split(" ")
+        for s in split:
+            nodes.append(int(s))
+        nodes.append(1)
+    
+        print(nodes)
+    
+        route = []
+        for j in range(len(nodes) - 1):
+            route.append(ox.shortest_path(g, nodes[j], nodes[j+1], weight="length"))
+    
+        #paths.append(route)
+        color = del_colors[int(df['deliverer'].iloc[i]) - 1]
+    
+    
+        ox.plot_graph_routes(g, route, node_size=2, node_alpha=1, ax=ax, route_colors = [ str(color) for i in range(len(route))], orig_dest_size=250, route_alpha=0.7, show=False)
+    
+    
+    
+    ox.plot_graph_route(g, ox.shortest_path(g,1,1,weight='lenght'), node_size=10, figsize=(50,50), show=False, orig_dest_size=250, route_color = 'red', route_alpha=1)
+    #ox.plot_graph_routes(g, paths, node_size=2, node_alpha=1, ax=ax, route_colors = 'green',orig_dest_size=250, route_alpha=1)
+    
+    from matplotlib.lines import Line2D
+    custom_lines = [
+        Line2D([0], [0], color=del_colors[i], lw=10) for i in range(len(del_colors))]
+    
+        #            Line2D([0], [0], color=cmap(.5), lw=4),
+        #            Line2D([0], [0], color=cmap(1.), lw=4)]
+    
+    ax.legend(custom_lines, ['deliverer #'+str(i+1) for i in range(len(del_colors)) ], fontsize = 62 )
+    
+    
+    
+    fig.savefig('graph_paths.png', dpi=300)
+    
