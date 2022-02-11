@@ -41,7 +41,7 @@
 		aims to find the best possible schedule of a set of orders that
 		minimizes the distance traveled by the deliverers in a evening of 
 		work. Our solution is developed using a CLP(FD) model and implemented 
-		in MiniZinc. All the remaing part of the project(data retrieving, cleaning
+		in MiniZinc. All the remaing part of the project (data retrieving, cleaning
 		and visualization) are done using Python.\\	
 		In the \cref{Assignment} we will describe the problem and the goal
 		we want to reach, in the \cref{Model} we will the describe the 
@@ -129,7 +129,7 @@
 					\text{orario} &= [o_1, o_2, \dots, o_N];\\
 					\text{num\_pizze} &= [np_1, np_2, \dots, np_N];\\
 					\text{dest} &= [d_1, d_2, \dots, d_N];
-				\end{split}	blue
+				\end{split}
 			\end{equation*}
 
 			%TODO: cambiare il nome della struttura dati "ORARIO"
@@ -783,7 +783,7 @@ forall(ih in 1..h, id in 1..d-1)(
 
 	\section{Conclusions} 
 
-	\subsection{Future work}
+	\subsection{Future works}
 	\label{Future work}
 	Only total traveled distance is minimized (for now). Maybe a balancing 
 	function between the deliveres could be useful.
@@ -793,9 +793,7 @@ forall(ih in 1..h, id in 1..d-1)(
 	%We tried to express all the constraints at \texttt{"row-level"}, but 
 
 	Will be useful, for a more realistic application, take care of the time 
-	needed by the deliverer to give the pizza, handle the payment and other stuff. 
-
-
+	needed by a deliverer to give the pizza to the customer, eventually handle the payment and other stuff. 
 
 	
 \end{document}

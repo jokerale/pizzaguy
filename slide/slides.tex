@@ -67,7 +67,7 @@
 
 \title[The pizza guy]{The pizza guy problem using Minizinc}
 \author[Boldini, Diana, Zaglio]{G. Boldini, A. Diana, F. Zaglio}
-\institute[UNIPR]{Università degli Studi di Parma\newline
+\institute[UNIPR]{University of Parma\newline
     Master's Degree in Computer Science\newline
     Constraint Programming}
 \date{AA 2021/22}
@@ -117,16 +117,101 @@
 
 \end{frame}
 
+\section{Model}
+\begin{frame}{Input Data}
+    The input consists in having:
+	\begin{enumerate}
+		\item $d$: number of deliverers
+		\item $mdist$: 2-d matrix representing the travel distance between
+			every pair of nodes in the graph generated using Dijkstra
+		\item $k$: the side dimension of $mdist$
+		\item a set of $N$ orders, each of them made by a destination $dest$, a delivery 
+			time $orario$ and a number of pizzas $num\_pizzas$
+
+			\begin{equation*}
+				\begin{split}
+					\text{orario} &= [o_1, o_2, \dots, o_N];\\
+					\text{num\_pizze} &= [np_1, np_2, \dots, np_N];\\
+					\text{dest} &= [d_1, d_2, \dots, d_N];
+				\end{split}	
+			\end{equation*}
+	\end{enumerate}
+\end{frame}
+\begin{frame}{Assumptions}
+	\begin{enumerate}
+		\item the graph is undirected,
+		\item a deliverer can do only a single travel in one half-an-hour.
+		\item distances and travels time are considered the same thing;
+		\item the set of orders is known before the start of the evening;
+		\item all the time needed by the deliverer to interacts with customers
+                 is supposed to be zero. 
+	\end{enumerate}
+\end{frame}
+\begin{frame}{Implementation}
+    \begin{itemize}
+		\item {scheduling:\\
+            \begin{center}
+                \texttt{array[1..d, 1..N, 1..h] of var bool: scheduling;}
+            \end{center}    
+        }
+		\item {pizza\_carried\\
+            \begin{center}
+                \texttt{array[1..d, 1..h] of var 0..16: pizzas\_carried;}
+            \end{center}
+        }
+		\item {estimated arrival (ea)\\
+            \begin{center}
+                \texttt{array[1..N] of var 0..h*30: ea;}
+            \end{center}
+        }
+		\item {P\\
+            \begin{center}
+                \texttt{array[1..d, 1..N, 1..h] of var array2set(dest) union {0}: P;}
+            \end{center}
+        }
+		\item {X\\
+            \begin{center}
+                \texttt{array[1..d, 1..N, 1..h] of var 0..N: X;}
+            \end{center}
+        }
+		\item {distances\\
+            \begin{center}
+                \texttt{array[1..d, 1..N, 1..h] of var 0..29: distances;}
+            \end{center}
+        }
+		\item {total\_travel\\
+            \begin{center}
+                \texttt{array[1..d, 1..h] of var 0..29: total\_travel;}
+            \end{center}
+        } 
+	\end{itemize}
+\end{frame}
+\begin{frame}{Constraints}
+\end{frame}
+\begin{frame}{Restrict the search space}
+\end{frame}
+\begin{frame}{Break the symmetry}
+\end{frame}
+
+\section{Result}
+\begin{frame}{Search strategies comparison}
+\end{frame}
+\begin{frame}{Preliminary analysis}
+\end{frame}
+\begin{frame}{More specific analysis}
+\end{frame}
+\begin{frame}{5 city of increasing size}
+\end{frame}
+\begin{frame}{Real world application}
+\end{frame}
 
 \section{Conclusions}
 
-\begin{frame}
-    {Conclusions}
+\begin{frame}{Conclusions}
 
 \end{frame}
 
-\begin{frame}
-    {Future work}
+\begin{frame}{Future works}
 
 \end{frame}
 
