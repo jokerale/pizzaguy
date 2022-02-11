@@ -1,5 +1,5 @@
 include "globals.mzn";
-%include "data/Montichiari_dijkstra.dzn";
+%include "data/Asola_dijkstra.dzn";
 %include "data/temp-order.dzn";
 
 %% VERY IMPORTANT:
@@ -188,6 +188,17 @@ constraint forall(ih in 1..h, id in 1..d-1)(
 );
 
 
+%% ADDED
+constraint forall(iN in 1..N, iNN in 1..N diff {iN})(
+  
+    num_pizze[iN] + num_pizze[iNN] > 16
+    -> forall(id in 1..d, ih in 1..h)(scheduling[id,iN,ih] + scheduling[id,iNN,ih] < 2  
+  )
+%   -> (
+%       count([X[id,iNNN,ih] | iNNN in 1..N],iN)
+%       + count([X[id,iNNN,ih] | iNNN in 1..N],iN) < 2 
+%     )  
+);
 
 
 % Trying to optimize
@@ -213,8 +224,8 @@ constraint forall(ih in 1..h, id in 1..d-1)(
 
 
 
-solve :: bool_search( scheduling, first_fail, indomain_min)
-%          ::restart_linear(1000)
+solve :: bool_search( scheduling, most_constrained, indomain_max)
+%          ::restart_linear(100)
            minimize sum(total_travel);
        
 %solve satisfy;

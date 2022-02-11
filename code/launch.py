@@ -132,7 +132,7 @@ file.close()
 #ax = plt.axis()
 #fig = plt.figure()
 
-fig , ax = ox.plot_graph_route(g, ox.shortest_path(g,1,1,weight='lenght'), node_size=2, figsize=(50,50), show=False, orig_dest_size=250, route_color = 'red', route_alpha=1)#,
+fig , ax = ox.plot_graph_route(g, ox.shortest_path(g,1,1,weight='lenght'), node_size=2, figsize=(50,50), show=False, orig_dest_size=250, route_color = 'red', route_alpha=1, bgcolor='white')#,
                             #node_alpha=1, node_edgecolor = 'red', node_color = 'black', edge_color = 'black', bgcolor='white')
 sp = []
 
@@ -141,7 +141,7 @@ for i in range(len(nodi)):
     sp.append(ox.shortest_path(g, nodi[i], nodi[i], weight='lenght'))
     
 
-ox.plot_graph_routes(g, sp, node_size=2, node_alpha=1, ax=ax, route_colors = 'green',orig_dest_size=250, route_alpha=1)#, node_edgecolor = 'green', edge_color = 'black', bgcolor='white')
+ox.plot_graph_routes(g, sp, node_size=2, node_alpha=1, ax=ax, route_colors = 'green',orig_dest_size=250, route_alpha=1, bgcolor='white')#, node_edgecolor = 'green', edge_color = 'black', bgcolor='white')
 fig.savefig('graph.png')
 
 
@@ -219,7 +219,7 @@ if(plot):
     
     df = dfTravels[dfTravels['dest'] != ""]
     paths = []
-    fig , ax = ox.plot_graph_route(g, ox.shortest_path(g,1,1,weight='lenght'), node_size=2, figsize=(50,50), show=False, orig_dest_size=250, route_color = 'red', route_alpha=0)
+    fig , ax = ox.plot_graph_route(g, ox.shortest_path(g,1,1,weight='lenght'), node_size=2, figsize=(50,50), show=False, orig_dest_size=250, route_color = 'red', route_alpha=0, bgcolor='white')
     
     def rgb_to_hex(rgb):
         return '#%02x%02x%02x' % rgb
@@ -249,11 +249,11 @@ if(plot):
         color = del_colors[int(df['deliverer'].iloc[i]) - 1]
     
     
-        ox.plot_graph_routes(g, route, node_size=2, node_alpha=1, ax=ax, route_colors = [ str(color) for i in range(len(route))], orig_dest_size=250, route_alpha=0.7, show=False)
+        ox.plot_graph_routes(g, route, node_size=2, node_alpha=1, ax=ax, route_colors = [ str(color) for i in range(len(route))], orig_dest_size=250, route_alpha=0.7, show=False, bgcolor='white')
     
     
     
-    ox.plot_graph_route(g, ox.shortest_path(g,1,1,weight='lenght'), node_size=10, figsize=(50,50), show=False, orig_dest_size=250, route_color = 'red', route_alpha=1)
+    ox.plot_graph_route(g, ox.shortest_path(g,1,1,weight='lenght'), node_size=10, figsize=(50,50), show=False, orig_dest_size=250, route_color = 'red', route_alpha=1, bgcolor='white')
     #ox.plot_graph_routes(g, paths, node_size=2, node_alpha=1, ax=ax, route_colors = 'green',orig_dest_size=250, route_alpha=1)
     
     from matplotlib.lines import Line2D

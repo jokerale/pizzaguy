@@ -13,6 +13,7 @@
 \author{Giacomo Boldini, Alessio Diana, Federica Zaglio}
 
 %\usepackage{geometry}
+\usepackage{booktabs}
 \usepackage{xcolor}
 \usepackage{hyperref}
 \hypersetup{
@@ -24,6 +25,12 @@
 }
 \usepackage{amsmath}
 \usepackage{cleveref}
+
+\usepackage{graphicx}
+\graphicspath{ {../figures/} }
+\usepackage{caption}
+\usepackage{subcaption}
+
 \begin{document}
 
 	\maketitle
@@ -45,7 +52,11 @@
 		
 	\end{abstract}
 
+	{
+\small
 	\tableofcontents
+
+	}
 
 	\pagebreak
 
@@ -514,7 +525,7 @@ forall(ih in 1..h, id in 1..d-1)(
 	In this section, we will describe how the model behave, mainly in terms of solving
 	time, using different input data and different search strategies.
 
-	For doing that, we consider 5 italian city of increasing size (listed by increasing dimension): 
+	To do this, we consider 5 italian city of increasing size (listed by increasing dimension): 
 	\textit{Visano(BS)}, \textit{Asola(MN)}, \textit{Montichiari(BS)}, \textit{Brescia (BS)} and \textit{Roma (Roma)}.
 	Their street graphs have the following characteristics:%features:
 	\begin{table*}[h]
@@ -534,59 +545,259 @@ forall(ih in 1..h, id in 1..d-1)(
 	of nodes using Dijkstra. This produced the corresponding $mdist \in M^{nodes \times nodes}$.
 	For assumption (2) in \cref{subsec-assumptions}, these matrices are symmetric.
 
-	In addition to the model tests, we report a \textit{real-world} result of an execution of the model, obtained using some pre- and post-processing techniques.  
+	In addition to the model tests, we report a \textit{real-world} result of a model execution, obtained using some pre- and post-processing techniques.  
 
 	\subsection{Search strategies comparison}
 	\label{subsec:test-strategies}
 	Choosen a configuration of the problem that runs in a couple of minutes,
 	we tested how it performs (in terms of solving time) changing the search strategies.
-	The configuration choosen has:
+	The configuration choosen is:
 	\begin{center}
 		$N = 12$ (orders), $d = 2$ (deliverers), city = Visano.		
 	\end{center}
 
-	First of all a preliminary analysis, then a more specific on a subset of combinations 
-	with 20 seconds timeout.
+	First of all we made a preliminary analysis, which results are shown in
+	\cref{subsubsec:preliminary-analysis}. Then, more specific analyses
+	are made on a subset of possible search strategies (the most promising among all)
+	and results are shown in \cref{subsubsec:more-specific-analysis}.
+
+	The best strategy we found in the preliminary analysis (in terms of solving time) is the one shown
+	in \cref{tab:best-strategy}. However, as we found later, searching on variable \texttt{P}
+	isn't the optimal one (on average). 
+	Indeed, later we used the \texttt{scheduling} variable, which turned out to be 
+	the best one (on average).
+
+	\begin{table*}[h]
+		\centering
+		\scriptsize
+		\begin{tabular}{ll}
+			\toprule
+			var          &                P \\
+			vsa          &  anti\_first\_fail\\
+			vca          &         indomain \\
+			\midrule
+			initTime     &         0.665783 \\
+			solveTime    &          4.45827 \\
+			solutions    &              2.0 \\
+			variables    &           5925.0 \\
+			propagators  &           2322.0 \\
+			propagations &        2118705.0 \\
+			nodes        &           5179.0 \\
+			failures     &           2916.0 \\
+			restarts     &              0.0 \\
+			peakDepth    &             18.0 \\
+			\bottomrule
+		\end{tabular}
+		\caption{Search strategy with minimum solve time in preliminary analysis.}
+		\label{tab:best-strategy}
+	\end{table*}
+
+	
+
+	\subsubsection{Preliminary analysis}
+	\label{subsubsec:preliminary-analysis}
+	
+	First of all, we made preliminary analyses to figure out the most promising
+	search strategies among all their possibile configurations. To do this,
+	we simply analyzed the variation of solving time changing the search 
+	annotations in Minizinc: in particular, we changed (1) the search 
+	variable, (2) how the variable is choosen and (3) how to constraint
+	the variable. \\Results are shown in \cref{fig:search-strategies-gen} 
+	and we can see that searching of variable \texttt{scheduling} could be 
+	the faster choice. Also, some VCA (Variable Choice Annotation) and VSA 
+	(Variable Search Annotation) appear to be more promising than others. 
 
 
-	\subsubsection{Solving time}
 
-	\subsubsection{Search tree statistics}
+
+	\begin{figure}
+		\centering
+
+		\begin{subfigure}[c]{\textwidth}
+			\centering
+			\includegraphics[width=.5\textwidth]{var.png}
+			\caption{changing search variable.}
+		\end{subfigure}
+		\begin{subfigure}[b]{\textwidth}
+			\includegraphics[width=\textwidth]{vca.png}
+			\caption{changing Variable Choice Annotation (VCA)}
+		\end{subfigure}
+		\begin{subfigure}[b]{\textwidth}
+			\includegraphics[width=\textwidth]{vsa.png}
+			\caption{changing Variable Search Annotations (VSA)}
+		\end{subfigure}
+		
+		\caption{How solving time behave (on average) changing search strategies configurations.}
+        \label{fig:search-strategies-gen}
+	\end{figure}
+
+
+	\subsubsection{More specific analysis}
+	\label{subsubsec:more-specific-analysis}
+	In this case, we selected a subset of search strategies (the most promising)
+	and then we made a more specific analysis, reducing the timeout to 20 seconds 
+	and testing the same strategy more than one single time. All the executions
+	that reached the timeout are removed from the analysis.
+
+	We computed the correration matrix (\cref{fig:corr}) between search statistics
+	and it shows high correration between:
+	\begin{itemize}
+		\item number of failures and number of nodes ($1$);
+		\item number of propagations and solve time ($0.79$): this, in addition to the non-correration
+			between maximum depth and solve time ($-0.05$), points out that as the number of
+			propagations increases, it also increases the solve time, but not the tree's depth.
+			% Questo ci fa pensare al fatto che avere alberi larghi rispetto che profondi aumenti il tempo di esecuzione genereale(???? ipotesi)
+			% Forse il nostro problema ci da subito delle soluzioni, ma non quelle ottime (e quindi bisogna far passare tutta la larghezza).
+	\end{itemize}
+
+	\begin{figure}
+		\centering
+		\includegraphics[width=.6\textwidth]{corr.png}
+		\caption{Correlation matrix between the search statistics.}
+		\label{fig:corr}
+	\end{figure}
+
+	In \cref{fig:solve-time-specific} more detailed solve time analyses are
+	reported, for each search variable. It's clear that:
+	\begin{itemize}
+		\item regardless of which 
+		VCA and VSA are choosen, searching on \texttt{scheduling} variable is faster
+		than searching on \texttt{X} or \texttt{P} variables (again, on average).  
+		\item searching on \texttt{scheduling} variable never leads to timeout executions.
+	\end{itemize} 
+
+	The \cref{tab:more-specific} shows a summary of these informations. 
+
+	\begin{table}
+		\scriptsize
+		\centering
+		\begin{tabular}{lrrrrrrrr}
+		\toprule
+		var &  count &      mean &       std &      min &       25\% &       50\% &     75\% &       max \\
+		\midrule
+		scheduling &  280.0 &  5.3998 &  0.5834 &  4.7762 &  4.87248 &  5.4201 &   5.576 &   8.7637 \\
+		X          &  240.0 &  9.2220 &  2.7396 &  5.8241 &  7.03597 &  8.7616 &  10.510 &  20.0438 \\
+		P          &  251.0 &  9.4433 &  5.0247 &  4.9271 &  5.55710 &  6.4068 &  15.243 &  19.5353 \\
+		\bottomrule
+		\end{tabular}
+
+		\caption{Solve time statistics}
+		\label{tab:more-specific}
+	\end{table}
+
+	\begin{figure}
+		\centering
+		\includegraphics[width=\textwidth]{solve-time-specific.png}
+		\caption{More specific analysis on solve time, changing the search strategies.}
+		\label{fig:solve-time-specific}
+	\end{figure}
+
+
+	\pagebreak
 
 	\subsection{5 city of increasing size}
 	\label{subsec:test-5-cities}
 	Using one of the best search strategies, we tried to solve the problem using all the 5 increasing 
 	size cities in order to see how solving time changes. The timeout is set to 5 minutes for each execution.
-	In this case the configuration choosen has:
+	In this case, the configuration choosen is:
 	\begin{center}
-		$N = 12$ (orders), $d = 2$ (deliverers), city = Visano.	$\leftarrow$ TO CHANGE
+		$N = 12$ (orders), $d = 2$ (deliverers)	\\
+		city = Visano, Asola, Montichiari, Brescia, Roma
 	\end{center}
+	Solving times found are shown in \cref{fig:city-increasing-size}. Solve and init times are 
+	set to 300 seconds if the execution reached the timeout without solving the problem. This is the
+	case for the two biggest cities (Brescia and Roma). For the other cities, the time increases
+	with the size of the city and it is always under 20 seconds. 
+	\begin{figure}
+		\centering
+		\begin{subfigure}[c]{.49\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{city-increasing-size.png}
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}[c]{.49\textwidth}
+			\includegraphics[width=\textwidth]{city-increasing-size-2.png}
+			\caption{}
+		\end{subfigure}
+
+		\caption{Solving times for 5 cities of increasing size. $N = 12$, $d=2$}
+		\label{fig:city-increasing-size}
+	\end{figure}
 
 
 	\subsection{Increasing the size of the problem}
 	\label{subsec:test-size-of-problem}
 	Using one of the best search strategies, we tried to solve a set of problems in the same city (Visano)
 	with different complexities, represented by number of order $N$ and number of deliverer $d$. 
-	The timeout is set to 5 minutes for each execution.
+	The timeout is set to 2 minutes for each execution, $N$ ranges from $2$ to $15$ and $d$ ranges from $1$ to $4$. 
+	Results are represented in \cref{fig:increasing-problem} and they show what we expected: the peak depth of
+	the tree, the solve time, the number of solutions and propagations increases with $N$ and $d$. 
 	
+	\begin{figure}
+		\begin{subfigure}[c]{\textwidth}
+			\includegraphics[width=\textwidth]{incr-problem-depth.png}
+			\caption{peakDepth}
+		\end{subfigure}
+		\begin{subfigure}[b]{\textwidth}
+			\includegraphics[width=\textwidth]{incr-problem-time.png}
+			\caption{Solve time}
+		\end{subfigure}
+		\begin{subfigure}[b]{\textwidth}
+			\includegraphics[width=\textwidth]{incr-problem-solutions.png}
+			\caption{Solutions}
+		\end{subfigure}
+		\begin{subfigure}[b]{\textwidth}
+			\includegraphics[width=\textwidth]{incr-problem-propagations.png}
+			\caption{Propagations}
+		\end{subfigure}
+
+		\caption{Results increasing the size of the problem.
+			$N = 2\dots15,\hspace{.5em} d=1\dots4$, city = Visano. 
+			2 minutes timeout.}
+        \label{fig:increasing-problem}
+	\end{figure}
+
 	\subsection{Real-world application}
 
 	Using \textit{Python} and \textit{OpenStreetMap} we were able to execute the model
 	on a graph obtained by a real-world map and plot the results directly on the streetmap.
 	
-	
+	In \cref{fig:maps} there is an example of model execution on the city \textit{Visano}, 
+	with $N = 13$ orders and $d = 2$ deliverer. Solve time was 48.8 seconds.
 
-	\section{Conclusions}
+	\begin{figure}
+		\begin{subfigure}[t]{.5\textwidth}
+			\includegraphics[width=\textwidth]{graph.png}
+			\caption{Pizzeria (red) and destinations to reach (green)}
+
+		\end{subfigure}
+		\begin{subfigure}[t]{.5\textwidth}
+			\includegraphics[width=\textwidth]{graph_paths-min.png}
+			\caption{Path for each deliverer}
+		\end{subfigure}
+
+		\caption{Map plot of model's results.}
+        \label{fig:maps}
+	\end{figure}
 
 
-	\section{Future work}
+	\section{Conclusions} 
+
+	\subsection{Future work}
 	\label{Future work}
 	Only total traveled distance is minimized (for now). Maybe a balancing 
-	function is needed or maybe not.
+	function between the deliveres could be useful.
 
-	We tried to express all the constraints at \texttt{"row-level"}, but 
+	Simplify the model could be useful because it may leads to time decreasing.
+	
+	%We tried to express all the constraints at \texttt{"row-level"}, but 
 
-	Consider the time needed to give the pizza and take the money... 
+	Will be useful, for a more realistic application, take care of the time 
+	needed by the deliverer to give the pizza, handle the payment and other stuff. 
+
+
+
+	
 \end{document}
 
 
