@@ -47,15 +47,18 @@
 		we want to reach, in the \cref{Model} we will the describe the 
 		model and the implementation, including some euristichs and symmetry breaking
 		strategies. In the \cref{Results} we will describe the results and
-		the possible search strategies. In the last \cref{Future work} we 
-		will propose some possible changes and improvements to the current model.
+		the possible search strategies. Finally, in \cref{sec:conclusions} we will 
+		conclude that the main problem in the proposed model is the solving time,
+		that quickly increases considering a number of orders greater than 10
+		and a number of deliverers greater than 4, which are relatively small. 
+		Also, some possible changes and improvements 
+		will be proposed.
 		
 	\end{abstract}
 
 	{
-\small
+	\footnotesize
 	\tableofcontents
-
 	}
 
 	\pagebreak
@@ -127,7 +130,7 @@
 			\begin{equation*}
 				\begin{split}
 					\text{orario} &= [o_1, o_2, \dots, o_N];\\
-					\text{num\_pizze} &= [np_1, np_2, \dots, np_N];\\
+					\text{num\_pizzas} &= [np_1, np_2, \dots, np_N];\\
 					\text{dest} &= [d_1, d_2, \dots, d_N];
 				\end{split}
 			\end{equation*}
@@ -140,10 +143,14 @@
 	In order to make the problem a little easier, we made the following 
 	semplifications:
 	\begin{enumerate}
-		\item the graph is undirected, so \texttt{mdist} is symmetric: 
+		\item the graph is undirected, so \texttt{mdist} is symmetric:
 		\begin{center}
 			\texttt{mdist[x, y] = mdist[y, x]}
 		\end{center} 
+		As we'll show later, we can use Dijkstra on a real-world graph to calculate 
+		distances between the nodes. In this case, \texttt{mdist} matrix could be
+		asymmetric. 
+
 		\item a deliverer can do only a single travel in one half-an-hour. In other
 			words, the orders that are assigned to him/her are delivered creating 
 			a circuit starting from the pizzeria, visiting all the destinations 
@@ -273,20 +280,20 @@
 		accomplished by the deliverer \texttt{id} in the \texttt{ih} half-an-hour;
 		\item \textit{P = n} means that the order \textit{iN} has to be
 		accomplished by the deliverer \texttt{id} in the \texttt{ih} half-an-hour 
-		reaching the node \texttt{n} in the graph
+		reaching the node \texttt{n} in the graph;
 		\item \textit{distances = l} means that the order \texttt{iN} has to be
 		accomplished by the deliverer \texttt{id} in the \texttt{ih} half-an-hour 
-		and it will take \texttt{l} minutes to reach it, starting from the beginning of the
-		corresponding half-an-hour (partial time) 
+		and it will take $l$ minutes to reach it, starting from the beginning of the
+		corresponding half-an-hour (partial time).
 		 
 	\end{itemize}
 	All the others meaningless positions are set to zero in all the matrices.
 
 	\paragraph*{Total\_travel}
 	We use this 2-d matrix in order to store the total travel distance of deliverer \textit{id} in one half-an-hour \textit{ih}.
-	As described above, in the matrix \textit{distance} there are partial distances: from pizzeria to first delivery node, 
-	from first delivery node and the second one and so on, until the last delivery node.
-	If we add the distance between this last delivery node and the pizzeria (that is the path to return to the pizzeria)
+	As described above, in the matrix \textit{distance} there are partial distances: from pizzeria for each delivery node handled,
+	starting from the corresponding half-an-hour.
+	If we add the distance between the last delivery node and the pizzeria (that is the path to return to the pizzeria)
 	we have the total travel distance.
 	As already mentioned, our goal is minimize the sum of all these values.
 
@@ -355,9 +362,9 @@ forall(id in 1..d, iN in 1..N, ih in 1..h)(
 	distance between the pizzeria (node number 1) and this node: \texttt{mdist[1, P[X[1]]]}.
 	This value is put in \texttt{distances[X[1]]}.\\
 	
-	In the last case, the distance to reach the node in \texttt{X[i]} is 
-	the sum of the distance between the node \texttt{X[i]} and \texttt{X[i-1]}, and all 
-	the distances previusly computed to reach the latter. 
+	In the second case, the distance to reach the node in \texttt{X[i]} is 
+	the sum of the distance between the node \texttt{X[i]} and \texttt{X[i-1]}, and the last 
+	distance previusly computed (\texttt{distances[X[i-1]]}). 
     % TODO: DA SCRIVERE IN MATEMATICHESE!! COME DICE MINOOO!!! 
 	
 	For the sake of simplicity, in the example above, the matrices \text{P} and \text{X} are treated 
@@ -374,7 +381,7 @@ forall(id in 1..d, iN in 1..N, ih in 1..h)(
        else
           distances[id, X[id,iN,ih], ih] = 
             mdist[P[id, X[id,iN-1,ih], ih], P[id, X[id,iN,ih], ih]] 
-         	+ sum([distances[id,P[id, X[id,iNN,ih], ih],ih]
+         	+ distances[id,X[id,iN-1,ih], ih]
                   | iNN in 1..iN-1])
        endif
    endif
@@ -453,13 +460,13 @@ forall(id in 1..d, ih in 1..h)(
 		Every order has a requested delivery time that becomes a delivery window. 
 		We know that all the half-an-hours before and after this delivery window
 		are not usable. So, for each order we computed its \textit{valid} half-an-hour 
-		indeces (\texttt{hra}) that are used to access the matrices \texttt{scheduling}, \textbf{???}\texttt{distances} 
+		indeces (\texttt{hra}) that are used to access the matrices \texttt{scheduling}
 		and \texttt{P} in \textit{not-valid} half-an-hour to set it equal to zero.   
 		Also, a consideration on \texttt{X} matrix is made: for each \textit{not-valid} 
 		half-an-hour for a specific order, we know that this order index will be not present
 		in the corresponding row of \texttt{X}.
 
-		\textbf{maybe distances}
+		%\textbf{maybe distances}
 
 		\begin{verbatim}
 forall(id in 1..d, iN in 1..N, ih in (1..h diff hra[iN]) ) (
@@ -543,7 +550,7 @@ forall(ih in 1..h, id in 1..d-1)(
 	
 	As preprocessing step, for each of them we computed the shortest path beetween all the pairs
 	of nodes using Dijkstra. This produced the corresponding $mdist \in M^{nodes \times nodes}$.
-	For assumption (2) in \cref{subsec-assumptions}, these matrices are symmetric.
+	%For assumption (2) in \cref{subsec-assumptions}, these matrices are symmetric.
 
 	In addition to the model tests, we report a \textit{real-world} result of a model execution, obtained using some pre- and post-processing techniques.  
 
@@ -782,19 +789,42 @@ forall(ih in 1..h, id in 1..d-1)(
 
 
 	\section{Conclusions} 
+	\label{sec:conclusions}
+	Our proposed model seems to be working, \textit{but} the main problem is the solving time: 
+	it increases quickly 
+	with the size of the problem. Indeed, the model takes a couple of seconds to solve the problem
+	only with a number of order $N \le 12$. Using a number of orders over this threshold, 
+	the executions always reach the timeout of 5 minutes. With such a small value of $N$,
+	we're far from a real world situation, which usually includes $N \ge 50$ (and more
+	than $d = 3$ deliverer).
 
-	\subsection{Future works}
+	Also, we tried to use different solvers (from Gecode), but we got no improvement; 
+	on the contrary, we obtained worst results.
+
+	One possible improvement that we tried is reducing \texttt{mdist} size, considering
+	only the destination nodes.
+	This requires some pre- and post-processing steps and removes the correlation between
+	the size of the city (number of nodes) and the time required to solve the problem; 
+	However, considering the complexity ($N$ and $d$) the required time keeps growing 
+	in the same way.
+
+
+	\subsubsection*{Future works}
 	\label{Future work}
-	Only total traveled distance is minimized (for now). Maybe a balancing 
+
+	First of all, rethink about the model could be useful in order to reduce the solve time;
+	maybe \textit{we've not choosen the minimum path to reach the solution (ah-ah)!} maybe a 
+	simpler model leads to 
+	lower times. This can be done in parallel with \texttt{mdist} reduction, which is still 
+	a good choice.
+
+	Also, only total traveled distance is minimized (for now); maybe a balancing 
 	function between the deliveres could be useful.
 
-	Simplify the model could be useful because it may leads to time decreasing.
+	Finally, for a more realistic application, take care of the time 
+	needed by a deliverer to give the pizza to the customer, eventually handle 
+	the payment and other stuff could be useful.
 	
-	%We tried to express all the constraints at \texttt{"row-level"}, but 
-
-	Will be useful, for a more realistic application, take care of the time 
-	needed by a deliverer to give the pizza to the customer, eventually handle the payment and other stuff. 
-
 	
 \end{document}
 
