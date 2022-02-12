@@ -20,5 +20,6 @@ slides.pdf
 code/.ipynb_checkpoints/
 code/cache/
 code/data/temp-order.dzn
+code/data/temp-order-cheat.dzn
 code/out.txt
 code/graph*png
