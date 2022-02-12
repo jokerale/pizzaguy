@@ -36,6 +36,7 @@
 \usepackage{booktabs}
 \usepackage{tikz}
 \usepackage{adjustbox}
+\usepackage{verbatim}
 \usepackage[] %qm
 {qcircuit}
 % theme
@@ -112,9 +113,38 @@
 
 \section{Introduction}
 
-\begin{frame}
+\begin{frame}[allowframebreaks]
     {The pizza guy problem}
+    The best pizzeria in the town delivers pizzas at home and we want to find:
+    \begin{itemize} 
+        \item the best schedule of the set of orders,
+        \item minimize the total traveled distance by all the deliverers, 
+        \item respect the delivery times requested by the customers.
+    \end{itemize}
+    \vspace{0.3cm}
+    To solve the problem means
+    \begin{itemize}
+        \item assign a set of sorted lists of orders to every deliverer
+        \item where each list represents an "ordered" travel
+    \end{itemize}
+    \pagebreak
+    \begin{enumerate}
+		\item An \textit{order} consists in:
+		\begin{enumerate}
+			\item a delivery address;
+			\item a desired delivery time (granularity of 15 minutes) from 19.00 to 22.00;
+			\item a number of pizzas;
+		\end{enumerate}
+        \item Delivery window:
+        \begin{enumerate}
+			\item is up to 30 minutes later than desired delivery time;
+			\item during this time, multiple travels from and to the pizzeria are allowed 
+		\end{enumerate}
 
+		\item the street topology of the city can be seen as a graph (the edges rappresent the travel time.)
+		\item max pizza carried by a deliverer: 16;
+		
+	\end{enumerate}
 \end{frame}
 
 \section{Model}
@@ -123,15 +153,15 @@
 	\begin{enumerate}
 		\item $d$: number of deliverers
 		\item $mdist$: 2-d matrix representing the travel distance between
-			every pair of nodes in the graph generated using Dijkstra
-		\item $k$: the side dimension of $mdist$
+			every pair of nodes (with Dijkstra)
+		\item $k$: side dimension of $mdist$
 		\item a set of $N$ orders, each of them made by a destination $dest$, a delivery 
 			time $orario$ and a number of pizzas $num\_pizzas$
 
 			\begin{equation*}
 				\begin{split}
 					\text{orario} &= [o_1, o_2, \dots, o_N];\\
-					\text{num\_pizze} &= [np_1, np_2, \dots, np_N];\\
+					\text{num\_pizzas} &= [np_1, np_2, \dots, np_N];\\
 					\text{dest} &= [d_1, d_2, \dots, d_N];
 				\end{split}	
 			\end{equation*}
@@ -139,21 +169,45 @@
 \end{frame}
 \begin{frame}{Assumptions}
 	\begin{enumerate}
-		\item the graph is undirected,
-		\item a deliverer can do only a single travel in one half-an-hour.
+		\item the graph could be undirected;
+		\item a deliverer can do only a single travel 
+        (from pizzeria, to all destination nodes and back to pizzeria) in one half-an-hour ($h$);
+        \begin{itemize}
+            \item the total number of $h$ is 6 (\# slot in 19.00 to 22.00)
+        \end{itemize}
+            
 		\item distances and travels time are considered the same thing;
 		\item the set of orders is known before the start of the evening;
 		\item all the time needed by the deliverer to interacts with customers
                  is supposed to be zero. 
 	\end{enumerate}
 \end{frame}
-\begin{frame}{Implementation}
+
+\begin{frame}[allowframebreaks]{Implementation}
+    Note: $d$ : \# deliverers, $N$: \# deliveries and $h$: \# time slot.\\
+    As decisional variables, we used these following data structures:
     \begin{itemize}
 		\item {scheduling:\\
             \begin{center}
                 \texttt{array[1..d, 1..N, 1..h] of var bool: scheduling;}
             \end{center}    
         }
+        \item {P: destinations to reach\\
+            \begin{center}
+                \texttt{array[1..d, 1..N, 1..h] of var array2set(dest) union {0}: P;}
+            \end{center}
+        }
+		\item {X: position of destinations to reach\\
+            \begin{center}
+                \texttt{array[1..d, 1..N, 1..h] of var 0..N: X;}
+            \end{center}
+        }
+        \item {distances\\
+            \begin{center}
+                \texttt{array[1..d, 1..N, 1..h] of var 0..29: distances;}
+            \end{center}
+        }
+        \pagebreak
 		\item {pizza\_carried\\
             \begin{center}
                 \texttt{array[1..d, 1..h] of var 0..16: pizzas\_carried;}
@@ -164,21 +218,7 @@
                 \texttt{array[1..N] of var 0..h*30: ea;}
             \end{center}
         }
-		\item {P\\
-            \begin{center}
-                \texttt{array[1..d, 1..N, 1..h] of var array2set(dest) union {0}: P;}
-            \end{center}
-        }
-		\item {X\\
-            \begin{center}
-                \texttt{array[1..d, 1..N, 1..h] of var 0..N: X;}
-            \end{center}
-        }
-		\item {distances\\
-            \begin{center}
-                \texttt{array[1..d, 1..N, 1..h] of var 0..29: distances;}
-            \end{center}
-        }
+		
 		\item {total\_travel\\
             \begin{center}
                 \texttt{array[1..d, 1..h] of var 0..29: total\_travel;}
@@ -186,8 +226,53 @@
         } 
 	\end{itemize}
 \end{frame}
-\begin{frame}{Constraints}
+
+\begin{frame}[fragile]{Constraints: scheduling and P consistency}
+    Scheduling consistency:
+    \begin{itemize}
+		\item ensures that all the orders are fulfilled: \\
+            \begin{center}
+                \texttt{sum(scheduling) = N;}
+            \end{center}
+            
+		\item ensures that only one delivever takes care of one order. 
+          \begin{center}
+            \texttt{forall(j in 1..N)(\\
+			    sum([scheduling[id,j,ih]| id in 1..d, ih in 1..h]) = 1\\
+		  );}
+        \end{center}
+        \end{itemize}
+    \vspace{0.5cm}
+    P construction: 
+    \begin{verbatim}
+    forall(id in 1..d, iN in 1..N, ih in hra[iN])(
+        P[id, iN, ih] = scheduling[id, iN, ih] * dest[iN]
+    );
+    \end{verbatim}
 \end{frame}
+
+\begin{frame}[fragile]{Constraints: X consistency}
+    X has to contain all the meaningful positions in P:
+    \begin{verbatim}
+    forall(id in 1..d, iN in 1..N, ih in 1..h)(
+        if P[id, iN, ih] > 0 then 
+            count([ X[id, iNN, ih] | iNN in 1..N], iN, 1)
+        else
+        (
+            count([ X[id, iNN, ih] | iNN in 1..N], iN, 0) 
+            /\
+            distances[id,iN,ih] = 0
+        )
+        endif
+    );
+    \end{verbatim}
+    Also, for each row of X, we want to push all the meaningless values (zeros) to the end. \\
+    (done in another constraint).
+\end{frame}
+
+\begin{frame}
+\end{frame}
+
 \begin{frame}{Restrict the search space}
 \end{frame}
 \begin{frame}{Break the symmetry}
