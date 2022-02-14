@@ -128,7 +128,7 @@
         \item respect the delivery times requested by the customers.
     \end{itemize}
     \vspace{0.3cm}
-    To solve the problem means:
+    Solving the problem means:
     \begin{itemize}
         \item assign a set of sorted lists of orders to every deliverer,
         \item where each list represents an "ordered" travel.
@@ -179,7 +179,7 @@
 		\item a deliverer can do only a single travel 
         (from pizzeria, to all destination nodes and back to pizzeria) in one half-an-hour ($h$);
         \begin{itemize}
-            \item the total number of $h$ is 6 (\# slot in 19.00 to 22.00)\\~\
+            \item the total number of $h$ is 6 (\# slots in 19.00 - 22.00)\\~\
         \end{itemize}
             
 		\item distances and travels time are considered the same thing;\\~\
@@ -190,7 +190,7 @@
 \end{frame}
 
 \begin{frame}[allowframebreaks]{Implementation}
-    $d$ : \# deliverers, $N$: \# deliveries and $h$: \# time slot.\\~\
+    $d$ : \# deliverers, $N$: \# deliveries and $h$: \# time slots.\\~\
 
     As decisional variables, we used these following data structures:
     \begin{itemize}
@@ -379,7 +379,7 @@ forall(id in 1..d, ih in 1..h)(
 
 \end{frame}
 
-\begin{frame}[fragile]{Break a symmetry}
+\begin{frame}[fragile]{Symmetry breaking}
 
     Simmetry $\rightarrow$ having multiple deliveriers.\\~\
 
@@ -399,7 +399,7 @@ forall(ih in 1..h, id in 1..d-1)(
 
 \end{frame}
 
-\section{Result}
+\section{Results}
 
 
 \begin{frame}{Tests and results}
