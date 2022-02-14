@@ -1,10 +1,10 @@
 \documentclass
-[9pt, xcolor=dvipsnames]
+[10pt, xcolor=dvipsnames]
 %[11pt,compress ,xcolor=dvipsnames]
 {beamer}
 
 \usepackage{graphicx}
-\graphicspath{ {./figures} }
+\graphicspath{ {../figures} }
 
 \usepackage{caption}
 \captionsetup[figure]{font=scriptsize,labelfont=scriptsize}
@@ -37,6 +37,9 @@
 \usepackage{tikz}
 \usepackage{adjustbox}
 \usepackage{verbatim}
+\usepackage{setspace}
+\usepackage{subcaption}
+
 \usepackage[] %qm
 {qcircuit}
 % theme
@@ -83,7 +86,7 @@
 
 
 \AtBeginSection[]{
-	\begin{frame}
+	\begin{frame}{Outline}
 		\tableofcontents[sectionstyle=show/shaded,subsectionstyle=show/shaded/hide,subsubsectionstyle=show/shaded/hide]
 	\end{frame}
 }
@@ -93,7 +96,10 @@
 \begin{document}
 
 % interlinea
-\linespread{1.25}
+%\linespread{1.5}
+%\doublespacing
+
+
 \setbeamertemplate{navigation symbols}{}
 
 
@@ -105,7 +111,7 @@
 
 
 % outline
-\begin{frame}
+\begin{frame}{Outline}
     \tableofcontents[sectionstyle=show,subsectionstyle=show/shaded/hide,subsubsectionstyle=show/shaded/hide]
 %    \tableofcontents
 \end{frame}
@@ -122,27 +128,27 @@
         \item respect the delivery times requested by the customers.
     \end{itemize}
     \vspace{0.3cm}
-    To solve the problem means
+    To solve the problem means:
     \begin{itemize}
-        \item assign a set of sorted lists of orders to every deliverer
-        \item where each list represents an "ordered" travel
+        \item assign a set of sorted lists of orders to every deliverer,
+        \item where each list represents an "ordered" travel.
     \end{itemize}
     \pagebreak
     \begin{enumerate}
 		\item An \textit{order} consists in:
 		\begin{enumerate}
-			\item a delivery address;
-			\item a desired delivery time (granularity of 15 minutes) from 19.00 to 22.00;
-			\item a number of pizzas;
+			\item a delivery address,
+			\item a desired delivery time (granularity of 15 minutes) from 19.00 to 22.00,
+			\item a number of pizzas.\\~\
 		\end{enumerate}
         \item Delivery window:
         \begin{enumerate}
 			\item is up to 30 minutes later than desired delivery time;
-			\item during this time, multiple travels from and to the pizzeria are allowed 
+			\item during this time, multiple travels from and to the pizzeria are allowed.\\~\
 		\end{enumerate}
 
-		\item the street topology of the city can be seen as a graph (the edges rappresent the travel time.)
-		\item max pizza carried by a deliverer: 16;
+		\item The street topology of the city can be seen as a graph (the edges rappresent the travel time).\\~\
+		\item Max pizza carried by a deliverer: 16.
 		
 	\end{enumerate}
 \end{frame}
@@ -151,12 +157,12 @@
 \begin{frame}{Input Data}
     The input consists in having:
 	\begin{enumerate}
-		\item $d$: number of deliverers
+		\item $d$: number of deliverers,
 		\item $mdist$: 2-d matrix representing the travel distance between
-			every pair of nodes (with Dijkstra)
-		\item $k$: side dimension of $mdist$
+			every pair of nodes (with Dijkstra),
+		\item $k$: side dimension of $mdist$,
 		\item a set of $N$ orders, each of them made by a destination $dest$, a delivery 
-			time $orario$ and a number of pizzas $num\_pizzas$
+			time $orario$ and a number of pizzas $num\_pizzas$:
 
 			\begin{equation*}
 				\begin{split}
@@ -169,22 +175,23 @@
 \end{frame}
 \begin{frame}{Assumptions}
 	\begin{enumerate}
-		\item the graph could be undirected;
+		\item the graph could be undirected;\\~\
 		\item a deliverer can do only a single travel 
         (from pizzeria, to all destination nodes and back to pizzeria) in one half-an-hour ($h$);
         \begin{itemize}
-            \item the total number of $h$ is 6 (\# slot in 19.00 to 22.00)
+            \item the total number of $h$ is 6 (\# slot in 19.00 to 22.00)\\~\
         \end{itemize}
             
-		\item distances and travels time are considered the same thing;
-		\item the set of orders is known before the start of the evening;
+		\item distances and travels time are considered the same thing;\\~\
+		\item the set of orders is known before the start of the evening;\\~\
 		\item all the time needed by the deliverer to interacts with customers
                  is supposed to be zero. 
 	\end{enumerate}
 \end{frame}
 
 \begin{frame}[allowframebreaks]{Implementation}
-    Note: $d$ : \# deliverers, $N$: \# deliveries and $h$: \# time slot.\\
+    $d$ : \# deliverers, $N$: \# deliveries and $h$: \# time slot.\\~\
+
     As decisional variables, we used these following data structures:
     \begin{itemize}
 		\item {scheduling:\\
@@ -235,7 +242,7 @@
                 \texttt{sum(scheduling) = N;}
             \end{center}
             
-		\item ensures that only one delivever takes care of one order. 
+		\item ensures that only one delivever takes care of one order:
           \begin{center}
             \texttt{forall(j in 1..N)(\\
 			    sum([scheduling[id,j,ih]| id in 1..d, ih in 1..h]) = 1\\
@@ -266,41 +273,352 @@
         endif
     );
     \end{verbatim}
-    Also, for each row of X, we want to push all the meaningless values (zeros) to the end. \\
+    Also, for each row of X, we want to push all the meaningless values (zeros) to the end
     (done in another constraint).
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]{Constraints: distances calculation}
+    Considering a single row of \texttt{X}, two different cases:
+    \begin{itemize}
+        \item the first (meaningful) cell;
+        \item all the others (meaningful) cells.
+    \end{itemize}
+\begin{verbatim}
+    forall(id in 1..d, iN in 1..N, ih in 1..h)(
+        if X[id,iN,ih] !=0 then
+           if iN == 1 then
+              distances[id, X[id,iN,ih], ih] = 
+                 mdist[1, P[id, X[id,iN,ih], ih]] 
+            else
+               distances[id, X[id,iN,ih], ih] = 
+                 mdist[P[id, X[id,iN-1,ih], ih], P[id, X[id,iN,ih], ih]] 
+                  + distances[id,X[id,iN-1,ih], ih]
+                       | iNN in 1..iN-1])
+            endif
+        endif
+     );
+\end{verbatim}
+
 \end{frame}
 
-\begin{frame}{Restrict the search space}
+\begin{frame}[fragile]{Constraints: total travel}
+    
+    Total travel consistency ensured by \texttt{total\_travel} domain of \texttt{[0..29]}:
+    
+    \begin{verbatim}
+    constraint forall(id in 1..d, iN in 1..N, ih in 1..h)(
+        ( X[id,iN,ih] !=0
+            /\ ( iN+1 == N+1 \/ X[id,iN+1,ih] == 0)
+            /\ P[id,X[id,iN,ih],ih] != 0)
+
+            -> (total_travel[id,ih] = 
+                distances[id, X[id,iN,ih], ih] 
+                + mdist[P[id, X[id,iN,ih], ih],1])   
+    );
+    \end{verbatim}
+
+    
 \end{frame}
-\begin{frame}{Break the symmetry}
+
+\begin{frame}[fragile]{Constraints: ea \& pizza\_carried}
+
+Expected arrival: all the orders must arrive in the delivery window.
+    \begin{verbatim}
+forall(iN in 1..N)(
+   ea[iN] = sum([scheduling[id,iN,ih]
+            * (distances[id,iN,ih]+((ih-1)*30)) 
+               | id in 1..d, ih in 1..h])
+   /\ ea[iN] >= ra[iN] 
+   /\ ea[iN] < ra[iN]+30 
+);
+    \end{verbatim}
+
+Number of pizzas carried for each travel:
+    \begin{verbatim}
+forall(id in 1..d, ih in 1..h)(
+   pizzas_carried[id, ih] = sum([ num_pizze[j]
+                                | j in 1..N 
+                                where scheduling[id, j, ih] = 1])
+);
+    \end{verbatim}
+\end{frame}
+
+
+\begin{frame}{Graphical representation}
+
+    \begin{center}
+        \includegraphics[scale=.45]{drawio.png}
+    \end{center}
+
+\end{frame}
+
+\begin{frame}[fragile]{Restrict the search space}
+
+    \begin{enumerate}
+        \item domain restrictions;
+        \item for each order, exclude all the non-possible half-an-hour;
+        \begin{verbatim}
+    forall(id in 1..d, iN in 1..N, ih in (1..h diff hra[iN]))(
+        scheduling[id,iN,ih] = 0
+        /\ P[id,iN,ih] = 0
+        /\ distances[id,iN,ih] = 0
+        /\ count( [X[id,iNN,ih] | iNN in 1..N], iN, 0)
+    );
+        \end{verbatim}
+        \item enforce useless cells of \texttt{X} to be zero (and push them to the bottom).
+  \begin{verbatim}
+    forall(id in 1..d, ih in 1..h)(
+        let {
+            var int: c = count([P[id,iNN,ih] | iNN in 1..N],0)
+        } in forall(iN in N-c+1..N)(
+            X[id,iN,ih] = 0
+            )
+    );
+  \end{verbatim}
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}[fragile]{Break a symmetry}
+
+    Simmetry $\rightarrow$ having multiple deliveriers.\\~\
+
+    \textit{e.g.} 3 orders, 2 deliverer (\texttt{d1} and \texttt{d2}).\\
+    \hspace{1em}best strategy: first two togheter, third alone.\\
+
+    \hspace{1em}$\rightarrow$ first two can be assigned to \texttt{d1} and the third to \texttt{d2}\\
+    \hspace{2em} and \textbf{viceversa}. \\~\
+
+Impose an order on the deliverers:
+
+\begin{verbatim}
+forall(ih in 1..h, id in 1..d-1)(
+    pizzas_carried[id,ih] >= pizzas_carried[id+1,ih]
+);
+\end{verbatim}
+
 \end{frame}
 
 \section{Result}
+
+
+\begin{frame}{Tests and results}
+    
+
+    Different analyzes:
+    \begin{itemize}
+        \item search strategies comparison;
+        \item same problem with different cities (of increasing size);
+        \item same city, increasing complexity of the problem;
+        \item real-world application.\\~\
+    \end{itemize}
+
+    5 real-world italian cities considered:
+    \begin{table}[h]
+		\centering
+		\begin{tabular}{l|ll}
+			City & nodes & edges \\
+			\hline
+			Visano & 297 & 378 \\
+			Asola & 480 & 664 \\
+			Montichiari & 1130 & 1509 \\
+			Brescia & 3925 & 5464 \\
+			Roma & 4729 & 7277 \\
+		\end{tabular}		
+	\end{table}
+	
+    \texttt{mdist} computed using Dijkstra as pre-preprocessing step.
+
+
+\end{frame}
+
+
+
+
 \begin{frame}{Search strategies comparison}
+
+    \begin{center}
+		$N = 12$ (orders), $d = 2$ (deliverers), city = Visano.	\\~\	
+	\end{center}
+
+    Changing the search annotations:
+    \begin{itemize}
+        \item the search variable;
+        \item how the variable is choosen (VCA);
+        \item how to constraint the variable (VSA).\\~\
+    \end{itemize}
+
+    Result:
+    \begin{itemize}
+        \item searching of variable \texttt{scheduling} is usually faster;
+        \item some VCA (Variable Choice Annotation) and
+        VSA (Variable Search Annotation) appear to be more promising 
+        than others.
+    \end{itemize}
 \end{frame}
-\begin{frame}{Preliminary analysis}
+
+\begin{frame}{Search strategies comparison: preliminary analysis}
+    \begin{figure}
+		\centering
+
+		\begin{subfigure}[b]{.3\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{var.png}
+			\caption{changing search variable.}
+		\end{subfigure}
+		\begin{subfigure}[b]{.69\textwidth}
+			\includegraphics[width=.9\textwidth]{vca.png}
+			\caption{changing Variable Choice Annotation (VCA)}
+		\end{subfigure}
+		\begin{subfigure}[b]{\textwidth}
+
+            \centering
+            \includegraphics[width=.8\textwidth]{vsa.png}
+			\caption{changing Variable Search Annotations (VSA)}
+		\end{subfigure}
+		
+	\end{figure}
+ 
 \end{frame}
-\begin{frame}{More specific analysis}
+
+   
+    %\includegraphics{}{var.png}
+
+
+
+\begin{frame}[allowframebreaks]{Search strategies comparison: more specific analysis}
+
+    Subset of search strategies (the most promising) considered.\\
+    Timeout of 20 seconds.\\~\
+
+    Correlation matrix:
+    \begin{itemize}
+        \item number of failures and number of nodes (1)
+        \item number of propagations and solve time (0.79) and 
+        non-correlation between maximum depth and solve time (-0.05)
+    \end{itemize}
+
+    \begin{figure}
+        \centering
+        \includegraphics[width=.3\textwidth]{corr.png}
+    \end{figure}
+
+    \framebreak
+
+    \begin{figure}
+		\centering
+		\includegraphics[width=.72\textwidth]{solve-time-specific.png}
+	\end{figure}
+
 \end{frame}
+
 \begin{frame}{5 city of increasing size}
+
+    \begin{center}
+		$N = 12$ (orders), $d = 2$ (deliverers), changing the city
+	\end{center}
+
+
+    \begin{figure}
+		\centering
+		\begin{subfigure}[c]{.49\textwidth}
+			\centering
+			\includegraphics[width=.7\textwidth]{city-increasing-size.png}
+		\end{subfigure}
+		\begin{subfigure}[c]{.49\textwidth}
+			\includegraphics[width=.7\textwidth]{city-increasing-size-2.png}
+
+		\end{subfigure}
+	\end{figure}
+
+    Roma and Brescia always reach timeout.
+
 \end{frame}
+
+\begin{frame}[allowframebreaks]{Changing the complexity of the problem}
+
+    $N = 2\dots15,\hspace{.5em} d=1\dots4$, city = Visano, 2 minutes timeout.\\~\
+
+    \begin{figure}
+        \centering
+		\begin{subfigure}[c]{\textwidth}
+            \centering
+			\includegraphics[width=.8\textwidth]{incr-problem-depth.png}
+			\caption{peakDepth}
+		\end{subfigure}
+		\begin{subfigure}[b]{\textwidth}
+            \centering
+			\includegraphics[width=.8\textwidth]{incr-problem-time.png}
+			\caption{Solve time}
+		\end{subfigure}
+		\begin{subfigure}[b]{\textwidth}
+            \centering
+			\includegraphics[width=.8\textwidth]{incr-problem-solutions.png}
+			\caption{Solutions}
+		\end{subfigure}
+		\begin{subfigure}[b]{\textwidth}
+            \centering
+			\includegraphics[width=.8\textwidth]{incr-problem-propagations.png}
+			\caption{Propagations}
+		\end{subfigure}
+
+	\end{figure}
+\end{frame}
+
 \begin{frame}{Real world application}
+
+    City graph from \texttt{OpenStreetMap (Python)}.\\
+    \texttt{mdist} filled with Dijkstra.\\~\
+
+    \begin{figure}
+		\begin{subfigure}[t]{.5\textwidth}
+			\includegraphics[width=.7\textwidth]{graph.png}
+			\caption{Pizzeria (red) and destinations to reach (green)}
+
+		\end{subfigure}
+		\begin{subfigure}[t]{.49\textwidth}
+			\includegraphics[width=.7\textwidth]{graph_paths-min.png}
+			\caption{Path for each deliverer}
+		\end{subfigure}
+	\end{figure}
+
+
+
+    \textit{Visano}, $N = 13$, $d = 2$, solve time: 48.8 seconds.
+
 \end{frame}
 
 \section{Conclusions}
 
 \begin{frame}{Conclusions}
+    \begin{enumerate}
+        \item Our proposed model seems to work.\\~\
+        \item \textit{But} the time increases quickly with the size of the problem:
+        \begin{itemize}
+            \item timeout of 5 minutes for $N \ge 15$ and $d \ge 3$ 
+            \item real-world scenario: $N \ge 60, d \ge 3$\\~\
+        \end{itemize}
+        \item Worst results with the other solvers besides Gecode. \\~\
+    \end{enumerate}
+
+    Possible improvements:
+    \begin{itemize}
+        \item reduce \texttt{mdist} size (already done but not reported);
+        \item balancing function between deliverers could be useful;
+        \item find a way to exclude two destinations that are too far away from the same travel;
+        \item maybe rethink about the model.
+    \end{itemize}
 
 \end{frame}
 
-\begin{frame}{Future works}
-
+\begin{frame}
+    \huge Thank you.
+    \begin{figure}
+        \hfill
+        \includegraphics[width=.5\textwidth]{diana-pizza-guy.png}
+        
+    \end{figure}
 \end{frame}
-
-
 
 %\appendix
 %

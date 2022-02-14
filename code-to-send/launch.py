@@ -116,15 +116,6 @@ file.write(stringaOrari + os.linesep
            + "d = " + str(d) + ";" + os.linesep)
 file.close()
 
-
-
-
-
-
-
-
-
-
 # command to execute
 cmd = 'minizinc --solver Gecode --time-limit ' + str(timelimit) + ' v03.mzn ' + filename_dij + ' data/temp-order.dzn --statistics'  
 
@@ -157,8 +148,8 @@ solver_time_l = [line for line in out.split('\n') if "%%%mzn-stat: solveTime=" i
 solve_time = float(solver_time_l[0].split('=')[1])
 print("SOLVE TIME FROM STATISTICS: " + str(solve_time))
 
-if ('UNSAT' in out) or ('UNKNOWN' in out): 
-    exit()
+#if ('UNSAT' in out) or ('UNKNOWN' in out): 
+#    exit()
 
 # Save image of paths
 if(plot):

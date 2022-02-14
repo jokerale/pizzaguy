@@ -1,6 +1,54 @@
 include "globals.mzn";
+
+% comment if using launch.py
 %include "data/Asola_dijkstra.dzn";
 %include "data/temp-order.dzn";
+
+
+
+%%%%%% hand-written inputs %%%%%
+
+% comment if using launch.py
+
+%d = 3;
+
+% (1)
+% N = 3;
+% orario = [21.00, 19.45, 20.30];
+% dest = [2, 3, 5];
+% num_pizze = [1, 4, 3];
+% k = 5;
+% mdist = [| 0, 1, 2, 2, 3
+%          | 1, 0, 2, 21, 3
+%          | 2, 2, 0, 4, 1
+%          | 2, 21, 4, 0, 5
+%          | 3, 3, 1, 5, 0
+%          |];
+
+% (2)
+%N = 8;
+%orario     =  [19.15, 19.30, 19.30, 20.30, 19.45, 19.30, 20.30, 21.30];
+%num_pizze  =  [2,     8,     8,     6,     5,     8,     8,     6];
+%dest       =  [2,     4,     4,     3,     2,     5,     3,     5];
+%k = 13;
+%
+%mdist = [| 0,  7,  9,  3,   7,  1,  2,  12, 12, 10, 9,  11, 9
+%         | 7,  0,  2, 10,   14, 8,  5,  6,  5,  3,  7,  12, 9
+%         | 9,  2,  0,  9,   15, 10, 7,  5,  3,  1,  5,  11, 8
+%         | 3,  10, 9,  0,   10, 4,  5,  14, 12, 10, 6,  14, 12
+%         | 7,  14, 15, 10,  0,  6,  9,  10, 12, 14, 16, 4,  7
+%         | 1,  8,  10, 4,   6,  0,  3,  13, 13, 11, 10, 10, 10
+%         | 2,  5,  7,  5,   9,  3,  0,  10, 10, 8,  11, 10, 7
+%         | 12, 6,  5,  14,  10, 13, 10, 0,  2,  4,  8,  6,  3
+%         | 12, 5,  3,  12,  12, 13, 10, 2,  0,  2,  6,  8,  5
+%         | 10, 3,  1,  10,  14, 11, 8,  4,  2,  0,  4,  10, 7
+%         | 9,  7,  5,  6,   16, 10, 11, 8,  6,  4,  0,  14, 11
+%         | 11, 12, 11, 14,  4,  10, 10, 6,  8,  10, 14, 0,  3
+%         | 9,  9,  8,  12,  7,  10, 7,  3,  5,  7,  11, 3,  0
+%         |];
+%
+%
+
 
 
 %%%%%% INPUT %%%%%%
@@ -46,7 +94,7 @@ array[1..d, 1..N, 1..h] of var 0..N: X;          % positions of the destinations
 
 array[1..d, 1..N, 1..h] of var 0..29: distances; % partial distances to reach the node (COULD BE INT)
 
-array[1..d, 1..h] of var 0..29: total_travel;    % 
+array[1..d, 1..h] of var 0..29: total_travel;    % total travel time for each deliverer for each half-an-hour
 
 
 
@@ -66,12 +114,12 @@ constraint forall(iN in 1..N)(
 % All the rest must be 0.
 constraint forall(id in 1..d, iN in 1..N, ih in (1..h diff hra[iN]) ) (
   scheduling[id,iN,ih] = 0
-  %/\
-  %distances[id,iN,ih] = 0
+  /\
+  distances[id,iN,ih] = 0 
   /\
   P[id,iN,ih] = 0
   /\
-  count( [X[id,iNN,ih] | iNN in 1..N], iN, 0) % maybe ok
+  count( [X[id,iNN,ih] | iNN in 1..N], iN, 0)
 );
 
 
@@ -80,19 +128,16 @@ constraint forall(id in 1..d, iN in 1..N, ih in hra[iN])(
   P[id, iN, ih] = scheduling[id, iN, ih] * dest[iN]
 );
 
-%% ADDED
+%% For each destination nodes, its number must be the same both in P and dest
 constraint forall(dd in array2set(dest))(
   count(P, dd) = count(dest, dd)
 );
-
-%constraint alldifferent_except_0(X);
 
 
 
 % For each line of P, the number of zeros must be the same as the
 % number of zeros in the same line of X.
 constraint forall(id in 1..d, ih in 1..h)(
-%  count([P[id,iN,ih] | iN in 1..N],0) = count([X[id,iN,ih] | iN in 1..N],0)
   let {
     var int: c = count([P[id,iNN,ih] | iNN in 1..N],0)
   }
@@ -108,10 +153,9 @@ constraint forall(id in 1..d, ih in 1..h)(
 
 
 
-% X consistency (all)
+% X consistency
 constraint forall(id in 1..d, iN in 1..N, ih in 1..h)(
   if P[id, iN, ih] > 0 then 
-%   if P[id, iN, ih] != 0 then
     count([ X[id, iNN, ih] | iNN in 1..N], iN, 1)
   else
     ( 
@@ -125,22 +169,26 @@ constraint forall(id in 1..d, iN in 1..N, ih in 1..h)(
   %( X[id,iN,ih] == 0 -> forall(iNN in iN..N) (X[id,iNN,ih] = 0) )
 );
 
-% DISTANCES (?) - in the previous constraint
-% constraint forall(id in 1..d, iN in 1..N, ih in 1..h)(   %hra[iN])( % (??) should work
+% DISTANCES - BECAME REDUNTANT (in the previous constraint)
+% constraint forall(id in 1..d, iN in 1..N, ih in 1..h)( 
 %   count([X[id,iNN,ih]| iNN in 1..N], iN, 0) -> distances[id,iN,ih] = 0
 % );
 
 % calculate distances
-constraint forall(id in 1..d, iN in 1..N, ih in 1..h)( %{hra[iN]} union {hra1[iN]})( % seems not working
+constraint forall(id in 1..d, iN in 1..N, ih in 1..h)( 
   
-  if X[id,iN,ih] !=0 then
+  if (X[id,iN,ih] !=0 /\ P[id, X[id,iN,ih], ih] != 0)  then 
   (
     if iN == 1 then
       distances[id, X[id,iN,ih], ih] = mdist[1, P[id, X[id,iN,ih], ih]] 
     else
+    (
+    if P[id, X[id,iN-1,ih], ih] != 0 then
       distances[id, X[id,iN,ih], ih] = 
-         distances[id,X[id,iN-1,ih], ih]  %+ sum([distances[id,P[id, X[id,iNN,ih], ih],ih] | iNN in 1..iN-1])
+         distances[id,X[id,iN-1,ih], ih]  
          + mdist[P[id, X[id,iN-1,ih], ih], P[id, X[id,iN,ih], ih]] 
+         endif
+    )
     endif
   )
   endif
@@ -148,19 +196,20 @@ constraint forall(id in 1..d, iN in 1..N, ih in 1..h)( %{hra[iN]} union {hra1[iN
 );
 
 % total_travel 
-constraint forall(id in 1..d, iN in 1..N, ih in 1..h)(%hra[iN])( % (??) should work
-  
-  ( X[id,iN,ih] !=0 /\ ( iN+1 == N+1 \/ X[id,iN+1,ih] == 0) )
+constraint forall(id in 1..d, iN in 1..N, ih in 1..h)(
+
+  ( X[id,iN,ih] !=0 /\ ( iN+1 == N+1 \/ X[id,iN+1,ih] == 0) /\ P[id,X[id,iN,ih],ih] != 0)
     -> (total_travel[id,ih] = distances[id, X[id,iN,ih], ih] + mdist[P[id, X[id,iN,ih], ih],1])
        
 );
 
 
-% EA
+% EA - expected arrival
 constraint forall(iN in 1..N)(
     % construction
     ea[iN] = sum([scheduling[id,iN,ih] * (distances[id,iN,ih]+((ih-1)*30)) | id in 1..d, ih in 1..h])
     /\
+    % orders must arrive in time
     ea[iN] >= ra[iN] 
     /\ 
     ea[iN] < ra[iN]+30 
@@ -168,8 +217,8 @@ constraint forall(iN in 1..N)(
 
 
 
-% PIZZA_CARRIED
-% constraint sum(pizzas_carried) = sum(num_pizze); %MAYBE UNUSEFUL
+% pizza_carried
+
 constraint forall(id in 1..d, ih in 1..h)(
   pizzas_carried[id, ih] = sum([ num_pizze[iN] | iN in 1..N where scheduling[id, iN, ih] = 1])
   );
@@ -181,51 +230,11 @@ constraint forall(ih in 1..h, id in 1..d-1)(
 );
 
 
-%% ADDED
-constraint forall(iN in 1..N, iNN in 1..N diff {iN})(
-  
-    num_pizze[iN] + num_pizze[iNN] > 16
-    -> forall(id in 1..d, ih in 1..h)(scheduling[id,iN,ih] + scheduling[id,iNN,ih] < 2  
-  )
-%   -> (
-%       count([X[id,iNNN,ih] | iNNN in 1..N],iN)
-%       + count([X[id,iNNN,ih] | iNNN in 1..N],iN) < 2 
-%     )  
-);
-
-
-% Trying to optimize
-% constraint forall(ik in 1..k)(
-%  ( count(dest,k,0) -> count(P,k,0) )
-%  /\
-%  ( count(dest,k,1) -> count(P,k,1) )
-% );
-
-% May not improve
-% constraint forall(kk in array2set(dest))(
-%   count(P,kk) = count(dest,kk)
-% );
-
-% constraint forall(ik in 1..k)(
-%   let{
-%        var int: c;
-%     } in  count(dest,k,c) -> count(P,k,c)
-% %   /\
-% %   ( count(dest,k,1) -> count(P,k,1) )
-% );P[id, X[id,iN-1,ih], ih]
-
-
-
-
+% solve satisfy;
+% solve minimize sum(total_travel);
 solve :: bool_search( scheduling, most_constrained, indomain_max)
 %          ::restart_linear(100)
-           minimize sum(total_travel);
-       
-%solve satisfy;
-%solve minimize sum(total_travel);
-
-%solve :: int_search( X,
-%        most_constrained, indomain_random) minimize sum(total_travel);
+           minimize sum(total_travel); 
 
 
 
@@ -294,7 +303,6 @@ output
        ["\nea: "] ++ [show(ea)]
        ++["\nra: "] ++ [show(ra)]
        ++ ["\nhra: "] ++ [show(hra)] ++ ["\n"]
-       ++["\nsum(distances): "] ++ [show(sum(distances))] ++ ["\n"]
        ++["\nsum(total_travel): "] ++ [show(sum(total_travel))] ++ ["\n"]
        
        ++["\n TRAVEL TIME"]
@@ -369,46 +377,3 @@ output
 %         ["tot path weight: " ++ show(sum(path_w))]
         
 %         ++ ["\nexpected arrival: ["] ++ [ show(start+(ea[i] div 60)) ++ "." ++ show(ea[i] mod 60) ++ if i=N then "]" else ", " endif | i in 1..N ];
-
-
-
-
-
-
-
-
-%%%%%% INPUT %%%%%%
-
-% (1)
-% orario = [21.00, 19.45, 20.30];
-% dest = [2, 3, 6];
-% num_pizze = [1, 4, 3];
-% k = 13;
-% N = 3;
-% mdist = [| 0,  7,  9,  3,   7,  1,  2,  12, 12, 10, 9,  11, 9
-%          | 7,  0,  2, 10,   14, 8,  5,  6,  5,  3,  7,  12, 9
-%          | 9,  2,  0,  9,   15, 10, 7,  5,  3,  1,  5,  11, 8
-%          | 3,  10, 9,  0,   10, 4,  5,  14, 12, 10, 6,  14, 12
-%          | 7,  14, 15, 10,  0,  6,  9,  10, 12, 14, 16, 4,  7
-%          | 1,  8,  10, 4,   6,  0,  3,  13, 13, 11, 10, 10, 10
-%          | 2,  5,  7,  5,   9,  3,  0,  10, 10, 8,  11, 10, 7
-%          | 12, 6,  5,  14,  10, 13, 10, 0,  2,  4,  8,  6,  3
-%          | 12, 5,  3,  12,  12, 13, 10, 2,  0,  2,  6,  8,  5
-%          | 10, 3,  1,  10,  14, 11, 8,  4,  2,  0,  4,  10, 7
-%          | 9,  7,  5,  6,   16, 10, 11, 8,  6,  4,  0,  14, 11
-%          | 11, 12, 11, 14,  4,  10, 10, 6,  8,  10, 14, 0,  3
-%          | 9,  9,  8,  12,  7,  10, 7,  3,  5,  7,  11, 3,  0
-%          |];
-
-% (2)
-% int: k = 5;
-% mdist = [| 0, 1, 2, 2, 3
-%          | 1, 0, 2, 21, 3
-%          | 2, 2, 0, 4, 1
-%          | 2, 21, 4, 0, 5
-%          | 3, 3, 1, 5, 0
-%          |];
-% orario     =  [19.15, 19.30, 19.30, 20.30, 19.45, 19.30, 20.30, 21.30];
-% num_pizze  =  [2,     8,     8,     6,     5,     8,     8,     6];
-% dest       =  [2,     4,     4,     3,     2,     5,     3,     5];
-% N = 8;

@@ -374,7 +374,7 @@ forall(id in 1..d, iN in 1..N, ih in 1..h)(
 	
 	\begin{verbatim}
 forall(id in 1..d, iN in 1..N, ih in 1..h)(
-   if X[id,iN,ih] !=0 then
+   if (X[id,iN,ih] !=0  /\ P[id, X[id,iN,ih], ih] != 0) then
       if iN == 1 then
          distances[id, X[id,iN,ih], ih] = 
             mdist[1, P[id, X[id,iN,ih], ih]] 
@@ -394,6 +394,17 @@ forall(id in 1..d, iN in 1..N, ih in 1..h)(
 	start of the next half-an-hour. 
 	To do this, we store the computed travel distance in \texttt{total\_travel} and its 
 	domain \texttt{[0..29]} ensures this property.  
+
+	\begin{verbatim}
+forall(id in 1..d, iN in 1..N, ih in 1..h)(
+  ( X[id,iN,ih] !=0 
+    /\ ( iN+1 == N+1 \/ X[id,iN+1,ih] == 0) 
+    /\ P[id,X[id,iN,ih],ih] != 0)
+        -> (total_travel[id,ih] = 
+              distances[id, X[id,iN,ih], ih] 
+              + mdist[P[id, X[id,iN,ih], ih],1])       
+);
+	\end{verbatim}
 
 	\paragraph*{}
 	To make \texttt{ea} consistent, which is the array that allow us to record the expected arrival
@@ -460,8 +471,8 @@ forall(id in 1..d, ih in 1..h)(
 		Every order has a requested delivery time that becomes a delivery window. 
 		We know that all the half-an-hours before and after this delivery window
 		are not usable. So, for each order we computed its \textit{valid} half-an-hour 
-		indeces (\texttt{hra}) that are used to access the matrices \texttt{scheduling}
-		and \texttt{P} in \textit{not-valid} half-an-hour to set it equal to zero.   
+		indeces (\texttt{hra}) that are used to access the matrices \texttt{scheduling},
+		\texttt{P} and \texttt{distances} in \textit{not-valid} half-an-hour to set it equal to zero.   
 		Also, a consideration on \texttt{X} matrix is made: for each \textit{not-valid} 
 		half-an-hour for a specific order, we know that this order index will be not present
 		in the corresponding row of \texttt{X}.
@@ -473,6 +484,8 @@ forall(id in 1..d, iN in 1..N, ih in (1..h diff hra[iN]) ) (
    scheduling[id,iN,ih] = 0
    /\
    P[id,iN,ih] = 0
+   /\
+   distances[id,iN,ih] = 0 
    /\
    count( [X[id,iNN,ih] | iNN in 1..N], iN, 0)
 );
@@ -493,11 +506,13 @@ forall(id in 1..d, ih in 1..h)(
    }
    in forall(iN in N-c+1..N)(
       X[id,iN,ih] = 0
-   )  
+   ) /\
+   forall(iN in 1..N-c)(
+      X[id,iN,ih] > 0
+   )
 );
 		\end{verbatim}
 		
-
 	\end{enumerate}
 
 	\subsubsection{Simmetry breaking strategy}
@@ -664,6 +679,8 @@ forall(ih in 1..h, id in 1..d-1)(
 		\label{fig:corr}
 	\end{figure}
 
+	\pagebreak
+
 	In \cref{fig:solve-time-specific} more detailed solve time analyses are
 	reported, for each search variable. It's clear that:
 	\begin{itemize}
@@ -700,7 +717,7 @@ forall(ih in 1..h, id in 1..d-1)(
 	\end{figure}
 
 
-	\pagebreak
+	
 
 	\subsection{5 city of increasing size}
 	\label{subsec:test-5-cities}
@@ -773,19 +790,22 @@ forall(ih in 1..h, id in 1..d-1)(
 	with $N = 13$ orders and $d = 2$ deliverer. Solve time was 48.8 seconds.
 
 	\begin{figure}
-		\begin{subfigure}[t]{.5\textwidth}
-			\includegraphics[width=\textwidth]{graph.png}
+		\begin{subfigure}[t]{1\textwidth}
+			\centering
+			\includegraphics[width=.6\textwidth]{graph.png}
 			\caption{Pizzeria (red) and destinations to reach (green)}
 
 		\end{subfigure}
-		\begin{subfigure}[t]{.5\textwidth}
-			\includegraphics[width=\textwidth]{graph_paths-min.png}
+			\begin{subfigure}[t]{1\textwidth}
+				\centering
+				\includegraphics[width=.5\textwidth]{graph_paths-min.png}
 			\caption{Path for each deliverer}
 		\end{subfigure}
 
 		\caption{Map plot of model's results.}
         \label{fig:maps}
 	\end{figure}
+
 
 
 	\section{Conclusions} 
@@ -812,13 +832,16 @@ forall(ih in 1..h, id in 1..d-1)(
 	\subsubsection*{Future works}
 	\label{Future work}
 
-	First of all, rethink about the model could be useful in order to reduce the solve time;
-	maybe \textit{we've not choosen the minimum path to reach the solution (ah-ah)!} maybe a 
-	simpler model leads to 
+	First of all, rethink about the model could be useful in order to reduce the solve time; 
+	%\textit{we've not choosen the minimum path to reach the solution (ah-ah)!} 
+	maybe a simpler model leads to 
 	lower times. This can be done in parallel with \texttt{mdist} reduction, which is still 
-	a good choice.
+	a good choice. Also, it can be a good idea to find a way to exclude from the same travel 
+	those orders whose destinations are too far away to be made in a single travel.
+	%it can be a good idea to find a way to exclude orders 
+	%whose destinations	are too far away to be made on the same travel.
 
-	Also, only total traveled distance is minimized (for now); maybe a balancing 
+	Talking about the goal, only total traveled distance is minimized (for now); maybe a balancing 
 	function between the deliveres could be useful.
 
 	Finally, for a more realistic application, take care of the time 

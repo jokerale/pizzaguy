@@ -15,6 +15,7 @@
 *synctex.gz
 *.nav
 *.snm
+*.vrb
 report.pdf
 slides.pdf
 code/.ipynb_checkpoints/
